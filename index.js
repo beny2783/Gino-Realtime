@@ -8,7 +8,7 @@ import client from 'prom-client';
 import fs from 'fs';
 import path from 'path';
 import { nearestStore } from './nearestStore.js';
-import { geocodePostal } from './geocode.js';
+import { geocodeAddress } from './geocode.js';
 
 
 // Load environment variables from .env file
@@ -245,14 +245,6 @@ fastify.register(async (fastify) => {
     let turnCounter = 0;
     let firstAudioMark = null; // { name, sentAt }
     let currentTurnDeltaCount = 0;
-    const logsDir = path.resolve('./logs');
-    try { fs.mkdirSync(logsDir, { recursive: true }); } catch {}
-    const sessionLogs = [];
-    const addLog = (event, data = {}) => {
-      const entry = { ts: new Date().toISOString(), event, ...data };
-      sessionLogs.push(entry);
-      return entry;
-    };
     const pendingToolCalls = new Map(); // tool_call_id -> { name, argsStr }
 
     // Align Twilio's stream-relative timestamps to server wall clock
@@ -274,13 +266,13 @@ fastify.register(async (fastify) => {
             {
               type: 'function',
               name: 'findNearestStore',
-              description: 'Given a Canadian postal code, return the nearest Gino’s Pizza store.',
+              description: 'Given a Canadian address (postal code, street address, city, or landmark), return the nearest Ginos Pizza store.',
               parameters: {
                 type: 'object',
                 properties: {
-                  postal: {
+                  address: {
                     type: 'string',
-                    description: 'Canadian postal code (e.g., L1Z1Z2 or L1Z 1Z2).'
+                    description: 'Canadian address in any format: postal code (L1Z 1Z2), street address (123 Main St, Toronto), city name (Toronto, ON), or landmark (CN Tower, Toronto).'
                   }
                 }
                 // No "required" at top level (Realtime restriction). We handle validation server-side.
@@ -292,15 +284,18 @@ fastify.register(async (fastify) => {
             LAURA_PROMPT +
             `
     
-    POSTAL CAPTURE — DO THIS EXACTLY:
-    - Listen for a Canadian postal pattern: letter–digit–letter–(space optional)–digit–letter–digit (regex: ^[A-Z]\\d[A-Z]\\s?\\d[A-Z]\\d$).
-    - When you think you heard one, REPEAT IT BACK ONCE and ask for a quick yes/no: “I heard <CODE>. Is that right?”
-    - If the caller says yes (or clearly affirms), IMMEDIATELY call findNearestStore with { "postal": "<CODE>" }.
-      • Before calling, normalize to UPPERCASE and insert a space after the 3rd character (A1A 1A1).
-    - If the caller says no/unclear, ask them to SPELL it once using letters and numbers. Prompt with a cadence like:
-      “Please say it letter by letter — for example ‘M as in Mike, 5, V as in Victor…’”
-      Then capture again and proceed. Do not ask more than once.
-    - Do not keep re-asking. After one clarification attempt, proceed with the best code heard and continue.
+    ADDRESS CAPTURE — BE FLEXIBLE:
+    - Listen for ANY Canadian address format: postal codes, street addresses, city names, landmarks, or neighborhoods.
+    - When you hear an address, REPEAT IT BACK ONCE and ask for confirmation: "I heard <ADDRESS>. Is that right?"
+    - If the caller confirms, IMMEDIATELY call findNearestStore with { "address": "<ADDRESS>" }.
+    - If the caller corrects you, use their correction and call the tool.
+    - Examples of valid addresses:
+      • Postal codes: "L1Z 1Z2", "M5V 3A8", "K1A 0A6"
+      • Street addresses: "123 Main Street, Toronto", "456 Queen St, Ottawa, ON"
+      • City names: "Toronto", "Ottawa, Ontario", "Vancouver, BC"
+      • Landmarks: "CN Tower", "Parliament Hill", "Stanley Park"
+      • Neighborhoods: "Downtown Toronto", "Old Montreal"
+    - If the address is unclear, ask for clarification once, then proceed with the best address heard.
     
     AFTER TOOL RETURNS:
     - Use the returned store details immediately in your spoken response and continue the flow. Keep things moving.`
@@ -314,7 +309,6 @@ fastify.register(async (fastify) => {
     // Open event for OpenAI WebSocket
     openAiWs.on('open', () => {
       console.log('Connected to the OpenAI Realtime API');
-      addLog('openai.ws.open');
       attachRttMeter(openAiWs, (rtt) => hWSRttOpenAI.observe(rtt));
       setTimeout(sendSessionUpdate, 250); // Ensure connection stability
     });
@@ -324,11 +318,9 @@ fastify.register(async (fastify) => {
       const now = performance.now();
       try {
         const response = JSON.parse(data);
-        if (response.type === 'session.created') addLog('session.created', { session: response.session });
         // Tool call started
         if (response.type === 'response.output_tool_call.begin') {
           console.log('Tool call begin:', { id: response.id, name: response.name });
-          addLog('tool.begin', { id: response.id, name: response.name });
           const { id, name } = response;
           pendingToolCalls.set(id, { name, argsStr: '' });
           return;
@@ -342,7 +334,6 @@ fastify.register(async (fastify) => {
           // For visibility, log small deltas only
           if (delta && delta.length <= 120) {
             console.log('Tool call delta:', { id, delta });
-            addLog('tool.delta', { id, delta });
           }
           return;
         }
@@ -357,7 +348,6 @@ fastify.register(async (fastify) => {
             console.log('Tool call args raw:', entry.argsStr);
             const args = entry.argsStr ? JSON.parse(entry.argsStr) : {};
             console.log('Tool call end:', { id, name: entry.name, args });
-             addLog('tool.end', { id, name: entry.name, args });
             if (entry.name === 'findNearestStore') {
               let { lat, lon, postal } = args;
 
@@ -370,7 +360,6 @@ fastify.register(async (fastify) => {
               if (typeof lat !== 'number' || typeof lon !== 'number') {
                 const out = { ok: false, reason: 'CoordinatesMissing', message: 'Could not derive lat/lon' };
                 console.log('Sending tool.output (error):', out);
-                addLog('tool.output', { id, out });
                 openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
               } else {
                 const { store, distanceKm } = nearestStore(lat, lon);
@@ -391,18 +380,15 @@ fastify.register(async (fastify) => {
                   }
                 };
                 console.log('Sending tool.output (success):', { id, outSummary: { ok: out.ok, distanceKm: out.distanceKm, storeId: out.store.id } });
-                addLog('tool.output', { id, outSummary: { ok: out.ok, distanceKm: out.distanceKm, storeId: out.store.id } });
                 openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
               }
             } else {
               const out = { ok:false, reason:'UnknownTool' };
               console.log('Sending tool.output (unknown tool):', out);
-              addLog('tool.output', { id, out });
               openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
             }
           } catch (e) {
             console.error('Tool call failed:', e);
-            addLog('tool.error', { id, error: String(e?.stack || e) });
             openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify({ ok:false, reason:'ServerError' }) }}));
           } finally {
             pendingToolCalls.delete(id);
@@ -415,7 +401,6 @@ fastify.register(async (fastify) => {
         }
         if (response.type === 'session.updated') {
           console.log('Session updated successfully:', response);
-          addLog('session.updated', { session: response.session });
         }
 
         // Track VAD stop as turn boundary (and compute user stop wall-clock if we can)
@@ -440,7 +425,6 @@ fastify.register(async (fastify) => {
             currentTurn.firstDeltaAt = now;
             hOpenAITTFB.observe(currentTurn.firstDeltaAt - currentTurn.speechStoppedAt);
             console.log('First audio delta received for turn', currentTurn?.turnId);
-            addLog('audio.first_delta', { turn: currentTurn?.turnId });
           }
           currentTurn && (currentTurn.lastDeltaAt = now);
           currentTurnDeltaCount++;
@@ -474,16 +458,15 @@ fastify.register(async (fastify) => {
             for (const item of outputs) {
               if (item?.type === 'function_call') {
                 console.log('Function call via response.done:', { name: item.name, call_id: item.call_id, arguments: item.arguments });
-                addLog('function_call.done', { name: item.name, call_id: item.call_id, arguments: item.arguments });
                 try {
                   let args = {};
                   if (typeof item.arguments === 'string' && item.arguments.trim()) {
                     args = JSON.parse(item.arguments);
                   }
                   if (item.name === 'findNearestStore') {
-                    let { lat, lon, postal } = args;
-                    if ((typeof lat !== 'number' || typeof lon !== 'number') && postal) {
-                      const geo = await geocodePostal(postal);
+                    let { lat, lon, address } = args;
+                    if ((typeof lat !== 'number' || typeof lon !== 'number') && address) {
+                      const geo = await geocodeAddress(address);
                       lat = geo.lat; lon = geo.lon;
                     }
                     let output;
@@ -503,14 +486,11 @@ fastify.register(async (fastify) => {
                       },
                     };
                     openAiWs.send(JSON.stringify(convoItem));
-                    addLog('function_call_output.sent', { call_id: item.call_id, ok: output.ok });
                     // Trigger model to respond using the tool result
                     openAiWs.send(JSON.stringify({ type: 'response.create' }));
-                    addLog('response.create.sent');
                   }
                 } catch (e) {
                   console.error('Error handling function_call via response.done:', e);
-                  addLog('function_call.error', { error: String(e?.stack || e) });
                 }
               }
             }
@@ -520,7 +500,6 @@ fastify.register(async (fastify) => {
           }
           if (response?.response?.status) {
             console.log('Response done status:', response.response.status, 'deltaCount=', currentTurnDeltaCount);
-            addLog('response.done', { status: response.response.status, deltaCount: currentTurnDeltaCount });
           }
           currentTurn = null;
         }
@@ -609,14 +588,6 @@ fastify.register(async (fastify) => {
 
     // Handle connection close
     connection.on('close', () => {
-      try {
-        const sid = streamSid || `nosid-${Date.now()}`;
-        const filePath = path.join(logsDir, `${sid}-${Date.now()}.log.json`);
-        fs.writeFileSync(filePath, JSON.stringify(sessionLogs, null, 2));
-        console.log('Saved session logs to', filePath);
-      } catch (e) {
-        console.error('Failed to save session logs:', e);
-      }
       if (openAiWs.readyState === WebSocket.OPEN) openAiWs.close();
       console.log('Client disconnected.');
     });
