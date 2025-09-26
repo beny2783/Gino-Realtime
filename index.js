@@ -9,6 +9,8 @@ import fs from 'fs';
 import path from 'path';
 import { nearestStore } from './nearestStore.js';
 import { geocodeAddress } from './geocode.js';
+import { findMenuItems } from './menu.js';
+import { getKbSnippet } from './kb.js';
 
 
 // Load environment variables from .env file
@@ -16,6 +18,16 @@ dotenv.config();
 
 // Retrieve the OpenAI API key from environment variables. You must have OpenAI Realtime API access.
 const { OPENAI_API_KEY } = process.env;
+
+// VAD (Voice Activity Detection) configuration
+const {
+  VAD_MODE = 'semantic',           // 'server' or 'semantic'
+  VAD_SILENCE_MS = '500',        // Server VAD: silence duration (ms)
+  VAD_PREFIX_MS = '80',          // Server VAD: prefix padding (ms)
+  VAD_THRESHOLD = '0.5',         // Server VAD: sensitivity (0.0-1.0)
+  VAD_EAGERNESS = 'high',        // Semantic VAD: 'low', 'medium', 'high', 'auto'
+  VAD_SEMANTIC_ENABLED = 'false', // Enable semantic VAD (true/false)
+} = process.env;
 if (!OPENAI_API_KEY) {
   console.error('Missing OpenAI API key. Please set it in the .env file.');
   process.exit(1);
@@ -33,80 +45,166 @@ fastify.register(fastifyWs);
 // Clean, readable markdown prompt for LAURA (no Tools section)
 const LAURA_PROMPT = `
 Role & Objective
-You are Laura, the warm and enthusiastic virtual host for Gino’s Pizza in Canada.
-Your objective is to provide a seamless caller experience by taking and confirming orders, answering common questions using the Knowledge Base, and ensuring callers feel cared for.
-Success means the guest’s order is captured clearly, they get accurate information, or they are smoothly transferred to a human when required.
+You are Laura, the warm and enthusiastic virtual host for Gino’s Pizza in Canada. Always role-play as Laura, speaking in first person (“I” / “we”) as the caller’s live assistant.
+Your objective is to provide a seamless caller experience by taking and confirming orders, answering common questions using the Knowledge Base, and ensuring callers feel cared for. Success means the guest’s order is captured clearly, they get accurate information, or they are smoothly transferred to a human when required.
 
 Personality & Tone
 Warm, conversational, personable, and welcoming.
 Adapt to caller style: if caller gives short answers, simplify and move quickly; if caller gives detailed preferences, mirror their detail level.
 Friendly but efficient — one question at a time.
 Supportive and never impatient — politely re-ask missing details once.
-Always speak in english and close with clarity so the guest knows what happens next.
+Always speak in English and close with clarity so the guest knows what happens next.
 
 Context
 Use this Knowledge Base to answer caller questions. If the information requested is not here, or the situation requires escalation, use the transferToNumber tool.
+
+Tools
+
+transferToNumber: Connects caller to nearest store (based on postal code) or central helpline.
+
+getMenuItems: Example: CALL getMenuItems({kind: "toppings"}). Returns available menu items. Do not invent details.
+
+getKbSnippet: Example: CALL getKbSnippet({topic: "dietary"}). Returns knowledge base text. Use only the smallest topic/ids required.
 
 Venue
 Name: Gino’s Pizza (Multiple locations across Canada).
 Disclaimer: Menu items vary by location. Prices do not include tax and may change.
 Accessibility: Most stores are wheelchair accessible.
-Timezone: Confirm caller’s city or postal code, then use that to reference their correct local Canadian time.
+Timezone: Caller’s local Canadian time. If no city/postal code is provided, confirm time by saying “local store time.”
+
+Opening Hours
+
+Sunday–Thursday: 11:00 – 22:00
+
+Friday–Saturday: 11:00 – 23:00
+(Exact hours may vary by store — confirm when caller provides city or postal code.)
+
+Knowledge Base Access
+Menu Access:
+
+Use getMenuItems with smallest filters possible.
+
+Do not enumerate the whole menu; only present items the caller asked about.
+
+For dietary restrictions, use dietary filter (vegan, vegetarian, gluten_free).
+
+Always say “from $X” for prices.
+
+KB Access:
+
+Use getKbSnippet for catering prices, dietary info, offers, charity policy, hours, or pronunciations.
+
+Always say “from $X” when reading prices.
+
+For catering orders, always escalate after capturing provided details.
 
 Instructions / Rules
 
-Always follow step-by-step ordering flow: item → size → toppings → quantity → sides/desserts → drinks → delivery/pickup details → phone number and email. Do not validate format, but ensure both are provided.
+NATURAL ORDERING FLOW — SMART, FLEXIBLE, EFFICIENT
 
-Confirm absolute times in the caller’s local timezone based on city/postal code.
+Start with: “What would you like to order today?” Then gather only missing details.
 
-Repeat back contact details and order exactly as provided.
+If the caller states multiple details in one sentence (e.g., “Large pepperoni, well-done”), accept them together.
 
-Give guide prices exactly as listed, using “from $X” wording where shown (prices may vary by location).
+Use the logical sequence (item → size → toppings → quantity → sides/desserts → drinks → delivery/pickup details) as a fallback guide when details are missing, but prioritize caller-provided order and phrasing.
 
-Mention calorie counts only if caller asks.
+Offer sides/desserts/drinks once after main items: “Would you like any sides or drinks with that?”
 
-Never invent information not in Knowledge Base. If asked about unlisted items, explain politely and offer transfer.
+Detect delivery vs. pickup from cues. If unclear, ask: “Pickup or delivery today?”
+
+Corrections overwrite previous details without fuss.
+
+Keep acknowledgements short (“Thanks”, “Perfect”) and avoid filler.
+
+STRUCTURED CHECKS — MINIMAL CONFIRMATION
+
+At the end, do one full order read-back (items, quantity, sides/drinks, delivery/pickup details).
+
+DATA CAPTURE (when relevant to the order)
+
+Do not validate format, but ensure both phone and email are provided.
+
+PACE & CLARITY
+
+Answer promptly and keep pace efficient.
+
+Confirm absolute times in caller’s local timezone when city/postal code is provided. Otherwise say “local store time.”
+
+Mention calorie counts only if asked.
+
+Never invent information. If asked about unlisted items, explain politely and offer transfer.
 
 Stay within Gino’s Pizza context only.
 
-Be polite and calm, even if caller is testing or difficult.
+SAFETY & ESCALATION
 
-Safety & Escalation
+Immediate transfer if caller is upset, urgent, or asks for manager/staff.
 
-Immediate transfer if caller is upset, urgent, unclear (intent cannot be determined after one clarification), or asks for manager/staff.
+If caller intent remains unclear after one clarifying question (e.g., “Could you please repeat that?”), escalate immediately.
 
-Escalate if caller asks about: catering, vouchers, gift cards, lost property, corporate/private hire, charity/raffle exceptions, or anything outside standard orders/menu.
+Escalate if caller asks about catering, vouchers, gift cards, lost property, corporate/private hire, charity/raffle exceptions, or anything outside standard orders/menu.
 
-For catering orders, capture any details provided (e.g., date, size, quantity) but always escalate for final confirmation.
-
-transferToNumber connects to the caller’s nearest store based on their postal code; if unavailable, connect to central helpline.
+For catering orders, capture details but always escalate for final confirmation.
 
 Always reassure before transfer.
 
-Conversation Flow
+CONVERSATION FLOW
 
 Entry: Greet warmly — “Hello, this is Laura at Gino’s Pizza. How can I help today?”
 
 Detect intent: order vs. general enquiry.
 
-Ordering Path: Collect order details step by step. If catering/large event → capture details, then transfer.
+Ordering Path: Collect details naturally. For catering/large event → capture details, then transfer.
 
-Finish: Full read-back of order; reassure — “Thank you, I’ve noted your order. Our team will finalize and prepare it within the store’s regular preparation window.”
+Finish: One full read-back
 
-Knowledge Base Path: Answer directly about store locations, hours, menu, dietary options, offers. Provide guide prices if asked. If caller asks about catering, vouchers, or topics not in KB → transfer.
+Knowledge Base Path: Answer directly using KB. If caller asks about catering, vouchers, or topics not in KB → transfer.
 
 Exit:
-
-If order: confirm details, reassure next steps.
-
-If enquiry: polite closure.
-
-If transfer: short reassurance + handoff.
+• If order: confirm details, reassure next steps.
+• If enquiry: close with “Thank you for calling Gino’s Pizza, have a great day!”
+• If transfer: short reassurance + handoff.
 `;
 
 const VOICE = 'alloy';
 const TEMPERATURE = 0.8; // Controls the randomness of the AI's responses
 const PORT = process.env.PORT || 5050; // Allow dynamic port assignment
+
+// =====================
+// VAD Configuration
+// =====================
+
+function makeTurnDetection() {
+  // Check if semantic VAD is enabled via environment variable
+  const useSemanticVAD = VAD_SEMANTIC_ENABLED === 'true' || VAD_MODE === 'semantic';
+  
+  if (useSemanticVAD) {
+    const config = {
+      type: 'semantic_vad',
+      eagerness: VAD_EAGERNESS, // 'low' | 'medium' | 'high' | 'auto'
+      create_response: true,
+      interrupt_response: true
+    };
+    console.log('🧠 Using semantic VAD with eagerness:', VAD_EAGERNESS);
+    return config;
+  }
+  
+  // Default: server_vad with configurable settings
+  const config = {
+    type: 'server_vad',
+    threshold: Number(VAD_THRESHOLD),
+    prefix_padding_ms: Number(VAD_PREFIX_MS),
+    silence_duration_ms: Number(VAD_SILENCE_MS),
+    create_response: true,
+    interrupt_response: true
+  };
+  console.log('⚙️ Using server VAD with config:', {
+    threshold: config.threshold,
+    prefix_padding_ms: config.prefix_padding_ms,
+    silence_duration_ms: config.silence_duration_ms
+  });
+  return config;
+}
 
 // List of Event Types to log to the console. See the OpenAI Realtime API Documentation
 const LOG_EVENT_TYPES = [
@@ -119,6 +217,9 @@ const LOG_EVENT_TYPES = [
   'input_audio_buffer.speech_started',
   'session.created',
   'session.updated',
+  'response.output_tool_call.begin',
+  'response.output_tool_call.delta',
+  'response.output_tool_call.end',
 ];
 
 // =====================
@@ -168,6 +269,12 @@ const hFeltLatency = new client.Histogram({
   buckets: [100, 200, 300, 500, 800, 1200, 2000, 3000, 5000],
 });
 
+// VAD cancellation tracking
+const cVADCancellations = new client.Counter({
+  name: 'vad_cancellations_total',
+  help: 'Number of responses cancelled due to VAD turn detection',
+});
+
 register.registerMetric(hOpenAITTFB);
 register.registerMetric(hE2EReply);
 register.registerMetric(hRespStream);
@@ -176,6 +283,7 @@ register.registerMetric(hWSRttTwilio);
 register.registerMetric(cBytesIn);
 register.registerMetric(cBytesOut);
 register.registerMetric(hFeltLatency);
+register.registerMetric(cVADCancellations);
 
 // =====================
 // Routes
@@ -190,12 +298,10 @@ fastify.get('/metrics', async (req, reply) => {
 });
 
 // Route for Twilio to handle incoming and outgoing calls
-// <Say> punctuation to improve text-to-speech translation
+// Direct connection to Laura agent - no pre-recorded greeting
 fastify.all('/incoming-call', async (request, reply) => {
   const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Say voice="Google.en-GB-Standard-A">Hello, you are through to Laura at Gino’s Pizza. How can I help today?</Say>
-  <Pause length="1"/>
   <Connect>
     <Stream url="wss://${request.headers.host}/media-stream" />
   </Connect>
@@ -246,6 +352,82 @@ fastify.register(async (fastify) => {
     let firstAudioMark = null; // { name, sentAt }
     let currentTurnDeltaCount = 0;
     const pendingToolCalls = new Map(); // tool_call_id -> { name, argsStr }
+    
+    // Call logging system
+    const callLogs = [];
+    const callStartTime = new Date().toISOString();
+    const callId = `call_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    
+    function logCallEvent(type, data, message = '') {
+      const logEntry = {
+        timestamp: new Date().toISOString(),
+        type,
+        data: data || {},
+        message
+      };
+      callLogs.push(logEntry);
+      console.log(`[${type}] ${message}`, data || '');
+    }
+    
+    async function saveCallLogs() {
+      try {
+        const callEndTime = new Date().toISOString();
+        const logData = {
+          callId,
+          callStartTime,
+          callEndTime,
+          streamSid,
+          totalTurns: turnCounter,
+          totalLogs: callLogs.length,
+          logs: callLogs
+        };
+        
+        const logsDir = path.join(process.cwd(), 'logs');
+        if (!fs.existsSync(logsDir)) {
+          fs.mkdirSync(logsDir, { recursive: true });
+        }
+        
+        const filename = `${callId}.json`;
+        const filepath = path.join(logsDir, filename);
+        
+        await fs.promises.writeFile(filepath, JSON.stringify(logData, null, 2));
+        console.log(`📝 Call logs saved to: ${filepath}`);
+      } catch (error) {
+        console.error('❌ Failed to save call logs:', error);
+      }
+    }
+    
+    // Per-call caching for performance
+    const menuCache = new Map(); // key -> JSON string
+    const kbCache = new Map(); // key -> JSON string
+    const geocodeCache = new Map(); // address -> { lat, lon }
+    
+    function cachedFindMenuItems(filters) {
+      const key = JSON.stringify(filters || {});
+      if (menuCache.has(key)) return menuCache.get(key);
+      const res = findMenuItems(filters);
+      menuCache.set(key, res);
+      return res;
+    }
+    
+    function cachedGetKbSnippet(args) {
+      const key = JSON.stringify(args || {});
+      if (kbCache.has(key)) return kbCache.get(key);
+      const res = getKbSnippet(args);
+      kbCache.set(key, res);
+      return res;
+    }
+    
+    function cachedGeocode(address) {
+      const normalized = address.toLowerCase().trim();
+      if (geocodeCache.has(normalized)) return geocodeCache.get(normalized);
+      return null; // Will be set after geocoding
+    }
+    
+    function setGeocodeCache(address, result) {
+      const normalized = address.toLowerCase().trim();
+      geocodeCache.set(normalized, result);
+    }
 
     // Align Twilio's stream-relative timestamps to server wall clock
     let streamStartAt = null; // performance.now() at 'start' event
@@ -259,7 +441,10 @@ fastify.register(async (fastify) => {
           model: 'gpt-realtime',
           output_modalities: ['audio'],
           audio: {
-            input: { format: { type: 'audio/pcmu' }, turn_detection: { type: 'server_vad' } },
+            input: {
+              format: { type: 'audio/pcmu' },
+              turn_detection: makeTurnDetection(),
+            },
             output: { format: { type: 'audio/pcmu' }, voice: VOICE },
           },
           tools: [
@@ -276,6 +461,58 @@ fastify.register(async (fastify) => {
                   }
                 }
                 // No "required" at top level (Realtime restriction). We handle validation server-side.
+              }
+            },
+            {
+              type: 'function',
+              name: 'getMenuItems',
+              description: 'Query menu items by kind/dietary/search. Returns compact structured items for sizes, crusts, sauces, toppings, deals, gourmet pizzas, add-ons, salads, and dips.',
+              parameters: {
+                type: 'object',
+                properties: {
+                  kinds: {
+                    type: 'array',
+                    items: { 
+                      type: 'string', 
+                      enum: ['size', 'crust', 'sauce', 'topping', 'gourmet', 'deal', 'addon', 'salad', 'dip'] 
+                    },
+                    description: 'Filter by item kinds'
+                  },
+                  dietary: {
+                    type: 'string',
+                    enum: ['vegan', 'vegetarian', 'gluten_free'],
+                    description: 'Filter by dietary restrictions'
+                  },
+                  search: {
+                    type: 'string',
+                    description: 'Free text search across names and details'
+                  },
+                  limit: {
+                    type: 'number',
+                    description: 'Maximum number of results to return (default: 12)'
+                  }
+                }
+              }
+            },
+            {
+              type: 'function',
+              name: 'getKbSnippet',
+              description: 'Fetch compact KB snippets (catering prices, dietary notes, offers, charity policy, hours, pronunciations).',
+              parameters: {
+                type: 'object',
+                properties: {
+                  topic: {
+                    type: 'string',
+                    enum: ['catering_prices', 'dietary', 'offers', 'charity_policy', 'hours', 'pronunciations'],
+                    description: 'KB topic to fetch'
+                  },
+                  ids: {
+                    type: 'array',
+                    items: { type: 'string' },
+                    description: 'Specific IDs to filter (for catering_prices)'
+                  }
+                },
+                required: ['topic']
               }
             }
           ],
@@ -308,7 +545,7 @@ fastify.register(async (fastify) => {
 
     // Open event for OpenAI WebSocket
     openAiWs.on('open', () => {
-      console.log('Connected to the OpenAI Realtime API');
+      logCallEvent('OPENAI_CONNECTED', { callId }, 'Connected to the OpenAI Realtime API');
       attachRttMeter(openAiWs, (rtt) => hWSRttOpenAI.observe(rtt));
       setTimeout(sendSessionUpdate, 250); // Ensure connection stability
     });
@@ -318,11 +555,34 @@ fastify.register(async (fastify) => {
       const now = performance.now();
       try {
         const response = JSON.parse(data);
-        // Tool call started
+        // Tool call started - send immediate acknowledgment
         if (response.type === 'response.output_tool_call.begin') {
-          console.log('Tool call begin:', { id: response.id, name: response.name });
+          logCallEvent('TOOL_CALL_BEGIN', { id: response.id, name: response.name }, 'Tool call begin');
           const { id, name } = response;
           pendingToolCalls.set(id, { name, argsStr: '' });
+          
+          // Send immediate acknowledgment based on tool type
+          let acknowledgment = '';
+          if (name === 'getMenuItems') {
+            acknowledgment = 'Let me check our menu for you.';
+          } else if (name === 'getKbSnippet') {
+            acknowledgment = 'Let me look that up for you.';
+          } else if (name === 'findNearestStore') {
+            acknowledgment = 'Let me find the nearest store for you.';
+          } else {
+            acknowledgment = 'Let me check that for you.';
+          }
+          
+          // Send immediate response
+          const immediateResponse = {
+            type: 'response.create',
+            response: {
+              modalities: ['audio'],
+              instructions: `Say exactly this: "${acknowledgment}" Keep it brief and natural.`
+            }
+          };
+          logCallEvent('TOOL_ACK_SENT', { toolName: name, acknowledgment }, 'Sent immediate acknowledgment');
+          openAiWs.send(JSON.stringify(immediateResponse));
           return;
         }
 
@@ -345,22 +605,31 @@ fastify.register(async (fastify) => {
           if (!entry) return;
 
           try {
-            console.log('Tool call args raw:', entry.argsStr);
+            logCallEvent('TOOL_CALL_ARGS', { id, argsStr: entry.argsStr }, 'Tool call args raw');
             const args = entry.argsStr ? JSON.parse(entry.argsStr) : {};
-            console.log('Tool call end:', { id, name: entry.name, args });
+            logCallEvent('TOOL_CALL_END', { id, name: entry.name, args }, 'Tool call end');
             if (entry.name === 'findNearestStore') {
-              let { lat, lon, postal } = args;
+              let { lat, lon, address } = args;
 
-              // If only postal is present, geocode it
-              if ((typeof lat !== 'number' || typeof lon !== 'number') && postal) {
-                const geo = await geocodePostal(postal);
-                lat = geo.lat; lon = geo.lon;
+              // Check cache first
+              if (address) {
+                const cached = cachedGeocode(address);
+                if (cached) {
+                  lat = cached.lat; lon = cached.lon;
+                } else {
+                  const geo = await geocodeAddress(address);
+                  lat = geo.lat; lon = geo.lon;
+                  setGeocodeCache(address, geo);
+                }
               }
 
               if (typeof lat !== 'number' || typeof lon !== 'number') {
                 const out = { ok: false, reason: 'CoordinatesMissing', message: 'Could not derive lat/lon' };
                 console.log('Sending tool.output (error):', out);
                 openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
+                
+                // Trigger Laura to respond with the error message
+                openAiWs.send(JSON.stringify({ type: 'response.create' }));
               } else {
                 const { store, distanceKm } = nearestStore(lat, lon);
                 const out = {
@@ -381,7 +650,40 @@ fastify.register(async (fastify) => {
                 };
                 console.log('Sending tool.output (success):', { id, outSummary: { ok: out.ok, distanceKm: out.distanceKm, storeId: out.store.id } });
                 openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
+                
+                // Trigger Laura to respond with the store information
+                openAiWs.send(JSON.stringify({ type: 'response.create' }));
               }
+            } else if (entry.name === 'getMenuItems') {
+              let args = {};
+              try { args = entry.argsStr ? JSON.parse(entry.argsStr) : {}; } catch {}
+              const items = cachedFindMenuItems(args);
+              const out = { ok: true, items }; // keep it small
+              logCallEvent('TOOL_OUTPUT_MENU', { id, itemCount: items.length, filters: args }, 'Sending tool.output (menu)');
+              
+              // Send tool output and trigger follow-up response
+              openAiWs.send(JSON.stringify({
+                type: 'tool.output',
+                tool_output: { tool_call_id: id, output: JSON.stringify(out) }
+              }));
+              
+              // Trigger Laura to respond with the menu data
+              openAiWs.send(JSON.stringify({ type: 'response.create' }));
+            } else if (entry.name === 'getKbSnippet') {
+              let args = {};
+              try { args = entry.argsStr ? JSON.parse(entry.argsStr) : {}; } catch {}
+              const data = cachedGetKbSnippet(args);
+              const out = { ok: true, data }; // keep it small
+              logCallEvent('TOOL_OUTPUT_KB', { id, topic: args.topic, dataType: typeof data }, 'Sending tool.output (kb)');
+              
+              // Send tool output and trigger follow-up response
+              openAiWs.send(JSON.stringify({
+                type: 'tool.output',
+                tool_output: { tool_call_id: id, output: JSON.stringify(out) }
+              }));
+              
+              // Trigger Laura to respond with the KB data
+              openAiWs.send(JSON.stringify({ type: 'response.create' }));
             } else {
               const out = { ok:false, reason:'UnknownTool' };
               console.log('Sending tool.output (unknown tool):', out);
@@ -397,10 +699,10 @@ fastify.register(async (fastify) => {
         }
 
         if (LOG_EVENT_TYPES.includes(response.type)) {
-          console.log(`Received event: ${response.type}`, response);
+          logCallEvent('OPENAI_EVENT', { type: response.type, data: response }, `Received event: ${response.type}`);
         }
         if (response.type === 'session.updated') {
-          console.log('Session updated successfully:', response);
+          logCallEvent('SESSION_UPDATED', { sessionId: response.session?.id }, 'Session updated successfully');
         }
 
         // Track VAD stop as turn boundary (and compute user stop wall-clock if we can)
@@ -417,6 +719,7 @@ fastify.register(async (fastify) => {
             currentTurn.userStopAt = streamStartAt + lastUserPacketTs; // align Twilio stream time → wall clock
           }
           currentTurnDeltaCount = 0;
+          logCallEvent('SPEECH_STOPPED', { turnId: currentTurn.turnId, speechStoppedAt: now }, 'User speech stopped');
         }
 
         if (response.type === 'response.output_audio.delta' && response.delta) {
@@ -424,7 +727,7 @@ fastify.register(async (fastify) => {
           if (currentTurn && !currentTurn.firstDeltaAt) {
             currentTurn.firstDeltaAt = now;
             hOpenAITTFB.observe(currentTurn.firstDeltaAt - currentTurn.speechStoppedAt);
-            console.log('First audio delta received for turn', currentTurn?.turnId);
+            logCallEvent('FIRST_AUDIO_DELTA', { turnId: currentTurn.turnId, ttfb: currentTurn.firstDeltaAt - currentTurn.speechStoppedAt }, 'First audio delta received');
           }
           currentTurn && (currentTurn.lastDeltaAt = now);
           currentTurnDeltaCount++;
@@ -488,6 +791,42 @@ fastify.register(async (fastify) => {
                     openAiWs.send(JSON.stringify(convoItem));
                     // Trigger model to respond using the tool result
                     openAiWs.send(JSON.stringify({ type: 'response.create' }));
+                  } else if (item.name === 'getMenuItems') {
+                    let args = {};
+                    try { args = typeof item.arguments === 'string' && item.arguments.trim() ? JSON.parse(item.arguments) : {}; } catch {}
+                    const items = cachedFindMenuItems(args);
+                    const output = { ok: true, items };
+                    console.log('Function call via response.done (menu):', { name: item.name, call_id: item.call_id, itemCount: items.length });
+                    // Send function_call_output
+                    const convoItem = {
+                      type: 'conversation.item.create',
+                      item: {
+                        type: 'function_call_output',
+                        call_id: item.call_id,
+                        output: JSON.stringify(output),
+                      },
+                    };
+                    openAiWs.send(JSON.stringify(convoItem));
+                    // Trigger model to respond using the tool result
+                    openAiWs.send(JSON.stringify({ type: 'response.create' }));
+                  } else if (item.name === 'getKbSnippet') {
+                    let args = {};
+                    try { args = typeof item.arguments === 'string' && item.arguments.trim() ? JSON.parse(item.arguments) : {}; } catch {}
+                    const data = cachedGetKbSnippet(args);
+                    const output = { ok: true, data };
+                    console.log('Function call via response.done (kb):', { name: item.name, call_id: item.call_id, topic: args.topic });
+                    // Send function_call_output
+                    const convoItem = {
+                      type: 'conversation.item.create',
+                      item: {
+                        type: 'function_call_output',
+                        call_id: item.call_id,
+                        output: JSON.stringify(output),
+                      },
+                    };
+                    openAiWs.send(JSON.stringify(convoItem));
+                    // Trigger model to respond using the tool result
+                    openAiWs.send(JSON.stringify({ type: 'response.create' }));
                   }
                 } catch (e) {
                   console.error('Error handling function_call via response.done:', e);
@@ -500,6 +839,11 @@ fastify.register(async (fastify) => {
           }
           if (response?.response?.status) {
             console.log('Response done status:', response.response.status, 'deltaCount=', currentTurnDeltaCount);
+            // Track VAD cancellations
+            if (response.response.status === 'cancelled') {
+              cVADCancellations.inc();
+              console.log('VAD cancellation detected - response was cancelled due to turn detection');
+            }
           }
           currentTurn = null;
         }
@@ -537,7 +881,7 @@ fastify.register(async (fastify) => {
             streamSid = data.start.streamSid;
             streamStartAt = performance.now();
             lastUserPacketTs = 0;
-            console.log('Incoming stream has started', streamSid);
+            logCallEvent('STREAM_STARTED', { streamSid }, 'Incoming stream has started');
             attachRttMeter(connection, (rtt) => hWSRttTwilio.observe(rtt));
             break;
 
@@ -571,14 +915,14 @@ fastify.register(async (fastify) => {
                 ttfb_ms: ttfb !== null ? Math.round(ttfb) : null,
                 e2e_first_byte_ms: e2e !== null ? Math.round(e2e) : null,
               };
-              console.log('TURN SUMMARY:', pretty(summary));
+              logCallEvent('TURN_SUMMARY', summary, 'TURN SUMMARY');
 
               firstAudioMark = null;
             }
             break;
 
           default:
-            console.log('Received non-media event:', data.event);
+            logCallEvent('TWILIO_EVENT', { event: data.event, data }, 'Received non-media event');
             break;
         }
       } catch (error) {
@@ -587,17 +931,18 @@ fastify.register(async (fastify) => {
     });
 
     // Handle connection close
-    connection.on('close', () => {
+    connection.on('close', async () => {
       if (openAiWs.readyState === WebSocket.OPEN) openAiWs.close();
-      console.log('Client disconnected.');
+      logCallEvent('CONNECTION_CLOSED', { callId, totalTurns: turnCounter }, 'Client disconnected');
+      await saveCallLogs();
     });
 
     // Handle WebSocket close and errors
     openAiWs.on('close', () => {
-      console.log('Disconnected from the OpenAI Realtime API');
+      logCallEvent('OPENAI_DISCONNECTED', { callId }, 'Disconnected from the OpenAI Realtime API');
     });
     openAiWs.on('error', (error) => {
-      console.error('Error in the OpenAI WebSocket:', error);
+      logCallEvent('OPENAI_ERROR', { error: error.message, callId }, 'Error in the OpenAI WebSocket');
     });
   });
 });
