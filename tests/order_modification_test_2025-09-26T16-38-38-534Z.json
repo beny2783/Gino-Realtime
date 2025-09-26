@@ -1,0 +1,160 @@
+{
+  "test": "Order Modification Scenario",
+  "timestamp": "2025-09-26T16:38:38.534Z",
+  "scenario": {
+    "name": "Order Modification & Location Handling",
+    "description": "Tests Laura's ability to handle complex order modifications, location lookups, and order changes",
+    "userMessages": [
+      "Yeah, I'd like to place an order.",
+      "Can I get a large pizza?",
+      "Can I get a Hawaiian?",
+      "What's on the Hawaiian",
+      "Yeah, can I put mushrooms on half? Is mushrooms good?",
+      "All of these",
+      "Some bonus wings .",
+      "What size do you have?",
+      "Can I get 15 wings ?",
+      "I'll take the 15 piece.",
+      "Okay, give me the 12.",
+      "Which flavors do you have?",
+      "Can I get them playing?",
+      "No, just plain. Can you make them plain?",
+      "Could you put the sauce on the side?",
+      "Okay.",
+      "How much is it?",
+      "Okay, can I get a medium pizza instead?",
+      "It's not bad. Do you have any drinks?",
+      "I'll take two 2-liter bottles.",
+      "I'll take one diet and one regular.",
+      "Okay.",
+      "How much was the Pepsi?",
+      "$4. Do you have a six pack?",
+      "Okay, so cancel the two liter bottles.",
+      "Yeah, but change the buffalo sauce to honey garlic.",
+      "Can you make it a small pizza instead?",
+      "Can you take off the mushrooms?",
+      "Can you make the wings boneless?",
+      "What store is it coming from?",
+      "I'm in Barrie",
+      ". No, I'm in Barrie!",
+      "Um...",
+      "I don't think there's a Maple Avenue in Barrie. How about Innisfil?",
+      "No, I'll order one because we don't have one there. How about Innisfil?",
+      "No.",
+      "Yeah, there's a Gino's in the Royal Victoria Hospital in Barrie",
+      "Okay",
+      ". Yeah, that sounds right. That's right.",
+      "Delivery.",
+      "Yeah sure, not a problem! It is 2 Bloor Street West.",
+      "416-235-0000",
+      "Yeah, it's Jim.",
+      "Okay. Okay, bye."
+    ]
+  },
+  "responses": [
+    {
+      "type": "assistant_message",
+      "text": "Hello, this is Laura at Gino’s Pizza. What would you like to order today?",
+      "timestamp": "2025-09-26T16:38:24.471Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Sure, let's start with that large pizza. What toppings or specialty style would you like on it?",
+      "timestamp": "2025-09-26T16:38:24.992Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We’ve got a delicious Hawaiian pizza with ham, pineapple, and bacon crumble. Would you like any changes to the toppings, or should we keep it as is?",
+      "timestamp": "2025-09-26T16:38:26.241Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "The Hawaiian pizza comes with ham, pineapple, and bacon crumble. Would you like to keep it that way, or make any changes?",
+      "timestamp": "2025-09-26T16:38:26.860Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Yes, mushrooms are a great choice! We can definitely add mushrooms on half of your Hawaiian pizza. \n\nSo, to confirm: a large Hawaiian pizza with ham, pineapple, bacon crumble, and mushrooms on half. Anything else you'd like to add or adjust?",
+      "timestamp": "2025-09-26T16:38:28.227Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Just to confirm, you’d like mushrooms on all of the pizza, not just half. Is that correct?",
+      "timestamp": "2025-09-26T16:38:28.824Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We’ve got a few options for wings. \n\nWould you like baked, breaded, or boneless wings? And would you prefer 8 or 12 pieces?",
+      "timestamp": "2025-09-26T16:38:29.995Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We’ve got wings in two sizes: 8 pieces or 12 pieces. You can choose from baked, breaded, or boneless. \n\nWhich type and size would you like?",
+      "timestamp": "2025-09-26T16:38:30.697Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We don’t have a 15-piece option, but we can definitely mix and match to get close. For example, you could do a 12-piece plus an 8-piece, or a 12-piece plus an 8-piece of a different style. \n\nWould you like to go with a combination like that, or maybe adjust to 12 or 8 pieces?",
+      "timestamp": "2025-09-26T16:38:32.735Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "I can definitely help you get as close as possible. We have 12-piece and 8-piece options. How about we go with a 12-piece plus an 8-piece, giving you 20 wings total? That way you get a bit extra. \n\nWould that work for you? And what style would you like—baked, breaded, or boneless?",
+      "timestamp": "2025-09-26T16:38:33.840Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Great, we'll go with a 12-piece. What style of wings would you like—baked, breaded, or boneless?",
+      "timestamp": "2025-09-26T16:38:34.578Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We have a few styles for the wings: baked, breaded, or boneless. While we don’t list specific wing sauces or flavors, the wings are typically served plain, and you can add dips or sauces on the side.\n\nWould you like baked, breaded, or boneless for your 12-piece wings order?",
+      "timestamp": "2025-09-26T16:38:36.198Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "It sounds like you might want the wings plain, without any sauce. Absolutely, we can do that. \n\nNow, would you like them baked, breaded, or boneless?",
+      "timestamp": "2025-09-26T16:38:36.942Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Yes, we can definitely make the wings plain, with no sauce added. \n\nSo, would you like those plain wings to be baked, breaded, or boneless?",
+      "timestamp": "2025-09-26T16:38:37.608Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We can absolutely put the sauce on the side. Let’s finalize the style—would you like those plain wings to be baked, breaded, or boneless? Then we’ll add the dip for you.",
+      "timestamp": "2025-09-26T16:38:38.323Z"
+    }
+  ],
+  "toolCalls": [
+    {
+      "name": "getMenuItems",
+      "arguments": "{  \n  \"search\": \"Hawaiian\" \n} \n",
+      "timestamp": "2025-09-26T16:38:25.563Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{\"search\":\"mushrooms\"}",
+      "timestamp": "2025-09-26T16:38:27.380Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{\"search\":\"wings\"}",
+      "timestamp": "2025-09-26T16:38:29.335Z"
+    },
+    {
+      "name": "getKbSnippet",
+      "arguments": "{  \n  \"topic\": \"dietary\" \n} \n",
+      "timestamp": "2025-09-26T16:38:35.121Z"
+    }
+  ],
+  "analysis": {
+    "orderModifications": "FAIL",
+    "pricingAccuracy": "FAIL",
+    "locationHandling": "FAIL",
+    "deliveryCapture": "FAIL",
+    "orderCompletion": "FAIL"
+  }
+}

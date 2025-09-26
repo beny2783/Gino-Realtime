@@ -1,0 +1,160 @@
+{
+  "test": "Order Modification Scenario",
+  "timestamp": "2025-09-26T16:51:39.013Z",
+  "scenario": {
+    "name": "Order Modification & Location Handling",
+    "description": "Tests Laura's ability to handle complex order modifications, location lookups, and order changes",
+    "userMessages": [
+      "Yeah, I'd like to place an order.",
+      "Can I get a large pizza?",
+      "Can I get a Hawaiian?",
+      "What's on the Hawaiian",
+      "Yeah, can I put mushrooms on half? Is mushrooms good?",
+      "All of these",
+      "Some bonus wings .",
+      "What size do you have?",
+      "Can I get 15 wings ?",
+      "I'll take the 15 piece.",
+      "Okay, give me the 12.",
+      "Which flavors do you have?",
+      "Can I get them playing?",
+      "No, just plain. Can you make them plain?",
+      "Could you put the sauce on the side?",
+      "Okay.",
+      "How much is it?",
+      "Okay, can I get a medium pizza instead?",
+      "It's not bad. Do you have any drinks?",
+      "I'll take two 2-liter bottles.",
+      "I'll take one diet and one regular.",
+      "Okay.",
+      "How much was the Pepsi?",
+      "$4. Do you have a six pack?",
+      "Okay, so cancel the two liter bottles.",
+      "Yeah, but change the buffalo sauce to honey garlic.",
+      "Can you make it a small pizza instead?",
+      "Can you take off the mushrooms?",
+      "Can you make the wings boneless?",
+      "What store is it coming from?",
+      "I'm in Barrie",
+      ". No, I'm in Barrie!",
+      "Um...",
+      "I don't think there's a Maple Avenue in Barrie. How about Innisfil?",
+      "No, I'll order one because we don't have one there. How about Innisfil?",
+      "No.",
+      "Yeah, there's a Gino's in the Royal Victoria Hospital in Barrie",
+      "Okay",
+      ". Yeah, that sounds right. That's right.",
+      "Delivery.",
+      "Yeah sure, not a problem! It is 2 Bloor Street West.",
+      "416-235-0000",
+      "Yeah, it's Jim.",
+      "Okay. Okay, bye."
+    ]
+  },
+  "responses": [
+    {
+      "type": "assistant_message",
+      "text": "Sure thing! What would you like to order today?",
+      "timestamp": "2025-09-26T16:51:22.351Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Of course! What kind of pizza would you like for your large? Any specific toppings or style in mind?",
+      "timestamp": "2025-09-26T16:51:22.997Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We’ve got a Hawaiian pizza with ham, pineapple, and bacon crumble. Would you like to add or change any toppings on that large Hawaiian?",
+      "timestamp": "2025-09-26T16:51:24.369Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Our Hawaiian pizza comes topped with ham, pineapple, and bacon crumble. \n\nDoes that sound good for your large pizza, or would you like to adjust any of the toppings?",
+      "timestamp": "2025-09-26T16:51:25.272Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Mushrooms are a great choice! We can definitely add mushrooms on half of your Hawaiian pizza. \n\nAnything else you'd like to customize?",
+      "timestamp": "2025-09-26T16:51:26.169Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Got it! So we’ve got a large Hawaiian pizza with ham, pineapple, bacon crumble, and mushrooms on half. \n\nWould you like to add any sides or drinks with that?",
+      "timestamp": "2025-09-26T16:51:26.946Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We’ve got a few options for wings. \n\nYou can choose from baked wings, breaded wings, or boneless wings. Each comes in either 8 pieces or 12 pieces. \n\nWhich type and size would you like?",
+      "timestamp": "2025-09-26T16:51:28.677Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We’ve got two sizes for the wings: 8 pieces or 12 pieces. \n\nWould you like the 8-piece or the 12-piece wings?",
+      "timestamp": "2025-09-26T16:51:29.371Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We don’t have a 15-piece option, but you can combine sizes. For example, you could do a 12-piece plus an 8-piece, or mix and match. \n\nWould you like to go with 12 pieces, or maybe combine two packs to get closer to 15?",
+      "timestamp": "2025-09-26T16:51:30.387Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Understood! We can combine to get close to 15. How about we go with a 12-piece plus an 8-piece, which makes 20 wings total? \n\nWould you prefer baked, breaded, or boneless wings for that combo?",
+      "timestamp": "2025-09-26T16:51:31.507Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "All right, we’ll go with a 12-piece wings. Would you like them baked, breaded, or boneless?",
+      "timestamp": "2025-09-26T16:51:32.100Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We offer wings as baked, breaded, or boneless, and you can typically choose sauces or dips on the side when you pick up or get delivery. \n\nSome popular choices include classic BBQ, hot, honey garlic, or mild. You’ll be able to select sauce or dip preferences when finalizing with the store. \n\nFor now, would you like baked, breaded, or boneless wings?",
+      "timestamp": "2025-09-26T16:51:33.274Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Sure, we can do the wings plain with no sauce. Now, would you like those wings baked, breaded, or boneless?",
+      "timestamp": "2025-09-26T16:51:34.777Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Absolutely! We can do plain wings without any sauce. You can still choose the style: baked, breaded, or boneless. \n\nWhich style would you like for your plain 12-piece wings?",
+      "timestamp": "2025-09-26T16:51:35.806Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "We can definitely have the sauce on the side for you. Now, which style do you prefer for your 12-piece wings: baked, breaded, or boneless?",
+      "timestamp": "2025-09-26T16:51:37.089Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "No problem. Let's keep it simple—how about we go with baked wings for the 12-piece, and we’ll put the sauce on the side. Does that work for you, or would you prefer breaded or boneless instead?",
+      "timestamp": "2025-09-26T16:51:38.081Z"
+    },
+    {
+      "type": "assistant_message",
+      "text": "Sure! The 12-piece baked wings are from $15. \n\nDoes that sound good for you, or would you like to adjust anything?",
+      "timestamp": "2025-09-26T16:51:38.760Z"
+    }
+  ],
+  "toolCalls": [
+    {
+      "name": "getMenuItems",
+      "arguments": "{  \n  \"search\": \"Hawaiian\" \n} \n",
+      "timestamp": "2025-09-26T16:51:23.623Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{ \"search\": \"wings\" }",
+      "timestamp": "2025-09-26T16:51:27.508Z"
+    }
+  ],
+  "analysis": {
+    "orderModifications": "FAIL",
+    "pricingAccuracy": "PASS",
+    "locationHandling": "FAIL",
+    "deliveryCapture": "PASS",
+    "orderCompletion": "FAIL"
+  }
+}

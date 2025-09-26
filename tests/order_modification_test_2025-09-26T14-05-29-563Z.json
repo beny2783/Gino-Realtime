@@ -1,0 +1,109 @@
+{
+  "test": "Order Modification Scenario",
+  "timestamp": "2025-09-26T14:05:29.564Z",
+  "scenario": {
+    "name": "Order Modification & Location Handling",
+    "description": "Tests Laura's ability to handle complex order modifications, location lookups, and order changes",
+    "userMessages": [
+      "Yeah, I'd like to place an order.",
+      "Can I get a large pizza?",
+      "Can I get a Hawaiian?",
+      "What's on the Hawaiian",
+      "Yeah, can I put mushrooms on half? Is mushrooms good?",
+      "All of these",
+      "Some bonus wings .",
+      "What size do you have?",
+      "Can I get 15 wings ?",
+      "I'll take the 15 piece.",
+      "Okay, give me the 12.",
+      "Which flavors do you have?",
+      "Can I get them playing?",
+      "No, just plain. Can you make them plain?",
+      "Could you put the sauce on the side?",
+      "Okay.",
+      "How much is it?",
+      "Okay, can I get a medium pizza instead?",
+      "It's not bad. Do you have any drinks?",
+      "I'll take two 2-liter bottles.",
+      "I'll take one diet and one regular.",
+      "Okay.",
+      "How much was the Pepsi?",
+      "$4. Do you have a six pack?",
+      "Okay, so cancel the two liter bottles.",
+      "Yeah, but change the buffalo sauce to honey garlic.",
+      "Can you make it a small pizza instead?",
+      "Can you take off the mushrooms?",
+      "Can you make the wings boneless?",
+      "What store is it coming from?",
+      "I'm in Barrie",
+      ". No, I'm in Barrie!",
+      "Um...",
+      "I don't think there's a Maple Avenue in Barrie. How about Innisfil?",
+      "No, I'll order one because we don't have one there. How about Innisfil?",
+      "No.",
+      "Yeah, there's a Gino's in the Royal Victoria Hospital in Barrie",
+      "Okay",
+      ". Yeah, that sounds right. That's right.",
+      "Delivery.",
+      "Yeah sure, not a problem! It is 2 Bloor Street West.",
+      "416-235-0000",
+      "Yeah, it's Jim.",
+      "Okay. Okay, bye."
+    ]
+  },
+  "responses": [],
+  "toolCalls": [
+    {
+      "name": "getMenuItems",
+      "arguments": "{  \n  \"search\": \"Hawaiian pizza\" \n} \n",
+      "timestamp": "2025-09-26T14:04:57.571Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{\"search\":\"mushrooms\"}",
+      "timestamp": "2025-09-26T14:04:59.480Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{ \"search\": \"wings\" }",
+      "timestamp": "2025-09-26T14:05:01.818Z"
+    },
+    {
+      "name": "getKbSnippet",
+      "arguments": "{  \n  \"topic\": \"offers\"  \n}",
+      "timestamp": "2025-09-26T14:05:08.569Z"
+    },
+    {
+      "name": "getKbSnippet",
+      "arguments": "{\"topic\":\"dietary\"}",
+      "timestamp": "2025-09-26T14:05:09.401Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{\"search\":\"wing flavors\"}",
+      "timestamp": "2025-09-26T14:05:10.098Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{\"search\":\"drinks\"}",
+      "timestamp": "2025-09-26T14:05:16.408Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{\"search\":\"Pepsi\"}",
+      "timestamp": "2025-09-26T14:05:20.240Z"
+    },
+    {
+      "name": "findNearestStore",
+      "arguments": "{  \n  \"address\": \"Innisfil, ON\" \n}",
+      "timestamp": "2025-09-26T14:05:25.467Z"
+    }
+  ],
+  "analysis": {
+    "orderModifications": "FAIL",
+    "pricingAccuracy": "FAIL",
+    "locationHandling": "PASS",
+    "deliveryCapture": "FAIL",
+    "orderCompletion": "FAIL"
+  }
+}
