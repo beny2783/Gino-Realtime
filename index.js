@@ -1,17 +1,12 @@
 import Fastify from 'fastify';
-import WebSocket from 'ws';
-import dotenv from 'dotenv';
 import fastifyFormBody from '@fastify/formbody';
 import fastifyWs from '@fastify/websocket';
-import { performance } from 'perf_hooks';
-import client from 'prom-client';
-import fs from 'fs';
-import path from 'path';
-import { nearestStore } from './nearestStore.js';
-import { geocodeAddress } from './geocode.js';
-import { findMenuItems } from './menu.js';
-import { getKbSnippet } from './kb.js';
+import { APP_CONFIG } from './config/config.js';
+import { register } from './services/metrics.js';
+import { createTwimlResponse } from './utils/utils.js';
+import { createWebSocketHandler } from './handlers/websocket.js';
 
+<<<<<<< HEAD
 
 // Load environment variables from .env file
 dotenv.config();
@@ -32,6 +27,11 @@ if (!OPENAI_API_KEY) {
   console.error('Missing OpenAI API key. Please set it in the .env file.');
   process.exit(1);
 }
+=======
+// =====================
+// Application Setup
+// =====================
+>>>>>>> origin/main
 
 // Initialize Fastify
 const fastify = Fastify();
@@ -39,6 +39,7 @@ fastify.register(fastifyFormBody);
 fastify.register(fastifyWs);
 
 // =====================
+<<<<<<< HEAD
 // Constants
 // =====================
 
@@ -325,8 +326,12 @@ register.registerMetric(hFeltLatency);
 register.registerMetric(cVADCancellations);
 
 // =====================
+=======
+>>>>>>> origin/main
 // Routes
 // =====================
+
+// Health check endpoint
 fastify.get('/', async (request, reply) => {
   reply.send({ message: 'Twilio Media Stream Server is running!' });
 });
@@ -339,41 +344,16 @@ fastify.get('/metrics', async (req, reply) => {
 // Route for Twilio to handle incoming and outgoing calls
 // Direct connection to Laura agent - no pre-recorded greeting
 fastify.all('/incoming-call', async (request, reply) => {
-  const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
-<Response>
-  <Connect>
-    <Stream url="wss://${request.headers.host}/media-stream" />
-  </Connect>
-</Response>`;
-
+  const twimlResponse = createTwimlResponse(request.headers.host);
   reply.type('text/xml').send(twimlResponse);
 });
-
-// =====================
-// Helpers
-// =====================
-function pretty(obj) {
-  return JSON.stringify(obj, null, 2);
-}
-
-function attachRttMeter(ws, observeFn, intervalMs = 5000) {
-  let lastPingAt = null;
-  const timer = setInterval(() => {
-    lastPingAt = performance.now();
-    try { ws.ping(); } catch {}
-  }, intervalMs);
-
-  ws.on('pong', () => {
-    if (lastPingAt) observeFn(performance.now() - lastPingAt);
-  });
-  ws.on('close', () => clearInterval(timer));
-}
 
 // =====================
 // WebSocket route for media-stream
 // =====================
 fastify.register(async (fastify) => {
   fastify.get('/media-stream', { websocket: true }, (connection, req) => {
+<<<<<<< HEAD
     console.log('Client connected');
 
     const openAiWs = new WebSocket(
@@ -880,16 +860,19 @@ const geocodeCache = makeLRU(400);
     openAiWs.on('error', (error) => {
       logCallEvent('OPENAI_ERROR', { error: error.message, callId }, 'Error in the OpenAI WebSocket');
     });
+=======
+    createWebSocketHandler(connection);
+>>>>>>> origin/main
   });
 });
 
 // =====================
 // Start server
 // =====================
-fastify.listen({ port: PORT, host: '0.0.0.0' }, (err) => {
+fastify.listen({ port: APP_CONFIG.PORT, host: APP_CONFIG.HOST }, (err) => {
   if (err) {
     console.error(err);
     process.exit(1);
   }
-  console.log(`Server is listening on port ${PORT}`);
+  console.log(`Server is listening on port ${APP_CONFIG.PORT}`);
 });
