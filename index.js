@@ -55,6 +55,11 @@ Friendly but efficient — one question at a time.
 Supportive and never impatient — politely re-ask missing details once.
 Always speak in English and close with clarity so the guest knows what happens next.
 
+## Length
+- 2–3 sentences per turn.
+## Pacing
+- Deliver your audio response fast, but do not sound rushed.
+
 Context
 Use this Knowledge Base to answer caller questions. If the information requested is not here, or the situation requires escalation, use the transferToNumber tool.
 
@@ -62,7 +67,7 @@ Tools
 
 transferToNumber: Connects caller to nearest store (based on postal code) or central helpline.
 
-getMenuItems: Example: CALL getMenuItems({kind: "toppings"}). Returns available menu items. Do not invent details.
+getMenuItems: ALWAYS call this for ANY menu item request. Example: CALL getMenuItems({search: "Caesar salad"}) or CALL getMenuItems({kinds: ["salad"]}). Never respond with menu information without calling this tool first.
 
 getKbSnippet: Example: CALL getKbSnippet({topic: "dietary"}). Returns knowledge base text. Use only the smallest topic/ids required.
 
@@ -397,14 +402,34 @@ fastify.register(async (fastify) => {
       }
     }
     
-    // Per-call caching for performance
-    const menuCache = new Map(); // key -> JSON string
-    const kbCache = new Map(); // key -> JSON string
-    const geocodeCache = new Map(); // address -> { lat, lon }
+    // LRU cache implementation to prevent memory leaks
+    function makeLRU(max = 200) {
+      const m = new Map();
+      return {
+        get(k) {
+          if (!m.has(k)) return undefined;
+          const v = m.get(k);
+          m.delete(k); m.set(k, v);
+          return v;
+        },
+        set(k, v) {
+          if (m.has(k)) m.delete(k);
+          m.set(k, v);
+          if (m.size > max) m.delete(m.keys().next().value);
+        },
+        has: (k) => m.has(k)
+      };
+    }
+
+// Per-call caching for performance with LRU limits
+const menuCache = makeLRU(200);
+const kbCache = makeLRU(200);
+const geocodeCache = makeLRU(400);
     
     function cachedFindMenuItems(filters) {
       const key = JSON.stringify(filters || {});
-      if (menuCache.has(key)) return menuCache.get(key);
+      const hit = menuCache.get(key);
+      if (hit) return hit;
       const res = findMenuItems(filters);
       menuCache.set(key, res);
       return res;
@@ -412,21 +437,56 @@ fastify.register(async (fastify) => {
     
     function cachedGetKbSnippet(args) {
       const key = JSON.stringify(args || {});
-      if (kbCache.has(key)) return kbCache.get(key);
+      const hit = kbCache.get(key);
+      if (hit) return hit;
       const res = getKbSnippet(args);
       kbCache.set(key, res);
       return res;
     }
-    
-    function cachedGeocode(address) {
-      const normalized = address.toLowerCase().trim();
-      if (geocodeCache.has(normalized)) return geocodeCache.get(normalized);
-      return null; // Will be set after geocoding
-    }
-    
-    function setGeocodeCache(address, result) {
-      const normalized = address.toLowerCase().trim();
-      geocodeCache.set(normalized, result);
+
+    // Centralized tool handling to eliminate code duplication
+    async function handleToolCall(name, args, send) {
+      if (name === 'findNearestStore') {
+        let { lat, lon, address } = args || {};
+        if ((typeof lat !== 'number' || typeof lon !== 'number') && address) {
+          const cached = geocodeCache.get(address.toLowerCase().trim());
+          const geo = cached || await geocodeAddress(address);
+          geocodeCache.set(address.toLowerCase().trim(), geo);
+          lat = geo.lat; lon = geo.lon;
+        }
+        if (typeof lat !== 'number' || typeof lon !== 'number') {
+          return send({ ok: false, reason: 'CoordinatesMissing', message: 'Could not derive lat/lon' });
+        }
+        const { store, distanceKm } = nearestStore(lat, lon);
+        return send({
+          ok: true,
+          distanceKm,
+          store: {
+            id: store.id,
+            brand: store.brand,
+            address: `${store.address}, ${store.city}, ${store.province}, ${store.country} ${store.postal}`,
+            city: store.city,
+            province: store.province,
+            postal: store.postal,
+            url: store.url,
+            lat: store.lat,
+            lon: store.lon,
+            hours: store.hours
+          }
+        });
+      }
+
+      if (name === 'getMenuItems') {
+        const items = cachedFindMenuItems(args || {});
+        return send({ ok: true, items });
+      }
+
+      if (name === 'getKbSnippet') {
+        const data = cachedGetKbSnippet(args || {});
+        return send({ ok: true, data });
+      }
+
+      return send({ ok: false, reason: 'UnknownTool' });
     }
 
     // Align Twilio's stream-relative timestamps to server wall clock
@@ -440,13 +500,16 @@ fastify.register(async (fastify) => {
           type: 'realtime',
           model: 'gpt-realtime',
           output_modalities: ['audio'],
-          audio: {
-            input: {
-              format: { type: 'audio/pcmu' },
-              turn_detection: makeTurnDetection(),
+            audio: {
+              input: {
+                format: { type: 'audio/pcmu' },
+                transcription: {
+                  model: 'whisper-1'
+                },
+                turn_detection: makeTurnDetection(),
+              },
+              output: { format: { type: 'audio/pcmu' }, voice: VOICE },
             },
-            output: { format: { type: 'audio/pcmu' }, voice: VOICE },
-          },
           tools: [
             {
               type: 'function',
@@ -561,28 +624,8 @@ fastify.register(async (fastify) => {
           const { id, name } = response;
           pendingToolCalls.set(id, { name, argsStr: '' });
           
-          // Send immediate acknowledgment based on tool type
-          let acknowledgment = '';
-          if (name === 'getMenuItems') {
-            acknowledgment = 'Let me check our menu for you.';
-          } else if (name === 'getKbSnippet') {
-            acknowledgment = 'Let me look that up for you.';
-          } else if (name === 'findNearestStore') {
-            acknowledgment = 'Let me find the nearest store for you.';
-          } else {
-            acknowledgment = 'Let me check that for you.';
-          }
-          
-          // Send immediate response
-          const immediateResponse = {
-            type: 'response.create',
-            response: {
-              modalities: ['audio'],
-              instructions: `Say exactly this: "${acknowledgment}" Keep it brief and natural.`
-            }
-          };
-          logCallEvent('TOOL_ACK_SENT', { toolName: name, acknowledgment }, 'Sent immediate acknowledgment');
-          openAiWs.send(JSON.stringify(immediateResponse));
+          // Acknowledgment system temporarily disabled to fix race condition
+          // TODO: Re-enable with proper state management
           return;
         }
 
@@ -608,87 +651,12 @@ fastify.register(async (fastify) => {
             logCallEvent('TOOL_CALL_ARGS', { id, argsStr: entry.argsStr }, 'Tool call args raw');
             const args = entry.argsStr ? JSON.parse(entry.argsStr) : {};
             logCallEvent('TOOL_CALL_END', { id, name: entry.name, args }, 'Tool call end');
-            if (entry.name === 'findNearestStore') {
-              let { lat, lon, address } = args;
-
-              // Check cache first
-              if (address) {
-                const cached = cachedGeocode(address);
-                if (cached) {
-                  lat = cached.lat; lon = cached.lon;
-                } else {
-                  const geo = await geocodeAddress(address);
-                  lat = geo.lat; lon = geo.lon;
-                  setGeocodeCache(address, geo);
-                }
-              }
-
-              if (typeof lat !== 'number' || typeof lon !== 'number') {
-                const out = { ok: false, reason: 'CoordinatesMissing', message: 'Could not derive lat/lon' };
-                console.log('Sending tool.output (error):', out);
-                openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
-                
-                // Trigger Laura to respond with the error message
-                openAiWs.send(JSON.stringify({ type: 'response.create' }));
-              } else {
-                const { store, distanceKm } = nearestStore(lat, lon);
-                const out = {
-                  ok: true,
-                  distanceKm,
-                  store: {
-                    id: store.id,
-                    brand: store.brand,
-                    address: `${store.address}, ${store.city}, ${store.province}, ${store.country} ${store.postal}`,
-                    city: store.city,
-                    province: store.province,
-                    postal: store.postal,
-                    url: store.url,
-                    lat: store.lat,
-                    lon: store.lon,
-                    hours: store.hours
-                  }
-                };
-                console.log('Sending tool.output (success):', { id, outSummary: { ok: out.ok, distanceKm: out.distanceKm, storeId: out.store.id } });
-                openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
-                
-                // Trigger Laura to respond with the store information
-                openAiWs.send(JSON.stringify({ type: 'response.create' }));
-              }
-            } else if (entry.name === 'getMenuItems') {
-              let args = {};
-              try { args = entry.argsStr ? JSON.parse(entry.argsStr) : {}; } catch {}
-              const items = cachedFindMenuItems(args);
-              const out = { ok: true, items }; // keep it small
-              logCallEvent('TOOL_OUTPUT_MENU', { id, itemCount: items.length, filters: args }, 'Sending tool.output (menu)');
-              
-              // Send tool output and trigger follow-up response
-              openAiWs.send(JSON.stringify({
-                type: 'tool.output',
-                tool_output: { tool_call_id: id, output: JSON.stringify(out) }
-              }));
-              
-              // Trigger Laura to respond with the menu data
-              openAiWs.send(JSON.stringify({ type: 'response.create' }));
-            } else if (entry.name === 'getKbSnippet') {
-              let args = {};
-              try { args = entry.argsStr ? JSON.parse(entry.argsStr) : {}; } catch {}
-              const data = cachedGetKbSnippet(args);
-              const out = { ok: true, data }; // keep it small
-              logCallEvent('TOOL_OUTPUT_KB', { id, topic: args.topic, dataType: typeof data }, 'Sending tool.output (kb)');
-              
-              // Send tool output and trigger follow-up response
-              openAiWs.send(JSON.stringify({
-                type: 'tool.output',
-                tool_output: { tool_call_id: id, output: JSON.stringify(out) }
-              }));
-              
-              // Trigger Laura to respond with the KB data
-              openAiWs.send(JSON.stringify({ type: 'response.create' }));
-            } else {
-              const out = { ok:false, reason:'UnknownTool' };
-              console.log('Sending tool.output (unknown tool):', out);
+            
+            // Use centralized tool handling
+            await handleToolCall(entry.name, args, (out) => {
               openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
-            }
+              openAiWs.send(JSON.stringify({ type: 'response.create' }));
+            });
           } catch (e) {
             console.error('Tool call failed:', e);
             openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify({ ok:false, reason:'ServerError' }) }}));
@@ -698,11 +666,40 @@ fastify.register(async (fastify) => {
           return;
         }
 
+        // Log agent text messages
+        if (response.type === 'conversation.item.created' && 
+            response.item?.role === 'assistant' && 
+            response.item?.type === 'message') {
+          const textContent = response.item.content?.find(content => content.type === 'text');
+          if (textContent) {
+            logCallEvent('AGENT_MESSAGE', { 
+              messageId: response.item.id,
+              text: textContent.text 
+            }, `Agent said: "${textContent.text}"`);
+          }
+        }
+
+        // Log user speech transcriptions
+        if (response.type === 'conversation.item.input_audio_transcription.completed') {
+          logCallEvent('USER_TRANSCRIPTION', {
+            eventId: response.event_id,
+            itemId: response.item_id,
+            contentIndex: response.content_index,
+            transcript: response.transcript,
+            usage: response.usage
+          }, `User said: "${response.transcript}"`);
+        }
+
         if (LOG_EVENT_TYPES.includes(response.type)) {
           logCallEvent('OPENAI_EVENT', { type: response.type, data: response }, `Received event: ${response.type}`);
         }
         if (response.type === 'session.updated') {
           logCallEvent('SESSION_UPDATED', { sessionId: response.session?.id }, 'Session updated successfully');
+          // Trigger initial greeting from Laura
+          setTimeout(() => {
+            logCallEvent('INITIAL_GREETING_TRIGGER', {}, 'Triggering initial greeting from Laura');
+            openAiWs.send(JSON.stringify({ type: 'response.create' }));
+          }, 100);
         }
 
         // Track VAD stop as turn boundary (and compute user stop wall-clock if we can)
@@ -761,79 +758,33 @@ fastify.register(async (fastify) => {
             for (const item of outputs) {
               if (item?.type === 'function_call') {
                 console.log('Function call via response.done:', { name: item.name, call_id: item.call_id, arguments: item.arguments });
+                
+                // Acknowledgment system temporarily disabled to fix race condition
+                // TODO: Re-enable with proper state management
+                
                 try {
                   let args = {};
                   if (typeof item.arguments === 'string' && item.arguments.trim()) {
                     args = JSON.parse(item.arguments);
                   }
-                  if (item.name === 'findNearestStore') {
-                    let { lat, lon, address } = args;
-                    if ((typeof lat !== 'number' || typeof lon !== 'number') && address) {
-                      const geo = await geocodeAddress(address);
-                      lat = geo.lat; lon = geo.lon;
-                    }
-                    let output;
-                    if (typeof lat !== 'number' || typeof lon !== 'number') {
-                      output = { ok: false, reason: 'CoordinatesMissing', message: 'Could not derive lat/lon' };
-                    } else {
-                      const { store, distanceKm } = nearestStore(lat, lon);
-                      output = { ok: true, distanceKm, store };
-                    }
-                    // Send function_call_output
-                    const convoItem = {
+                  
+                  // Use centralized tool handling
+                  await handleToolCall(item.name, args, (out) => {
+                    openAiWs.send(JSON.stringify({
                       type: 'conversation.item.create',
-                      item: {
-                        type: 'function_call_output',
-                        call_id: item.call_id,
-                        output: JSON.stringify(output),
-                      },
-                    };
-                    openAiWs.send(JSON.stringify(convoItem));
-                    // Trigger model to respond using the tool result
+                      item: { type: 'function_call_output', call_id: item.call_id, output: JSON.stringify(out) }
+                    }));
                     openAiWs.send(JSON.stringify({ type: 'response.create' }));
-                  } else if (item.name === 'getMenuItems') {
-                    let args = {};
-                    try { args = typeof item.arguments === 'string' && item.arguments.trim() ? JSON.parse(item.arguments) : {}; } catch {}
-                    const items = cachedFindMenuItems(args);
-                    const output = { ok: true, items };
-                    console.log('Function call via response.done (menu):', { name: item.name, call_id: item.call_id, itemCount: items.length });
-                    // Send function_call_output
-                    const convoItem = {
-                      type: 'conversation.item.create',
-                      item: {
-                        type: 'function_call_output',
-                        call_id: item.call_id,
-                        output: JSON.stringify(output),
-                      },
-                    };
-                    openAiWs.send(JSON.stringify(convoItem));
-                    // Trigger model to respond using the tool result
-                    openAiWs.send(JSON.stringify({ type: 'response.create' }));
-                  } else if (item.name === 'getKbSnippet') {
-                    let args = {};
-                    try { args = typeof item.arguments === 'string' && item.arguments.trim() ? JSON.parse(item.arguments) : {}; } catch {}
-                    const data = cachedGetKbSnippet(args);
-                    const output = { ok: true, data };
-                    console.log('Function call via response.done (kb):', { name: item.name, call_id: item.call_id, topic: args.topic });
-                    // Send function_call_output
-                    const convoItem = {
-                      type: 'conversation.item.create',
-                      item: {
-                        type: 'function_call_output',
-                        call_id: item.call_id,
-                        output: JSON.stringify(output),
-                      },
-                    };
-                    openAiWs.send(JSON.stringify(convoItem));
-                    // Trigger model to respond using the tool result
-                    openAiWs.send(JSON.stringify({ type: 'response.create' }));
-                  }
+                  });
                 } catch (e) {
                   console.error('Error handling function_call via response.done:', e);
                 }
               }
             }
           } catch {}
+          
+          // Response processing complete
+          
           if (currentTurn?.firstDeltaAt && currentTurn?.lastDeltaAt) {
             hRespStream.observe(currentTurn.lastDeltaAt - currentTurn.firstDeltaAt);
           }
