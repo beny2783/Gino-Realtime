@@ -24,7 +24,7 @@ export function createWebSocketHandler(connection) {
   );
 
   let streamSid = null;
-  let currentTurn = null; // { speechStoppedAt, firstDeltaAt, firstDeltaSentAt, lastDeltaAt, userStopAt, turnId }
+  let currentTurn = null; // { speechStoppedAt, firstDeltaAt, firstDeltaSentAt, lastDeltaAt, userStopAt, turnId, wasInterrupted }
   let turnCounter = 0;
   let firstAudioMark = null; // { name, sentAt }
   let currentTurnDeltaCount = 0;
@@ -36,6 +36,22 @@ export function createWebSocketHandler(connection) {
   // Align Twilio's stream-relative timestamps to server wall clock
   let streamStartAt = null; // performance.now() at 'start' event
   let lastUserPacketTs = 0; // Twilio media.timestamp (ms since stream start)
+
+  // Helper function to create response with interruption handling
+  const createResponseWithInterruptHandling = () => {
+    let responseData = { type: 'response.create' };
+    
+    // If there was an interruption, add reset instruction
+    if (currentTurn?.wasInterrupted) {
+      responseData.response = {
+        instructions: "The user interrupted you. Do not continue your previous answer; respond to the new input instead."
+      };
+      currentTurn.wasInterrupted = false; // Reset the flag
+      callLogger.log('INTERRUPTION_RESET', { turnId: currentTurn?.turnId }, 'Added interruption reset instruction');
+    }
+    
+    return responseData;
+  };
 
   const sendSessionUpdate = () => {
     const sessionUpdate = {
@@ -131,7 +147,7 @@ export function createWebSocketHandler(connection) {
           // Use centralized tool handling
           await handleToolCall(entry.name, args, (out) => {
             openAiWs.send(JSON.stringify({ type: 'tool.output', tool_output: { tool_call_id: id, output: JSON.stringify(out) }}));
-            openAiWs.send(JSON.stringify({ type: 'response.create' }));
+            openAiWs.send(JSON.stringify(createResponseWithInterruptHandling()));
           });
         } catch (e) {
           console.error('Tool call failed:', e);
@@ -174,8 +190,26 @@ export function createWebSocketHandler(connection) {
         // Trigger initial greeting from Laura
         setTimeout(() => {
           callLogger.log('INITIAL_GREETING_TRIGGER', {}, 'Triggering initial greeting from Laura');
-          openAiWs.send(JSON.stringify({ type: 'response.create' }));
+          openAiWs.send(JSON.stringify(createResponseWithInterruptHandling()));
         }, 100);
+      }
+
+      // Handle VAD speech started - interrupt AI response if in progress
+      if (response.type === 'input_audio_buffer.speech_started') {
+        // Check if AI is currently generating a response
+        if (currentTurn && currentTurn.firstDeltaAt) {
+          callLogger.log('SPEECH_STARTED_DURING_RESPONSE', { 
+            turnId: currentTurn.turnId 
+          }, 'User started speaking during AI response - sending interrupt');
+          
+          // Send interrupt to stop AI response
+          openAiWs.send(JSON.stringify({
+            type: 'response.interrupt'
+          }));
+          
+          // Track that an interruption occurred
+          currentTurn.wasInterrupted = true;
+        }
       }
 
       // Track VAD stop as turn boundary (and compute user stop wall-clock if we can)
@@ -187,6 +221,7 @@ export function createWebSocketHandler(connection) {
           lastDeltaAt: null,
           userStopAt: null,
           turnId: ++turnCounter,
+          wasInterrupted: false,
         };
         if (streamStartAt !== null && lastUserPacketTs !== null) {
           currentTurn.userStopAt = streamStartAt + lastUserPacketTs; // align Twilio stream time → wall clock
@@ -246,7 +281,7 @@ export function createWebSocketHandler(connection) {
                     type: 'conversation.item.create',
                     item: { type: 'function_call_output', call_id: item.call_id, output: JSON.stringify(out) }
                   }));
-                  openAiWs.send(JSON.stringify({ type: 'response.create' }));
+                  openAiWs.send(JSON.stringify(createResponseWithInterruptHandling()));
                 });
               } catch (e) {
                 console.error('Error handling function_call via response.done:', e);
