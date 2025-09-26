@@ -15,12 +15,12 @@ export const ENV = {
 
 // VAD (Voice Activity Detection) configuration
 export const VAD_CONFIG = {
-  MODE: process.env.VAD_MODE || 'semantic',
-  SILENCE_MS: process.env.VAD_SILENCE_MS || '500',
-  PREFIX_MS: process.env.VAD_PREFIX_MS || '80',
-  THRESHOLD: process.env.VAD_THRESHOLD || '0.5',
-  EAGERNESS: process.env.VAD_EAGERNESS || 'high',
-  SEMANTIC_ENABLED: process.env.VAD_SEMANTIC_ENABLED || 'false',
+  MODE: process.env.VAD_MODE || 'semantic', // "semantic" reduces false triggers
+  SILENCE_MS: process.env.VAD_SILENCE_MS || '250', // shorter silence → faster detection
+  PREFIX_MS: process.env.VAD_PREFIX_MS || '100',   // buffer before speech
+  THRESHOLD: process.env.VAD_THRESHOLD || '0.4',   // slightly more sensitive
+  EAGERNESS: process.env.VAD_EAGERNESS || 'very_high', // make it cut off faster
+  SEMANTIC_ENABLED: process.env.VAD_SEMANTIC_ENABLED || 'true',
 };
 
 // Application constants
