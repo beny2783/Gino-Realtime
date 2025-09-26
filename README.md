@@ -153,6 +153,17 @@ The application acts as a proxy between Twilio's Media Streams and OpenAI's Real
 - **OpenAI Realtime API** processes speech and generates responses
 - **Audio Format Conversion** ensures compatibility (G.711 μ-law)
 
+### Project Structure
+
+The codebase is organized into focused modules for maintainability:
+
+- **`config/`** - Configuration and constants
+- **`services/`** - Business logic and core services  
+- **`handlers/`** - Request and connection handlers
+- **`utils/`** - Utility functions and helpers
+
+See [ARCHITECTURE.md](./ARCHITECTURE.md) for detailed module organization.
+
 ## Configuration
 
 ### AI Personality

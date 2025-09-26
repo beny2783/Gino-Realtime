@@ -1,11 +1,11 @@
 import WebSocket from 'ws';
 import { performance } from 'perf_hooks';
-import { ENV, APP_CONFIG, TOOL_DEFINITIONS, LAURA_PROMPT, LOG_EVENT_TYPES } from './config.js';
-import { metrics } from './metrics.js';
-import { CallLogger } from './logger.js';
-import { handleToolCall } from './tools.js';
-import { attachRttMeter, createAudioDelta, createMarkEvent } from './utils.js';
-import { makeTurnDetection } from './vad.js';
+import { ENV, APP_CONFIG, TOOL_DEFINITIONS, LAURA_PROMPT, LOG_EVENT_TYPES } from '../config/config.js';
+import { metrics } from '../services/metrics.js';
+import { CallLogger } from '../services/logger.js';
+import { handleToolCall } from '../services/tools.js';
+import { attachRttMeter, createAudioDelta, createMarkEvent } from '../utils/utils.js';
+import { makeTurnDetection } from '../config/vad.js';
 
 // =====================
 // WebSocket Connection Handler

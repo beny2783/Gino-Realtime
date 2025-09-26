@@ -1,7 +1,7 @@
-import { nearestStore } from './nearestStore.js';
-import { geocodeAddress } from './geocode.js';
-import { findMenuItems } from './menu.js';
-import { getKbSnippet } from './kb.js';
+import { nearestStore } from '../nearestStore.js';
+import { geocodeAddress } from '../geocode.js';
+import { findMenuItems } from '../menu.js';
+import { getKbSnippet } from '../kb.js';
 
 // =====================
 // Tool Handlers

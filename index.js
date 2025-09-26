@@ -1,10 +1,10 @@
 import Fastify from 'fastify';
 import fastifyFormBody from '@fastify/formbody';
 import fastifyWs from '@fastify/websocket';
-import { APP_CONFIG } from './config.js';
-import { register } from './metrics.js';
-import { createTwimlResponse } from './utils.js';
-import { createWebSocketHandler } from './websocket.js';
+import { APP_CONFIG } from './config/config.js';
+import { register } from './services/metrics.js';
+import { createTwimlResponse } from './utils/utils.js';
+import { createWebSocketHandler } from './handlers/websocket.js';
 
 // =====================
 // Application Setup
