@@ -1,0 +1,2850 @@
+{
+  "test": {
+    "name": "Menu Search",
+    "messages": [
+      "Do you have vegetarian options?",
+      "What about Caesar salad?"
+    ],
+    "startTime": "2025-09-26T13:43:59.861Z"
+  },
+  "sessionId": "sess_CK31O3cocKhWGMNG3iMhn",
+  "timestamp": "2025-09-26T13:44:11.867Z",
+  "responses": [],
+  "toolCalls": [
+    {
+      "name": "getMenuItems",
+      "arguments": "{\"dietary\":\"vegetarian\"}",
+      "timestamp": "2025-09-26T13:44:01.583Z"
+    },
+    {
+      "name": "getKbSnippet",
+      "arguments": "{  \n  \"topic\": \"dietary\" \n} \n",
+      "timestamp": "2025-09-26T13:44:02.189Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{\"search\":\"Caesar salad\"}",
+      "timestamp": "2025-09-26T13:44:06.420Z"
+    }
+  ],
+  "toolResults": [
+    {
+      "tool": "getMenuItems",
+      "arguments": {
+        "dietary": "vegetarian"
+      },
+      "result": {
+        "ok": true,
+        "items": [
+          {
+            "id": "size-s",
+            "kind": "size",
+            "name": "Small",
+            "inches": 10,
+            "slices": 6,
+            "calories_per_slice": 160,
+            "base_price": 8,
+            "topping_price": 1.25
+          },
+          {
+            "id": "size-m",
+            "kind": "size",
+            "name": "Medium",
+            "inches": 12,
+            "slices": 8,
+            "calories_per_slice": 180,
+            "base_price": 10,
+            "topping_price": 1.75
+          },
+          {
+            "id": "size-l",
+            "kind": "size",
+            "name": "Large",
+            "inches": 14,
+            "slices": 10,
+            "calories_per_slice": 190,
+            "base_price": 12,
+            "topping_price": 2
+          },
+          {
+            "id": "size-xl",
+            "kind": "size",
+            "name": "X-Large",
+            "inches": 16,
+            "slices": 12,
+            "calories_per_slice": 200,
+            "base_price": 14,
+            "topping_price": 2.75
+          },
+          {
+            "id": "size-pr",
+            "kind": "size",
+            "name": "Party Round",
+            "inches": 20,
+            "slices": 16,
+            "calories_per_slice": 230,
+            "base_price": 24,
+            "topping_price": 4
+          },
+          {
+            "id": "size-pt",
+            "kind": "size",
+            "name": "Party Tray",
+            "inches": "21×15",
+            "slices": 20,
+            "calories_per_slice": 190,
+            "base_price": 24,
+            "topping_price": 4
+          },
+          {
+            "id": "size-ps",
+            "kind": "size",
+            "name": "Party Square",
+            "inches": "20×20",
+            "slices": 25,
+            "calories_per_slice": 190,
+            "base_price": 28,
+            "topping_price": 5
+          },
+          {
+            "id": "crust-original",
+            "kind": "crust",
+            "name": "Original",
+            "calories_range": "440-3320"
+          },
+          {
+            "id": "crust-whole-wheat",
+            "kind": "crust",
+            "name": "Whole Wheat",
+            "calories_range": "450-3400"
+          },
+          {
+            "id": "crust-thin",
+            "kind": "crust",
+            "name": "Thin",
+            "calories_range": "330-2660"
+          },
+          {
+            "id": "crust-thick",
+            "kind": "crust",
+            "name": "Thick",
+            "calories_range": "670-3990"
+          },
+          {
+            "id": "crust-pan",
+            "kind": "crust",
+            "name": "Pan Crust",
+            "extra": true,
+            "calories": 1120
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:44:01.583Z"
+    },
+    {
+      "tool": "getKbSnippet",
+      "arguments": {
+        "topic": "dietary"
+      },
+      "result": {
+        "ok": true,
+        "data": {
+          "vegan_friendly": "Items made with vegan ingredients; cross-contamination may occur.",
+          "vegetarian": "Veg options like veggie pizzas, garlic bread, salads.",
+          "gluten_free": "Cauliflower crust available (extra charge); cross-contamination possible.",
+          "customization": "Flexible — create-your-own pizzas or adjust toppings.",
+          "reminder": "Always advise guests to notify staff of any allergies or sensitivities."
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.189Z"
+    },
+    {
+      "tool": "getMenuItems",
+      "arguments": {
+        "search": "Caesar salad"
+      },
+      "result": {
+        "ok": true,
+        "items": [
+          {
+            "id": "salad-caesar",
+            "kind": "salad",
+            "name": "Caesar Salad",
+            "price": 7,
+            "calories": 450
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:44:06.420Z"
+    }
+  ],
+  "allMessages": [
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31spb9PVpcyHuuevhMH",
+        "previous_item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "item": {
+          "id": "item_CK31s72xxklyiuUi47Rt2",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Do you have vegetarian options?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.023Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31so9YtHcsY3vOOtoVa",
+        "previous_item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "item": {
+          "id": "item_CK31s72xxklyiuUi47Rt2",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Do you have vegetarian options?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.025Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31sIyXtRhromC5qMkkV",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31sZw7uYfMjmS2sBlNo",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.042Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31teZ16ydAn4TStF4iS",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31sFabSIuszmMcSks8B",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getMenuItems",
+          "call_id": "call_djk2TpkIM6BEf3IQ",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.463Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31tXgylppe0ZJvhJN2Y",
+        "previous_item_id": "item_CK31s72xxklyiuUi47Rt2",
+        "item": {
+          "id": "item_CK31sFabSIuszmMcSks8B",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getMenuItems",
+          "call_id": "call_djk2TpkIM6BEf3IQ",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.463Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31tOQTxvrxKI5Zqzpuw",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "item_id": "item_CK31sFabSIuszmMcSks8B",
+        "output_index": 0,
+        "call_id": "call_djk2TpkIM6BEf3IQ",
+        "delta": "{\"",
+        "obfuscation": "zePkq8RKoDocYf"
+      },
+      "timestamp": "2025-09-26T13:44:01.463Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31tAMq4Nhf9L832ktZZ",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "item_id": "item_CK31sFabSIuszmMcSks8B",
+        "output_index": 0,
+        "call_id": "call_djk2TpkIM6BEf3IQ",
+        "delta": "diet",
+        "obfuscation": "cmpr7hrZmeSb"
+      },
+      "timestamp": "2025-09-26T13:44:01.472Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31tm1LOuYobNHSyeCnH",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "item_id": "item_CK31sFabSIuszmMcSks8B",
+        "output_index": 0,
+        "call_id": "call_djk2TpkIM6BEf3IQ",
+        "delta": "ary",
+        "obfuscation": "dNR9xmdcxwEeX"
+      },
+      "timestamp": "2025-09-26T13:44:01.482Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31tnZxwSRaXACUBGcE6",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "item_id": "item_CK31sFabSIuszmMcSks8B",
+        "output_index": 0,
+        "call_id": "call_djk2TpkIM6BEf3IQ",
+        "delta": "\":\"",
+        "obfuscation": "3NJq4gU0IaWit"
+      },
+      "timestamp": "2025-09-26T13:44:01.487Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31t9hpWQGQVQ2VZuIZ7",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "item_id": "item_CK31sFabSIuszmMcSks8B",
+        "output_index": 0,
+        "call_id": "call_djk2TpkIM6BEf3IQ",
+        "delta": "veget",
+        "obfuscation": "Tt0pZwnz8oA"
+      },
+      "timestamp": "2025-09-26T13:44:01.492Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31tbDWhGgM2pF2SMpCx",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "item_id": "item_CK31sFabSIuszmMcSks8B",
+        "output_index": 0,
+        "call_id": "call_djk2TpkIM6BEf3IQ",
+        "delta": "arian",
+        "obfuscation": "19TnLPtzcbH"
+      },
+      "timestamp": "2025-09-26T13:44:01.502Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31tO52i6n0CswPmthPU",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "item_id": "item_CK31sFabSIuszmMcSks8B",
+        "output_index": 0,
+        "call_id": "call_djk2TpkIM6BEf3IQ",
+        "delta": "\"}",
+        "obfuscation": "Vr3s53Yhvi1nRC"
+      },
+      "timestamp": "2025-09-26T13:44:01.509Z"
+    },
+    {
+      "type": "response.function_call_arguments.done",
+      "data": {
+        "type": "response.function_call_arguments.done",
+        "event_id": "event_CK31t1dyCLAoVtHgj5S0A",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "item_id": "item_CK31sFabSIuszmMcSks8B",
+        "output_index": 0,
+        "call_id": "call_djk2TpkIM6BEf3IQ",
+        "name": "getMenuItems",
+        "arguments": "{\"dietary\":\"vegetarian\"}"
+      },
+      "timestamp": "2025-09-26T13:44:01.547Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31tgM8LlRZi4WzMUXNl",
+        "previous_item_id": "item_CK31s72xxklyiuUi47Rt2",
+        "item": {
+          "id": "item_CK31sFabSIuszmMcSks8B",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getMenuItems",
+          "call_id": "call_djk2TpkIM6BEf3IQ",
+          "arguments": "{\"dietary\":\"vegetarian\"}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.582Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31tg0nDjJhONMW9S9d5",
+        "response_id": "resp_CK31sZw7uYfMjmS2sBlNo",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31sFabSIuszmMcSks8B",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getMenuItems",
+          "call_id": "call_djk2TpkIM6BEf3IQ",
+          "arguments": "{\"dietary\":\"vegetarian\"}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.582Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31tQMBe2S7Xct8xH7sB",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31sZw7uYfMjmS2sBlNo",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31sFabSIuszmMcSks8B",
+              "type": "function_call",
+              "status": "completed",
+              "name": "getMenuItems",
+              "call_id": "call_djk2TpkIM6BEf3IQ",
+              "arguments": "{\"dietary\":\"vegetarian\"}"
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 2640,
+            "input_tokens": 2622,
+            "output_tokens": 18,
+            "input_token_details": {
+              "text_tokens": 2622,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 2560,
+              "cached_tokens_details": {
+                "text_tokens": 2560,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 18,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.583Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31ti33XPqGelQf83Yi7",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 36048,
+            "reset_seconds": 5.927
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:44:01.583Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31tNN4VMSJGa86Tm76r",
+        "previous_item_id": "item_CK31sFabSIuszmMcSks8B",
+        "item": {
+          "id": "item_CK31tJevdggOiKD8yQAWq",
+          "type": "function_call_output",
+          "call_id": "call_djk2TpkIM6BEf3IQ",
+          "output": "{\"ok\":true,\"items\":[{\"id\":\"size-s\",\"kind\":\"size\",\"name\":\"Small\",\"inches\":10,\"slices\":6,\"calories_per_slice\":160,\"base_price\":8,\"topping_price\":1.25},{\"id\":\"size-m\",\"kind\":\"size\",\"name\":\"Medium\",\"inches\":12,\"slices\":8,\"calories_per_slice\":180,\"base_price\":10,\"topping_price\":1.75},{\"id\":\"size-l\",\"kind\":\"size\",\"name\":\"Large\",\"inches\":14,\"slices\":10,\"calories_per_slice\":190,\"base_price\":12,\"topping_price\":2},{\"id\":\"size-xl\",\"kind\":\"size\",\"name\":\"X-Large\",\"inches\":16,\"slices\":12,\"calories_per_slice\":200,\"base_price\":14,\"topping_price\":2.75},{\"id\":\"size-pr\",\"kind\":\"size\",\"name\":\"Party Round\",\"inches\":20,\"slices\":16,\"calories_per_slice\":230,\"base_price\":24,\"topping_price\":4},{\"id\":\"size-pt\",\"kind\":\"size\",\"name\":\"Party Tray\",\"inches\":\"21×15\",\"slices\":20,\"calories_per_slice\":190,\"base_price\":24,\"topping_price\":4},{\"id\":\"size-ps\",\"kind\":\"size\",\"name\":\"Party Square\",\"inches\":\"20×20\",\"slices\":25,\"calories_per_slice\":190,\"base_price\":28,\"topping_price\":5},{\"id\":\"crust-original\",\"kind\":\"crust\",\"name\":\"Original\",\"calories_range\":\"440-3320\"},{\"id\":\"crust-whole-wheat\",\"kind\":\"crust\",\"name\":\"Whole Wheat\",\"calories_range\":\"450-3400\"},{\"id\":\"crust-thin\",\"kind\":\"crust\",\"name\":\"Thin\",\"calories_range\":\"330-2660\"},{\"id\":\"crust-thick\",\"kind\":\"crust\",\"name\":\"Thick\",\"calories_range\":\"670-3990\"},{\"id\":\"crust-pan\",\"kind\":\"crust\",\"name\":\"Pan Crust\",\"extra\":true,\"calories\":1120}]}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.742Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31tSRu9UsRpx4tH0x2W",
+        "previous_item_id": "item_CK31sFabSIuszmMcSks8B",
+        "item": {
+          "id": "item_CK31tJevdggOiKD8yQAWq",
+          "type": "function_call_output",
+          "call_id": "call_djk2TpkIM6BEf3IQ",
+          "output": "{\"ok\":true,\"items\":[{\"id\":\"size-s\",\"kind\":\"size\",\"name\":\"Small\",\"inches\":10,\"slices\":6,\"calories_per_slice\":160,\"base_price\":8,\"topping_price\":1.25},{\"id\":\"size-m\",\"kind\":\"size\",\"name\":\"Medium\",\"inches\":12,\"slices\":8,\"calories_per_slice\":180,\"base_price\":10,\"topping_price\":1.75},{\"id\":\"size-l\",\"kind\":\"size\",\"name\":\"Large\",\"inches\":14,\"slices\":10,\"calories_per_slice\":190,\"base_price\":12,\"topping_price\":2},{\"id\":\"size-xl\",\"kind\":\"size\",\"name\":\"X-Large\",\"inches\":16,\"slices\":12,\"calories_per_slice\":200,\"base_price\":14,\"topping_price\":2.75},{\"id\":\"size-pr\",\"kind\":\"size\",\"name\":\"Party Round\",\"inches\":20,\"slices\":16,\"calories_per_slice\":230,\"base_price\":24,\"topping_price\":4},{\"id\":\"size-pt\",\"kind\":\"size\",\"name\":\"Party Tray\",\"inches\":\"21×15\",\"slices\":20,\"calories_per_slice\":190,\"base_price\":24,\"topping_price\":4},{\"id\":\"size-ps\",\"kind\":\"size\",\"name\":\"Party Square\",\"inches\":\"20×20\",\"slices\":25,\"calories_per_slice\":190,\"base_price\":28,\"topping_price\":5},{\"id\":\"crust-original\",\"kind\":\"crust\",\"name\":\"Original\",\"calories_range\":\"440-3320\"},{\"id\":\"crust-whole-wheat\",\"kind\":\"crust\",\"name\":\"Whole Wheat\",\"calories_range\":\"450-3400\"},{\"id\":\"crust-thin\",\"kind\":\"crust\",\"name\":\"Thin\",\"calories_range\":\"330-2660\"},{\"id\":\"crust-thick\",\"kind\":\"crust\",\"name\":\"Thick\",\"calories_range\":\"670-3990\"},{\"id\":\"crust-pan\",\"kind\":\"crust\",\"name\":\"Pan Crust\",\"extra\":true,\"calories\":1120}]}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.742Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31tmrq38oBxSs8ZwuPE",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31trcHOLvIbb3Hl6VfN",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:01.764Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31tkyDJ9RZ8QaHBxPhX",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31t2DiEOsTclKcm4ZB6",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getKbSnippet",
+          "call_id": "call_9wI7sE8KglQ5WYlc",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.032Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31t4cfNsTwMe9Q381eH",
+        "previous_item_id": "item_CK31tJevdggOiKD8yQAWq",
+        "item": {
+          "id": "item_CK31t2DiEOsTclKcm4ZB6",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getKbSnippet",
+          "call_id": "call_9wI7sE8KglQ5WYlc",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.032Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31tjyX7MppkzCFr1d51",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": "{",
+        "obfuscation": "TtMZU78PoQUaEZf"
+      },
+      "timestamp": "2025-09-26T13:44:02.034Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31uVtCiLxUrGGJb4O9I",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": "  \n",
+        "obfuscation": "NdnsYRVsVZo0V"
+      },
+      "timestamp": "2025-09-26T13:44:02.038Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31uGEz6KTS460a418CD",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": " ",
+        "obfuscation": "CT9AjHQvVp5twfh"
+      },
+      "timestamp": "2025-09-26T13:44:02.057Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31usFvM2k0GgJTifxRL",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": " \"",
+        "obfuscation": "Z4gpDexSRVtyde"
+      },
+      "timestamp": "2025-09-26T13:44:02.068Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31u9lXOcdSYENqXhpoy",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": "topic",
+        "obfuscation": "LB5uCOOAg0F"
+      },
+      "timestamp": "2025-09-26T13:44:02.075Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31urDk6ke6DzgCCbwe0",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": "\":",
+        "obfuscation": "83QzADqyYCOZQW"
+      },
+      "timestamp": "2025-09-26T13:44:02.084Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31u7Qq2EJ8dYkHfXp7r",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": " \"",
+        "obfuscation": "V1dv3CvD6LyLaW"
+      },
+      "timestamp": "2025-09-26T13:44:02.094Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31ursrCQk2AkMuwDnQB",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": "diet",
+        "obfuscation": "2gxM4L77BzBl"
+      },
+      "timestamp": "2025-09-26T13:44:02.104Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31u5NlvdIIhGcpXUwRi",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": "ary",
+        "obfuscation": "eCLV26RAVpUEn"
+      },
+      "timestamp": "2025-09-26T13:44:02.113Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31uDnpqPTdnypxKWewh",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": "\"",
+        "obfuscation": "9Uh8COM7p9jKSrQ"
+      },
+      "timestamp": "2025-09-26T13:44:02.118Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31uklntQaPxSdtz75B0",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": " \n",
+        "obfuscation": "BzorXUmsI4FCZd"
+      },
+      "timestamp": "2025-09-26T13:44:02.129Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31u2E5OqQklcNyDDxYW",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": "}",
+        "obfuscation": "39WdVWGMYowgs6V"
+      },
+      "timestamp": "2025-09-26T13:44:02.137Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31u1IpcYG9rQtLWU0Ks",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "delta": " \n",
+        "obfuscation": "2A4ifQwQSPk3OF"
+      },
+      "timestamp": "2025-09-26T13:44:02.146Z"
+    },
+    {
+      "type": "response.function_call_arguments.done",
+      "data": {
+        "type": "response.function_call_arguments.done",
+        "event_id": "event_CK31urBAKP3RCSMpBtqyY",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "output_index": 0,
+        "call_id": "call_9wI7sE8KglQ5WYlc",
+        "name": "getKbSnippet",
+        "arguments": "{  \n  \"topic\": \"dietary\" \n} \n"
+      },
+      "timestamp": "2025-09-26T13:44:02.184Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31uYFlhkAoHUQDsWGtr",
+        "previous_item_id": "item_CK31tJevdggOiKD8yQAWq",
+        "item": {
+          "id": "item_CK31t2DiEOsTclKcm4ZB6",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getKbSnippet",
+          "call_id": "call_9wI7sE8KglQ5WYlc",
+          "arguments": "{  \n  \"topic\": \"dietary\" \n} \n"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.185Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31uU2YihjI9omgzVTwa",
+        "response_id": "resp_CK31trcHOLvIbb3Hl6VfN",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31t2DiEOsTclKcm4ZB6",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getKbSnippet",
+          "call_id": "call_9wI7sE8KglQ5WYlc",
+          "arguments": "{  \n  \"topic\": \"dietary\" \n} \n"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.185Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31uxDfVzy6NMqlcwx9t",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31trcHOLvIbb3Hl6VfN",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31t2DiEOsTclKcm4ZB6",
+              "type": "function_call",
+              "status": "completed",
+              "name": "getKbSnippet",
+              "call_id": "call_9wI7sE8KglQ5WYlc",
+              "arguments": "{  \n  \"topic\": \"dietary\" \n} \n"
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 3115,
+            "input_tokens": 3091,
+            "output_tokens": 24,
+            "input_token_details": {
+              "text_tokens": 3091,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 2624,
+              "cached_tokens_details": {
+                "text_tokens": 2624,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 24,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.189Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31u9PpLyV76g1OdXHWG",
+        "previous_item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "item": {
+          "id": "item_CK31umr5sieMKf3OYUSXX",
+          "type": "function_call_output",
+          "call_id": "call_9wI7sE8KglQ5WYlc",
+          "output": "{\"ok\":true,\"data\":{\"vegan_friendly\":\"Items made with vegan ingredients; cross-contamination may occur.\",\"vegetarian\":\"Veg options like veggie pizzas, garlic bread, salads.\",\"gluten_free\":\"Cauliflower crust available (extra charge); cross-contamination possible.\",\"customization\":\"Flexible — create-your-own pizzas or adjust toppings.\",\"reminder\":\"Always advise guests to notify staff of any allergies or sensitivities.\"}}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.365Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31u414ZgfJ4datsLv30",
+        "previous_item_id": "item_CK31t2DiEOsTclKcm4ZB6",
+        "item": {
+          "id": "item_CK31umr5sieMKf3OYUSXX",
+          "type": "function_call_output",
+          "call_id": "call_9wI7sE8KglQ5WYlc",
+          "output": "{\"ok\":true,\"data\":{\"vegan_friendly\":\"Items made with vegan ingredients; cross-contamination may occur.\",\"vegetarian\":\"Veg options like veggie pizzas, garlic bread, salads.\",\"gluten_free\":\"Cauliflower crust available (extra charge); cross-contamination possible.\",\"customization\":\"Flexible — create-your-own pizzas or adjust toppings.\",\"reminder\":\"Always advise guests to notify staff of any allergies or sensitivities.\"}}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.365Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31usPFJjfF2ctnmXd69",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31unwyii7eF3SOfWg1S",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.365Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31u6CDMbiTNEuCuEBZ0",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31usWsD11IAosw03KaH",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.581Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31uOdycYwmtmu3G75SB",
+        "previous_item_id": "item_CK31umr5sieMKf3OYUSXX",
+        "item": {
+          "id": "item_CK31usWsD11IAosw03KaH",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.581Z"
+    },
+    {
+      "type": "response.content_part.added",
+      "data": {
+        "type": "response.content_part.added",
+        "event_id": "event_CK31us6NUVJF2THb6gWVA",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:44:02.582Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uWPqW2IxbOOTd8oyO",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Yes",
+        "obfuscation": "ATqoqIfajRKQc"
+      },
+      "timestamp": "2025-09-26T13:44:02.582Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31utW5Jirhm4JeMscgY",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "SK2ynzqVLh2slmg"
+      },
+      "timestamp": "2025-09-26T13:44:02.586Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uWuOyA5BuuNjBzAoz",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " we",
+        "obfuscation": "sqhSNel8omKdy"
+      },
+      "timestamp": "2025-09-26T13:44:02.616Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uMcGjXMfXVbTyfGut",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " do",
+        "obfuscation": "rAjB9zDFXRJov"
+      },
+      "timestamp": "2025-09-26T13:44:02.616Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uhY3ITKgGVEix2uzk",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " offer",
+        "obfuscation": "dFlyv89grf"
+      },
+      "timestamp": "2025-09-26T13:44:02.616Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uCihEKjySAt5Wk0iC",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " vegetarian",
+        "obfuscation": "ycJ6v"
+      },
+      "timestamp": "2025-09-26T13:44:02.622Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31u0pjRHgIaDzKPtsxf",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " options",
+        "obfuscation": "dlgYiuca"
+      },
+      "timestamp": "2025-09-26T13:44:02.629Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uUR6fIiymH3DbNYUb",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "g7kl1RxxaaYTXVC"
+      },
+      "timestamp": "2025-09-26T13:44:02.640Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ucNCoeXAtadAHXTk2",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " We",
+        "obfuscation": "6qjwGjBiqGmFL"
+      },
+      "timestamp": "2025-09-26T13:44:02.647Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uhZ8mv7lfFBYksIFH",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’ve",
+        "obfuscation": "a3MSJ3CuaHG4A"
+      },
+      "timestamp": "2025-09-26T13:44:02.658Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uuiWRpBN0dsqMR44J",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " got",
+        "obfuscation": "8mzJn1XeAHpe"
+      },
+      "timestamp": "2025-09-26T13:44:02.673Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uuj2fYqHP4NAJBxjk",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " veggie",
+        "obfuscation": "Abixsw6pZ"
+      },
+      "timestamp": "2025-09-26T13:44:02.688Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uAUqESY0BLpGpJm2E",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pizzas",
+        "obfuscation": "5TrIAHdNH"
+      },
+      "timestamp": "2025-09-26T13:44:02.690Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uQutL7Z1DBAdvtKfK",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "Ff856T7Uw7FT6wv"
+      },
+      "timestamp": "2025-09-26T13:44:02.692Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31unPIVYmpm3Qweo5Nc",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " garlic",
+        "obfuscation": "QgchAyqId"
+      },
+      "timestamp": "2025-09-26T13:44:02.704Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uCdIiIj0BaxGMZSy1",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " bread",
+        "obfuscation": "KNKwE5pldD"
+      },
+      "timestamp": "2025-09-26T13:44:02.711Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uj9vxIAWm40Ymk1p0",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "QUyK39R4DymcO65"
+      },
+      "timestamp": "2025-09-26T13:44:02.720Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uQLQYdHnTAI9Kst5D",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " and",
+        "obfuscation": "iwKstoKL3jgO"
+      },
+      "timestamp": "2025-09-26T13:44:02.727Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ulVPsbv6xycz0PsNK",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " salads",
+        "obfuscation": "kV1yye1Tx"
+      },
+      "timestamp": "2025-09-26T13:44:02.739Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uxO3vUxiqnoFJttc2",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "ksZGewbqJjs2560"
+      },
+      "timestamp": "2025-09-26T13:44:02.747Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ub58SIe0YT6ekFagm",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " plus",
+        "obfuscation": "mU48flji2LQ"
+      },
+      "timestamp": "2025-09-26T13:44:02.753Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31u9SPwjK8zu7tkiIjb",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "IAyd9sfLiTHY"
+      },
+      "timestamp": "2025-09-26T13:44:02.763Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ufgWccMKLBXRdjj8k",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " can",
+        "obfuscation": "PikwzGxRtsVA"
+      },
+      "timestamp": "2025-09-26T13:44:02.772Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uPHvXSFvL3kbEk1OA",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " always",
+        "obfuscation": "ef5iushwi"
+      },
+      "timestamp": "2025-09-26T13:44:02.790Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uKDs8jNDwbVzRfxJo",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " customize",
+        "obfuscation": "X8coF2"
+      },
+      "timestamp": "2025-09-26T13:44:02.790Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uHfZc4qepT9zk4BwJ",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " your",
+        "obfuscation": "nKNuwaGx70L"
+      },
+      "timestamp": "2025-09-26T13:44:02.798Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31u2CDLeUZkx1LmgPAQ",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " own",
+        "obfuscation": "3rYBGbrrR6aO"
+      },
+      "timestamp": "2025-09-26T13:44:02.808Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uftfiSLk7p7NNymwN",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pizza",
+        "obfuscation": "uahoKcTZ4t"
+      },
+      "timestamp": "2025-09-26T13:44:02.820Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31u2c5SrcPtJjUdpmK3",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " by",
+        "obfuscation": "ipXXTUwJYgMaC"
+      },
+      "timestamp": "2025-09-26T13:44:02.824Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uk7d4zzabZoL8IhOx",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " adjusting",
+        "obfuscation": "4b4dsF"
+      },
+      "timestamp": "2025-09-26T13:44:02.831Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uD0zi17e3Tt3IhAhe",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " the",
+        "obfuscation": "vZCtAGZPsLro"
+      },
+      "timestamp": "2025-09-26T13:44:02.844Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ukIQIcGS7IlXD58iD",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " toppings",
+        "obfuscation": "nbqHnki"
+      },
+      "timestamp": "2025-09-26T13:44:02.849Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uZ4HGczOOPURHhy4P",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".\n\n",
+        "obfuscation": "uMH6T9ydpUTqa"
+      },
+      "timestamp": "2025-09-26T13:44:02.858Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uOekfbVH4XxtaE1JW",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Would",
+        "obfuscation": "fe4k7NZ5ogF"
+      },
+      "timestamp": "2025-09-26T13:44:02.868Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31umAOqI9TUrrUm9sfJ",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "jOLOyNbuIaf5"
+      },
+      "timestamp": "2025-09-26T13:44:02.878Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uh4lYYP68YqyL2fwV",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " like",
+        "obfuscation": "gVPb1flLVV3"
+      },
+      "timestamp": "2025-09-26T13:44:02.885Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uEx8ss1HZcOb5KUwj",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " to",
+        "obfuscation": "dP3eWORudWx5S"
+      },
+      "timestamp": "2025-09-26T13:44:02.900Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uzHXzFCehF396lPZD",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " add",
+        "obfuscation": "vbUFg7PNivcr"
+      },
+      "timestamp": "2025-09-26T13:44:02.908Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31upx6yp12hUqvAnkMh",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " any",
+        "obfuscation": "GFEWpcx2wokK"
+      },
+      "timestamp": "2025-09-26T13:44:02.911Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uTi7EXmYjwhSa9jLi",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " of",
+        "obfuscation": "DRGbK0tw2oaGo"
+      },
+      "timestamp": "2025-09-26T13:44:02.921Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uYObBxLmrJp9bhdv0",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " those",
+        "obfuscation": "1nN6Whc5IY"
+      },
+      "timestamp": "2025-09-26T13:44:02.931Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uUwsiWwvhGcjoMbiF",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " vegetarian",
+        "obfuscation": "xaC4c"
+      },
+      "timestamp": "2025-09-26T13:44:02.939Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uFVkRF7k1dRdDOyUE",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " items",
+        "obfuscation": "E7dMRTlwyL"
+      },
+      "timestamp": "2025-09-26T13:44:02.948Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uy8tpi9rsvOC2dIXQ",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " to",
+        "obfuscation": "j8DftGt4sVeGh"
+      },
+      "timestamp": "2025-09-26T13:44:02.956Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31u5qsKJGo0S1mZ1LYj",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " your",
+        "obfuscation": "I62liSz0dwR"
+      },
+      "timestamp": "2025-09-26T13:44:02.972Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31u2mDVgyXlkN1s9ZCH",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " order",
+        "obfuscation": "4dFvpyZO6m"
+      },
+      "timestamp": "2025-09-26T13:44:02.976Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31uheexiUItNkyA25Kk",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "?",
+        "obfuscation": "fvrrh9usvYFTqxm"
+      },
+      "timestamp": "2025-09-26T13:44:02.987Z"
+    },
+    {
+      "type": "response.output_text.done",
+      "data": {
+        "type": "response.output_text.done",
+        "event_id": "event_CK31ujS4YXeDgWkIruNuP",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "text": "Yes, we do offer vegetarian options. We’ve got veggie pizzas, garlic bread, and salads, plus you can always customize your own pizza by adjusting the toppings.\n\nWould you like to add any of those vegetarian items to your order?"
+      },
+      "timestamp": "2025-09-26T13:44:03.017Z"
+    },
+    {
+      "type": "response.content_part.done",
+      "data": {
+        "type": "response.content_part.done",
+        "event_id": "event_CK31u0wLW5cXUS4U9MU5r",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "item_id": "item_CK31usWsD11IAosw03KaH",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": "Yes, we do offer vegetarian options. We’ve got veggie pizzas, garlic bread, and salads, plus you can always customize your own pizza by adjusting the toppings.\n\nWould you like to add any of those vegetarian items to your order?"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:03.020Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31ukndsc08BslVoGJqA",
+        "previous_item_id": "item_CK31umr5sieMKf3OYUSXX",
+        "item": {
+          "id": "item_CK31usWsD11IAosw03KaH",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Yes, we do offer vegetarian options. We’ve got veggie pizzas, garlic bread, and salads, plus you can always customize your own pizza by adjusting the toppings.\n\nWould you like to add any of those vegetarian items to your order?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:44:03.020Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31umFspwvvRJ6m1l1uR",
+        "response_id": "resp_CK31unwyii7eF3SOfWg1S",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31usWsD11IAosw03KaH",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Yes, we do offer vegetarian options. We’ve got veggie pizzas, garlic bread, and salads, plus you can always customize your own pizza by adjusting the toppings.\n\nWould you like to add any of those vegetarian items to your order?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:44:03.021Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31u56z8qE3Uar3c5lQD",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31unwyii7eF3SOfWg1S",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31usWsD11IAosw03KaH",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Yes, we do offer vegetarian options. We’ve got veggie pizzas, garlic bread, and salads, plus you can always customize your own pizza by adjusting the toppings.\n\nWould you like to add any of those vegetarian items to your order?"
+                }
+              ]
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 3250,
+            "input_tokens": 3201,
+            "output_tokens": 49,
+            "input_token_details": {
+              "text_tokens": 3201,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 3072,
+              "cached_tokens_details": {
+                "text_tokens": 3072,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 49,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:03.023Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31vTS92qwSVs2Z5twAT",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 30150,
+            "reset_seconds": 14.774
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:44:03.040Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31xb81UvQ0yj5CTQsv3",
+        "previous_item_id": "item_CK31usWsD11IAosw03KaH",
+        "item": {
+          "id": "item_CK31xbwD7zyNeH3pjXizA",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "What about Caesar salad?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.008Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31xrHpw9NwU0Sxc9yRj",
+        "previous_item_id": "item_CK31usWsD11IAosw03KaH",
+        "item": {
+          "id": "item_CK31xbwD7zyNeH3pjXizA",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "What about Caesar salad?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.008Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31xFLhgeP9c3uLm5Ajb",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31xS7DkWZF1UJrn6pCL",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.033Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31yNAJkXYW9K16vKEdk",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31xd4HMhz1ojXCOhn1n",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getMenuItems",
+          "call_id": "call_mscRF04Y0h51bH2K",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.296Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31ykvBIvBjbd4r5uTfG",
+        "previous_item_id": "item_CK31xbwD7zyNeH3pjXizA",
+        "item": {
+          "id": "item_CK31xd4HMhz1ojXCOhn1n",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getMenuItems",
+          "call_id": "call_mscRF04Y0h51bH2K",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.296Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31yfX5erSU6jJi6f0e6",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "output_index": 0,
+        "call_id": "call_mscRF04Y0h51bH2K",
+        "delta": "{\"",
+        "obfuscation": "kMK1mCCVC9klTG"
+      },
+      "timestamp": "2025-09-26T13:44:06.296Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31yarPeEnLkIt9FeKCk",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "output_index": 0,
+        "call_id": "call_mscRF04Y0h51bH2K",
+        "delta": "search",
+        "obfuscation": "gan6NLn6Jy"
+      },
+      "timestamp": "2025-09-26T13:44:06.304Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31yZM5HuXEbkBCHKqHU",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "output_index": 0,
+        "call_id": "call_mscRF04Y0h51bH2K",
+        "delta": "\":\"",
+        "obfuscation": "5nECJsGFP78Mr"
+      },
+      "timestamp": "2025-09-26T13:44:06.312Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31yuv38FFAdV1P4EYu1",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "output_index": 0,
+        "call_id": "call_mscRF04Y0h51bH2K",
+        "delta": "Ca",
+        "obfuscation": "uIvp37OcdSJL9p"
+      },
+      "timestamp": "2025-09-26T13:44:06.321Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31yjMujdfWYoLvkHZZe",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "output_index": 0,
+        "call_id": "call_mscRF04Y0h51bH2K",
+        "delta": "esar",
+        "obfuscation": "amshgND15HWW"
+      },
+      "timestamp": "2025-09-26T13:44:06.331Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31yCtX7akASARuS2QVU",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "output_index": 0,
+        "call_id": "call_mscRF04Y0h51bH2K",
+        "delta": " salad",
+        "obfuscation": "5UspAZgdvi"
+      },
+      "timestamp": "2025-09-26T13:44:06.341Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31yIVtoj8jpS21SLM3j",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "output_index": 0,
+        "call_id": "call_mscRF04Y0h51bH2K",
+        "delta": "\"}",
+        "obfuscation": "iLYJUyuSmvwGZl"
+      },
+      "timestamp": "2025-09-26T13:44:06.348Z"
+    },
+    {
+      "type": "response.function_call_arguments.done",
+      "data": {
+        "type": "response.function_call_arguments.done",
+        "event_id": "event_CK31yFDFusBhcE3gqP341",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "output_index": 0,
+        "call_id": "call_mscRF04Y0h51bH2K",
+        "name": "getMenuItems",
+        "arguments": "{\"search\":\"Caesar salad\"}"
+      },
+      "timestamp": "2025-09-26T13:44:06.391Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31yKaA83GIxkdXxfyWb",
+        "previous_item_id": "item_CK31xbwD7zyNeH3pjXizA",
+        "item": {
+          "id": "item_CK31xd4HMhz1ojXCOhn1n",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getMenuItems",
+          "call_id": "call_mscRF04Y0h51bH2K",
+          "arguments": "{\"search\":\"Caesar salad\"}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.419Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31yuOfNE2kwJvvcpJ7U",
+        "response_id": "resp_CK31xS7DkWZF1UJrn6pCL",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31xd4HMhz1ojXCOhn1n",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getMenuItems",
+          "call_id": "call_mscRF04Y0h51bH2K",
+          "arguments": "{\"search\":\"Caesar salad\"}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.419Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31yZ62wfb4IToEQjl71",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31xS7DkWZF1UJrn6pCL",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31xd4HMhz1ojXCOhn1n",
+              "type": "function_call",
+              "status": "completed",
+              "name": "getMenuItems",
+              "call_id": "call_mscRF04Y0h51bH2K",
+              "arguments": "{\"search\":\"Caesar salad\"}"
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 3279,
+            "input_tokens": 3261,
+            "output_tokens": 18,
+            "input_token_details": {
+              "text_tokens": 3261,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 3200,
+              "cached_tokens_details": {
+                "text_tokens": 3200,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 18,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.419Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31y7wgFLHL40jyziKEL",
+        "previous_item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "item": {
+          "id": "item_CK31yDKx7FJLY6zE5CKOg",
+          "type": "function_call_output",
+          "call_id": "call_mscRF04Y0h51bH2K",
+          "output": "{\"ok\":true,\"items\":[{\"id\":\"salad-caesar\",\"kind\":\"salad\",\"name\":\"Caesar Salad\",\"price\":7,\"calories\":450}]}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.554Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31ylDN3rISfy3cFiKZ1",
+        "previous_item_id": "item_CK31xd4HMhz1ojXCOhn1n",
+        "item": {
+          "id": "item_CK31yDKx7FJLY6zE5CKOg",
+          "type": "function_call_output",
+          "call_id": "call_mscRF04Y0h51bH2K",
+          "output": "{\"ok\":true,\"items\":[{\"id\":\"salad-caesar\",\"kind\":\"salad\",\"name\":\"Caesar Salad\",\"price\":7,\"calories\":450}]}"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.554Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31yHjOB2wOBFhscpAXl",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31y5m3XbOzSjkLN90SS",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.586Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31y1cCu6Y4RlvZNzW1L",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.760Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31y1OaOQ82B8uMnMF8F",
+        "previous_item_id": "item_CK31yDKx7FJLY6zE5CKOg",
+        "item": {
+          "id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.761Z"
+    },
+    {
+      "type": "response.content_part.added",
+      "data": {
+        "type": "response.content_part.added",
+        "event_id": "event_CK31yHULVf7aMhnu6ktcu",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:44:06.761Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yi776JmzkJz4uADJn",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "We",
+        "obfuscation": "jxNcapXrZxLDUu"
+      },
+      "timestamp": "2025-09-26T13:44:06.761Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yjPN2NPmFeGR4pZWO",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’ve",
+        "obfuscation": "cqQ9eV7tVFrNu"
+      },
+      "timestamp": "2025-09-26T13:44:06.761Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ypN1GFn8dCtM77eNw",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " got",
+        "obfuscation": "F1jrMIDvc51x"
+      },
+      "timestamp": "2025-09-26T13:44:06.769Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31y7WZtWorN83bYPSKK",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " a",
+        "obfuscation": "pQaXJ2JYiZK7ML"
+      },
+      "timestamp": "2025-09-26T13:44:06.776Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yoGjr3EpKgKWd0ygb",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Caesar",
+        "obfuscation": "uIDUKitN2"
+      },
+      "timestamp": "2025-09-26T13:44:06.786Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31y6VkWuB9lDynMpSOl",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " salad",
+        "obfuscation": "wvm9bITJir"
+      },
+      "timestamp": "2025-09-26T13:44:06.796Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ygsIrlQ5iWs3GuM3V",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " available",
+        "obfuscation": "Zq1E2G"
+      },
+      "timestamp": "2025-09-26T13:44:06.802Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yst6dyxP3Q5pip4fU",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "nElik4TS2pP2hPc"
+      },
+      "timestamp": "2025-09-26T13:44:06.810Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yLKz9TUB34AKUEP7k",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " It",
+        "obfuscation": "jLalRn921p7ZT"
+      },
+      "timestamp": "2025-09-26T13:44:06.836Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yAEXYfRXFbsfcWn29",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’s",
+        "obfuscation": "fyW3uepkFnjFAw"
+      },
+      "timestamp": "2025-09-26T13:44:06.837Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yh2O7gtsLm1gzFKmJ",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " from",
+        "obfuscation": "G1Vdkd0R3pH"
+      },
+      "timestamp": "2025-09-26T13:44:06.838Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ygCCStk6RaM06Cszl",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " $",
+        "obfuscation": "znc5THGxHln4Fq"
+      },
+      "timestamp": "2025-09-26T13:44:06.844Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ya6R4JtrGGLPPdsCS",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "7",
+        "obfuscation": "FIqYiGoywtLUl6y"
+      },
+      "timestamp": "2025-09-26T13:44:06.852Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yt79u0RDfrQ9wZyFx",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " and",
+        "obfuscation": "lLFTQng5n0PJ"
+      },
+      "timestamp": "2025-09-26T13:44:06.863Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yPBQCMm2453TaNakR",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " has",
+        "obfuscation": "7bmyWX0YIJXh"
+      },
+      "timestamp": "2025-09-26T13:44:06.874Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yzUBCGX0OeDZXbvJY",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " about",
+        "obfuscation": "NMrO4dn2dS"
+      },
+      "timestamp": "2025-09-26T13:44:06.883Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yFv8sgZVMbOzmTSfF",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " ",
+        "obfuscation": "APD9i1lmxFVoje7"
+      },
+      "timestamp": "2025-09-26T13:44:06.889Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yuFffM6CHUACq6rLQ",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "450",
+        "obfuscation": "xSfFntmcQDXWn"
+      },
+      "timestamp": "2025-09-26T13:44:06.903Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yqQ7mAAXYCFm6CAVj",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " calories",
+        "obfuscation": "CxgHzGk"
+      },
+      "timestamp": "2025-09-26T13:44:06.908Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ykhOs7GSGrySJG8kw",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".\n\n",
+        "obfuscation": "9rlJe2TxEcGJJ"
+      },
+      "timestamp": "2025-09-26T13:44:06.922Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ywVNNFWU3GfYAxEdz",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Would",
+        "obfuscation": "CPMnHDrmbQW"
+      },
+      "timestamp": "2025-09-26T13:44:06.951Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yGmzKKODugHqOHYyU",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "lJlVcHtwoXYv"
+      },
+      "timestamp": "2025-09-26T13:44:06.953Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yDfTzgS6n4HKUqY4R",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " like",
+        "obfuscation": "OAQbDKltApL"
+      },
+      "timestamp": "2025-09-26T13:44:06.955Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31y33Rux7vEVwdNF2DO",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " to",
+        "obfuscation": "9CGIqgYOvEwVP"
+      },
+      "timestamp": "2025-09-26T13:44:06.956Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ydfmZZtcK6h7PLCXP",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " add",
+        "obfuscation": "M0BfiwFg6sMD"
+      },
+      "timestamp": "2025-09-26T13:44:06.963Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yiADdSj4urpZKrK3g",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " a",
+        "obfuscation": "cmXLXkvs7E3tK8"
+      },
+      "timestamp": "2025-09-26T13:44:06.970Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yFLEiHdDpY0pPhCqV",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Caesar",
+        "obfuscation": "RG2XN8ipQ"
+      },
+      "timestamp": "2025-09-26T13:44:06.979Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yYjbNlWpzHu31wMwb",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " salad",
+        "obfuscation": "1CoEWRwgRm"
+      },
+      "timestamp": "2025-09-26T13:44:06.987Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yl5wWntbOaaOCqRtE",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " to",
+        "obfuscation": "01gMlFjomsvYA"
+      },
+      "timestamp": "2025-09-26T13:44:06.997Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31yNGhEgKSIkmwRQHDQ",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " your",
+        "obfuscation": "9YbNWSkLwHX"
+      },
+      "timestamp": "2025-09-26T13:44:07.005Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ysQUUelluYM7C4kLs",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " order",
+        "obfuscation": "86Ey73oCYp"
+      },
+      "timestamp": "2025-09-26T13:44:07.014Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31y5nilMaercjRbSHhe",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "?",
+        "obfuscation": "ORWc3Gfa9atmlVY"
+      },
+      "timestamp": "2025-09-26T13:44:07.023Z"
+    },
+    {
+      "type": "response.output_text.done",
+      "data": {
+        "type": "response.output_text.done",
+        "event_id": "event_CK31z0HaCDJxPIlx5sOd1",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "text": "We’ve got a Caesar salad available. It’s from $7 and has about 450 calories.\n\nWould you like to add a Caesar salad to your order?"
+      },
+      "timestamp": "2025-09-26T13:44:07.058Z"
+    },
+    {
+      "type": "response.content_part.done",
+      "data": {
+        "type": "response.content_part.done",
+        "event_id": "event_CK31zx7dun2u4j9GtZsaU",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "item_id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": "We’ve got a Caesar salad available. It’s from $7 and has about 450 calories.\n\nWould you like to add a Caesar salad to your order?"
+        }
+      },
+      "timestamp": "2025-09-26T13:44:07.058Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31ze3zyBA04qDPpchiC",
+        "previous_item_id": "item_CK31yDKx7FJLY6zE5CKOg",
+        "item": {
+          "id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "We’ve got a Caesar salad available. It’s from $7 and has about 450 calories.\n\nWould you like to add a Caesar salad to your order?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:44:07.059Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31zmCzPr3rfFqMBFRwB",
+        "response_id": "resp_CK31y5m3XbOzSjkLN90SS",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "We’ve got a Caesar salad available. It’s from $7 and has about 450 calories.\n\nWould you like to add a Caesar salad to your order?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:44:07.061Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31zal0PeTHxVNSoXhgv",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31y5m3XbOzSjkLN90SS",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31yHWd1Zb1Fgrw8tXU5",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "We’ve got a Caesar salad available. It’s from $7 and has about 450 calories.\n\nWould you like to add a Caesar salad to your order?"
+                }
+              ]
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 3357,
+            "input_tokens": 3323,
+            "output_tokens": 34,
+            "input_token_details": {
+              "text_tokens": 3323,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 3264,
+              "cached_tokens_details": {
+                "text_tokens": 3264,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 34,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:44:07.065Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31zz4n2OemtgBLsnBB4",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 25666,
+            "reset_seconds": 21.499
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:44:07.077Z"
+    }
+  ],
+  "analysis": {
+    "totalResponses": 0,
+    "totalToolCalls": 3,
+    "toolsUsed": [
+      "getMenuItems",
+      "getKbSnippet"
+    ],
+    "responseTexts": []
+  }
+}

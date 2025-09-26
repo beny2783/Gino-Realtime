@@ -1,0 +1,3037 @@
+{
+  "test": {
+    "name": "Hawaiian Pizza Order",
+    "messages": [
+      "I'd like to order a Hawaiian pizza",
+      "Large please",
+      "Pickup"
+    ],
+    "startTime": "2025-09-26T13:43:32.836Z"
+  },
+  "sessionId": "sess_CK31O3cocKhWGMNG3iMhn",
+  "timestamp": "2025-09-26T13:43:47.844Z",
+  "responses": [],
+  "toolCalls": [
+    {
+      "name": "getMenuItems",
+      "arguments": "{  \n  \"search\": \"Hawaiian pizza\" \n} \n",
+      "timestamp": "2025-09-26T13:43:34.571Z"
+    },
+    {
+      "name": "getMenuItems",
+      "arguments": "{  \n  \"kinds\": [\"size\"] \n}",
+      "timestamp": "2025-09-26T13:43:39.407Z"
+    }
+  ],
+  "toolResults": [
+    {
+      "tool": "getMenuItems",
+      "arguments": {
+        "search": "Hawaiian pizza"
+      },
+      "result": {
+        "ok": true,
+        "items": [
+          {
+            "id": "gourmet-hawaiian",
+            "kind": "gourmet",
+            "name": "Hawaiian",
+            "details": "Ham, Pineapple, Bacon Crumble"
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:34.573Z"
+    },
+    {
+      "tool": "getMenuItems",
+      "arguments": {
+        "kinds": [
+          "size"
+        ]
+      },
+      "result": {
+        "ok": true,
+        "items": [
+          {
+            "id": "size-s",
+            "kind": "size",
+            "name": "Small",
+            "inches": 10,
+            "slices": 6,
+            "calories_per_slice": 160,
+            "base_price": 8,
+            "topping_price": 1.25
+          },
+          {
+            "id": "size-m",
+            "kind": "size",
+            "name": "Medium",
+            "inches": 12,
+            "slices": 8,
+            "calories_per_slice": 180,
+            "base_price": 10,
+            "topping_price": 1.75
+          },
+          {
+            "id": "size-l",
+            "kind": "size",
+            "name": "Large",
+            "inches": 14,
+            "slices": 10,
+            "calories_per_slice": 190,
+            "base_price": 12,
+            "topping_price": 2
+          },
+          {
+            "id": "size-xl",
+            "kind": "size",
+            "name": "X-Large",
+            "inches": 16,
+            "slices": 12,
+            "calories_per_slice": 200,
+            "base_price": 14,
+            "topping_price": 2.75
+          },
+          {
+            "id": "size-pr",
+            "kind": "size",
+            "name": "Party Round",
+            "inches": 20,
+            "slices": 16,
+            "calories_per_slice": 230,
+            "base_price": 24,
+            "topping_price": 4
+          },
+          {
+            "id": "size-pt",
+            "kind": "size",
+            "name": "Party Tray",
+            "inches": "21×15",
+            "slices": 20,
+            "calories_per_slice": 190,
+            "base_price": 24,
+            "topping_price": 4
+          },
+          {
+            "id": "size-ps",
+            "kind": "size",
+            "name": "Party Square",
+            "inches": "20×20",
+            "slices": 25,
+            "calories_per_slice": 190,
+            "base_price": 28,
+            "topping_price": 5
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:39.407Z"
+    }
+  ],
+  "allMessages": [
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31RCT6UPLb5chFSCDcv",
+        "previous_item_id": null,
+        "item": {
+          "id": "item_CK31RJr4eEgAokalWFNIP",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "I'd like to order a Hawaiian pizza"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:33.971Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31R6zeAW38aWypPX0Oa",
+        "previous_item_id": null,
+        "item": {
+          "id": "item_CK31RJr4eEgAokalWFNIP",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "I'd like to order a Hawaiian pizza"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:33.971Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31RRfWIr0NxaAp0MJW0",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31RSZqZ46P5PLzUsQuk",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.006Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31SQ5xmPNB4DxD4XOpx",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31RXORkoJ6Y7e7O03WS",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getMenuItems",
+          "call_id": "call_Nsn4p8sZcu7RCZZQ",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.370Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31SJ51MaIK945JPQVql",
+        "previous_item_id": "item_CK31RJr4eEgAokalWFNIP",
+        "item": {
+          "id": "item_CK31RXORkoJ6Y7e7O03WS",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getMenuItems",
+          "call_id": "call_Nsn4p8sZcu7RCZZQ",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.370Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31S26AXdxPO2YPEO8gP",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "{",
+        "obfuscation": "dXteuLkk2TRWHp8"
+      },
+      "timestamp": "2025-09-26T13:43:34.371Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31Sn9fnXz1DbqWEade5",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "  \n",
+        "obfuscation": "870VuTuXjh2Yi"
+      },
+      "timestamp": "2025-09-26T13:43:34.377Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31Sxwsf9ZUDrQoHZExO",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": " ",
+        "obfuscation": "RTjFt3E7iSBxndT"
+      },
+      "timestamp": "2025-09-26T13:43:34.388Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31SZ4BoNdh3JaHs7x2z",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": " \"",
+        "obfuscation": "7XstGxMxL7ssH9"
+      },
+      "timestamp": "2025-09-26T13:43:34.398Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31SR4oFzXUuRtBZp4mj",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "search",
+        "obfuscation": "BlFzRGubyR"
+      },
+      "timestamp": "2025-09-26T13:43:34.408Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31SHEFa9k5GB3cXbwYU",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "\":",
+        "obfuscation": "xUxJQc8alt9ASJ"
+      },
+      "timestamp": "2025-09-26T13:43:34.419Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31S251CczsR8oIjOd4y",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": " \"",
+        "obfuscation": "mRxlOoIQKA3RFd"
+      },
+      "timestamp": "2025-09-26T13:43:34.427Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31SeKa5QDkJoFp8rpxD",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "H",
+        "obfuscation": "MsetB3JbcxU4VYD"
+      },
+      "timestamp": "2025-09-26T13:43:34.439Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31ScZw3fZf9fIAOSLVJ",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "awai",
+        "obfuscation": "d7TAOqS3PMpm"
+      },
+      "timestamp": "2025-09-26T13:43:34.520Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31SwULHpUMNRYWecZeO",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "ian",
+        "obfuscation": "tYbKCyS0TtMl4"
+      },
+      "timestamp": "2025-09-26T13:43:34.521Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31SNCPEcVH4YCKS2glP",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": " pizza",
+        "obfuscation": "QdsXP0WQGU"
+      },
+      "timestamp": "2025-09-26T13:43:34.521Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31SHORkj3SJKtDUaUAi",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "\"",
+        "obfuscation": "Q2zeSWe6NhT3gvq"
+      },
+      "timestamp": "2025-09-26T13:43:34.521Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31SwzxJOsjSTyD6EIzT",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": " \n",
+        "obfuscation": "yGI7axTewH6UlI"
+      },
+      "timestamp": "2025-09-26T13:43:34.521Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31Sumv6Uz2X0kdVOY0I",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": "}",
+        "obfuscation": "Xc12LA7AXah2wvM"
+      },
+      "timestamp": "2025-09-26T13:43:34.522Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31StEL0MiKdmcrCUsKB",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "delta": " \n",
+        "obfuscation": "oVumr7qT9B11eT"
+      },
+      "timestamp": "2025-09-26T13:43:34.522Z"
+    },
+    {
+      "type": "response.function_call_arguments.done",
+      "data": {
+        "type": "response.function_call_arguments.done",
+        "event_id": "event_CK31SV1IME4U038Vl9wsJ",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "output_index": 0,
+        "call_id": "call_Nsn4p8sZcu7RCZZQ",
+        "name": "getMenuItems",
+        "arguments": "{  \n  \"search\": \"Hawaiian pizza\" \n} \n"
+      },
+      "timestamp": "2025-09-26T13:43:34.565Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31ShwwrZ1moApzQLoQa",
+        "previous_item_id": "item_CK31RJr4eEgAokalWFNIP",
+        "item": {
+          "id": "item_CK31RXORkoJ6Y7e7O03WS",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getMenuItems",
+          "call_id": "call_Nsn4p8sZcu7RCZZQ",
+          "arguments": "{  \n  \"search\": \"Hawaiian pizza\" \n} \n"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.566Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31S11vJJtG1x5jRG0uI",
+        "response_id": "resp_CK31RSZqZ46P5PLzUsQuk",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31RXORkoJ6Y7e7O03WS",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getMenuItems",
+          "call_id": "call_Nsn4p8sZcu7RCZZQ",
+          "arguments": "{  \n  \"search\": \"Hawaiian pizza\" \n} \n"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.568Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31Smp06TZtQS4J9aPO6",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31RSZqZ46P5PLzUsQuk",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31RXORkoJ6Y7e7O03WS",
+              "type": "function_call",
+              "status": "completed",
+              "name": "getMenuItems",
+              "call_id": "call_Nsn4p8sZcu7RCZZQ",
+              "arguments": "{  \n  \"search\": \"Hawaiian pizza\" \n} \n"
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 1773,
+            "input_tokens": 1747,
+            "output_tokens": 26,
+            "input_token_details": {
+              "text_tokens": 1747,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 0,
+              "cached_tokens_details": {
+                "text_tokens": 0,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 26,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.571Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31SNdeG9zbbnx3hFTlX",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 38307,
+            "reset_seconds": 2.539
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:34.576Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31Sk1t8Q3DaeUiMN0SU",
+        "previous_item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "item": {
+          "id": "item_CK31Ssnn4J50wQvIL5eMZ",
+          "type": "function_call_output",
+          "call_id": "call_Nsn4p8sZcu7RCZZQ",
+          "output": "{\"ok\":true,\"items\":[{\"id\":\"gourmet-hawaiian\",\"kind\":\"gourmet\",\"name\":\"Hawaiian\",\"details\":\"Ham, Pineapple, Bacon Crumble\"}]}"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.740Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31SrCNFvtWy3OUaaSP7",
+        "previous_item_id": "item_CK31RXORkoJ6Y7e7O03WS",
+        "item": {
+          "id": "item_CK31Ssnn4J50wQvIL5eMZ",
+          "type": "function_call_output",
+          "call_id": "call_Nsn4p8sZcu7RCZZQ",
+          "output": "{\"ok\":true,\"items\":[{\"id\":\"gourmet-hawaiian\",\"kind\":\"gourmet\",\"name\":\"Hawaiian\",\"details\":\"Ham, Pineapple, Bacon Crumble\"}]}"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.740Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31SwarLJbGCNbU8gHOF",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31SoSqxgQfKzwvvHgKH",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.758Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31SAHj9urNr2YIRkrvG",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31SrVCnmXtO7Ay3otuT",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.983Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31SgS2GGVnee2U95KfZ",
+        "previous_item_id": "item_CK31Ssnn4J50wQvIL5eMZ",
+        "item": {
+          "id": "item_CK31SrVCnmXtO7Ay3otuT",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.983Z"
+    },
+    {
+      "type": "response.content_part.added",
+      "data": {
+        "type": "response.content_part.added",
+        "event_id": "event_CK31SODnkXVdnfClJwU3d",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:34.983Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31SFZUIx8oPfwKZH3bO",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Sure",
+        "obfuscation": "rjXQNvtqeQco"
+      },
+      "timestamp": "2025-09-26T13:43:34.984Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31S4ScCP6bpMYO7RrPu",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " thing",
+        "obfuscation": "6qhlGqqpm6"
+      },
+      "timestamp": "2025-09-26T13:43:34.991Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31SHM2RdaW1l3HjqSiH",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "3BNaXoHvO9xLhn5"
+      },
+      "timestamp": "2025-09-26T13:43:34.999Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31SjF2qeOZdNZg6ZLcW",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " we",
+        "obfuscation": "YkPV7OJ87N9LD"
+      },
+      "timestamp": "2025-09-26T13:43:35.010Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31Sfqw1wH8vjQ8RlUL7",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’ve",
+        "obfuscation": "e7Nfbocn47lyG"
+      },
+      "timestamp": "2025-09-26T13:43:35.019Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31SbYmwJZs7p9FXIj8n",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " got",
+        "obfuscation": "TChrkEF4a9Mo"
+      },
+      "timestamp": "2025-09-26T13:43:35.032Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TwHwLuoZR7yZfAGjy",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " a",
+        "obfuscation": "1AB4eCpBAETDvk"
+      },
+      "timestamp": "2025-09-26T13:43:35.034Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TJ11KmWsiuyepZEHm",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Hawaiian",
+        "obfuscation": "sIuVJ0J"
+      },
+      "timestamp": "2025-09-26T13:43:35.044Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TZnNvwZnhTIv7ram0",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pizza",
+        "obfuscation": "a9LZn9TC1c"
+      },
+      "timestamp": "2025-09-26T13:43:35.077Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TXuDBbWhEG51wIHAJ",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " with",
+        "obfuscation": "2VsGF0R42u0"
+      },
+      "timestamp": "2025-09-26T13:43:35.078Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TSv8njPd4fJhP3ZrN",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " ham",
+        "obfuscation": "aXzjh95IlD13"
+      },
+      "timestamp": "2025-09-26T13:43:35.088Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TpLKTvWgzd0KHg2kb",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "w7Y6D4XkLjSoVzn"
+      },
+      "timestamp": "2025-09-26T13:43:35.091Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31T8z7V5mKKcZvsOlPa",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pineapple",
+        "obfuscation": "uO6oag"
+      },
+      "timestamp": "2025-09-26T13:43:35.097Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TK279PHK0EB6mAFUE",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "posJbNCrafZqIYH"
+      },
+      "timestamp": "2025-09-26T13:43:35.109Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TpodiRqCJlsK1AOuk",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " and",
+        "obfuscation": "SBRhAl0uZE07"
+      },
+      "timestamp": "2025-09-26T13:43:35.117Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TPjhrXzEv5vEu1nWx",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " bacon",
+        "obfuscation": "e5kyU2uHla"
+      },
+      "timestamp": "2025-09-26T13:43:35.125Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31Ttiq7ITZvKWDbrqy1",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " crumble",
+        "obfuscation": "kH55VTW5"
+      },
+      "timestamp": "2025-09-26T13:43:35.133Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TdmzLAi6ItttvT4VV",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "ycVqSl0nYWBbNv5"
+      },
+      "timestamp": "2025-09-26T13:43:35.148Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31Ts8fRFdqyje1ztgib",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " What",
+        "obfuscation": "FWFdXC3XoyO"
+      },
+      "timestamp": "2025-09-26T13:43:35.151Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ThirM0JFnqdIdB8Lq",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " size",
+        "obfuscation": "YSudLtr6CxJ"
+      },
+      "timestamp": "2025-09-26T13:43:35.160Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TZ3Fi2jTiGNhfArQz",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " would",
+        "obfuscation": "khtNhtVOBG"
+      },
+      "timestamp": "2025-09-26T13:43:35.169Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TBtev9GtZ9XiyIxeJ",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "kO17El5OcEPx"
+      },
+      "timestamp": "2025-09-26T13:43:35.178Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TUkAlcdg8N1IsguaO",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " like",
+        "obfuscation": "lyLQvdib0Gc"
+      },
+      "timestamp": "2025-09-26T13:43:35.189Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TXorLUqa7DkFlQjdv",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " for",
+        "obfuscation": "Zp4kLY8ygoiR"
+      },
+      "timestamp": "2025-09-26T13:43:35.196Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TfvdLvADTLJCqYcHZ",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " that",
+        "obfuscation": "04lLhT23dU8"
+      },
+      "timestamp": "2025-09-26T13:43:35.217Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31Tkzq1yAhBVBk9BlE3",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "?",
+        "obfuscation": "qCumAlYtCpGfg9F"
+      },
+      "timestamp": "2025-09-26T13:43:35.217Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TFPNK4eUyO08vwhfu",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " We",
+        "obfuscation": "jsIOJJnoJhHjq"
+      },
+      "timestamp": "2025-09-26T13:43:35.225Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TOe7WI2M5Q0avogcp",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " have",
+        "obfuscation": "i3HAcadr5Oq"
+      },
+      "timestamp": "2025-09-26T13:43:35.233Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TjEa0RxSeQZY9WzBQ",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " multiple",
+        "obfuscation": "V23PZYo"
+      },
+      "timestamp": "2025-09-26T13:43:35.241Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TVQaLY4Akjkr3v5uF",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " sizes",
+        "obfuscation": "g5VhYqhaIt"
+      },
+      "timestamp": "2025-09-26T13:43:35.262Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31TfARz7CSlRLvDeZml",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " available",
+        "obfuscation": "DvmQ37"
+      },
+      "timestamp": "2025-09-26T13:43:35.262Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31THfDJuHuobD20BHGR",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "TVRNFywalmgb5s0"
+      },
+      "timestamp": "2025-09-26T13:43:35.269Z"
+    },
+    {
+      "type": "response.output_text.done",
+      "data": {
+        "type": "response.output_text.done",
+        "event_id": "event_CK31TeDxlg7MnDjKXygxE",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "text": "Sure thing, we’ve got a Hawaiian pizza with ham, pineapple, and bacon crumble. What size would you like for that? We have multiple sizes available."
+      },
+      "timestamp": "2025-09-26T13:43:35.309Z"
+    },
+    {
+      "type": "response.content_part.done",
+      "data": {
+        "type": "response.content_part.done",
+        "event_id": "event_CK31Ts0nKRKBWThXpagTd",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": "Sure thing, we’ve got a Hawaiian pizza with ham, pineapple, and bacon crumble. What size would you like for that? We have multiple sizes available."
+        }
+      },
+      "timestamp": "2025-09-26T13:43:35.312Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31TiHLNK2WqOtO0ZCs7",
+        "previous_item_id": "item_CK31Ssnn4J50wQvIL5eMZ",
+        "item": {
+          "id": "item_CK31SrVCnmXtO7Ay3otuT",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Sure thing, we’ve got a Hawaiian pizza with ham, pineapple, and bacon crumble. What size would you like for that? We have multiple sizes available."
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:35.313Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31TkOldiZ21UuJmTDLO",
+        "response_id": "resp_CK31SoSqxgQfKzwvvHgKH",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31SrVCnmXtO7Ay3otuT",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Sure thing, we’ve got a Hawaiian pizza with ham, pineapple, and bacon crumble. What size would you like for that? We have multiple sizes available."
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:35.313Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31TeL7qoLxCB6I27KMu",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31SoSqxgQfKzwvvHgKH",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31SrVCnmXtO7Ay3otuT",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Sure thing, we’ve got a Hawaiian pizza with ham, pineapple, and bacon crumble. What size would you like for that? We have multiple sizes available."
+                }
+              ]
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 1849,
+            "input_tokens": 1815,
+            "output_tokens": 34,
+            "input_token_details": {
+              "text_tokens": 1815,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 1728,
+              "cached_tokens_details": {
+                "text_tokens": 1728,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 34,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:35.317Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31TFtVxwu6HJy3LOxbJ",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 36699,
+            "reset_seconds": 4.951
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:35.336Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31Wzy8dVeQtd4yQMTxC",
+        "previous_item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "item": {
+          "id": "item_CK31WVRcBzh8Ng1jpcdCc",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Large please"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.004Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31W0H0l0NhpJ527eG9i",
+        "previous_item_id": "item_CK31SrVCnmXtO7Ay3otuT",
+        "item": {
+          "id": "item_CK31WVRcBzh8Ng1jpcdCc",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Large please"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.004Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31WJoBgbDMmhfc8dvKD",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31WJQMknSsttBMUEuqa",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.011Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31X5w6PvTvNq4IMCYnH",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31WxWnWaEhvDKxRcPSd",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getMenuItems",
+          "call_id": "call_Mng8woqurTXiQdxP",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.252Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31XZMpcUheT9pVHxgmm",
+        "previous_item_id": "item_CK31WVRcBzh8Ng1jpcdCc",
+        "item": {
+          "id": "item_CK31WxWnWaEhvDKxRcPSd",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "getMenuItems",
+          "call_id": "call_Mng8woqurTXiQdxP",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.252Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31X2qqprHyri1LerCSE",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": "{",
+        "obfuscation": "tVzGmS8hoFM0rpf"
+      },
+      "timestamp": "2025-09-26T13:43:39.255Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31XQo9EbAnrLxeBvSlA",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": "  \n",
+        "obfuscation": "ll90rs4TLCLs5"
+      },
+      "timestamp": "2025-09-26T13:43:39.258Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31XE5gEOorQDjBdvRG7",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": " ",
+        "obfuscation": "nMibvkjZShA5RZm"
+      },
+      "timestamp": "2025-09-26T13:43:39.265Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31XGQXTO8ljNz1yav9E",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": " \"",
+        "obfuscation": "t3T3s6eorKAJg8"
+      },
+      "timestamp": "2025-09-26T13:43:39.275Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31X378zbDIgMBmlDGor",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": "k",
+        "obfuscation": "GcoOu3UPbWb8MwX"
+      },
+      "timestamp": "2025-09-26T13:43:39.299Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31XCMtxq9t9mUnYKMPI",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": "inds",
+        "obfuscation": "DccBgtaFKX0J"
+      },
+      "timestamp": "2025-09-26T13:43:39.311Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31X77NlmNuU9IEduzth",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": "\":",
+        "obfuscation": "mNgKuzaZmDHZfS"
+      },
+      "timestamp": "2025-09-26T13:43:39.315Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31Xycu7M8B1hqpulod0",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": " [\"",
+        "obfuscation": "THuUL9COE9vKo"
+      },
+      "timestamp": "2025-09-26T13:43:39.323Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31XPt9RWqAGSc9RPUpv",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": "size",
+        "obfuscation": "Tbfp0uahkukp"
+      },
+      "timestamp": "2025-09-26T13:43:39.374Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31XyxqDmlRvIhPTB1BG",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": "\"]",
+        "obfuscation": "RXmi6gYd1iLhBj"
+      },
+      "timestamp": "2025-09-26T13:43:39.375Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31XwKs5QKjudLTOYe9V",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": " \n",
+        "obfuscation": "mXAYHTx0Ow7rLn"
+      },
+      "timestamp": "2025-09-26T13:43:39.375Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31XsflINolHxDYCSHHt",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "delta": "}",
+        "obfuscation": "cmtGlAFKStx14GL"
+      },
+      "timestamp": "2025-09-26T13:43:39.375Z"
+    },
+    {
+      "type": "response.function_call_arguments.done",
+      "data": {
+        "type": "response.function_call_arguments.done",
+        "event_id": "event_CK31XBB2KWQeqa0CjcN9c",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "output_index": 0,
+        "call_id": "call_Mng8woqurTXiQdxP",
+        "name": "getMenuItems",
+        "arguments": "{  \n  \"kinds\": [\"size\"] \n}"
+      },
+      "timestamp": "2025-09-26T13:43:39.396Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31XcK7gQ5FYE65EN9AV",
+        "previous_item_id": "item_CK31WVRcBzh8Ng1jpcdCc",
+        "item": {
+          "id": "item_CK31WxWnWaEhvDKxRcPSd",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getMenuItems",
+          "call_id": "call_Mng8woqurTXiQdxP",
+          "arguments": "{  \n  \"kinds\": [\"size\"] \n}"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.402Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31XYsuND0AYPnILlFhq",
+        "response_id": "resp_CK31WJQMknSsttBMUEuqa",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31WxWnWaEhvDKxRcPSd",
+          "type": "function_call",
+          "status": "completed",
+          "name": "getMenuItems",
+          "call_id": "call_Mng8woqurTXiQdxP",
+          "arguments": "{  \n  \"kinds\": [\"size\"] \n}"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.407Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31XKZn7wYznT3kxGYb0",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31WJQMknSsttBMUEuqa",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31WxWnWaEhvDKxRcPSd",
+              "type": "function_call",
+              "status": "completed",
+              "name": "getMenuItems",
+              "call_id": "call_Mng8woqurTXiQdxP",
+              "arguments": "{  \n  \"kinds\": [\"size\"] \n}"
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 1880,
+            "input_tokens": 1857,
+            "output_tokens": 23,
+            "input_token_details": {
+              "text_tokens": 1857,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 1856,
+              "cached_tokens_details": {
+                "text_tokens": 1856,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 23,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.407Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31XVuHCaYmmxuR7yPRg",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 37278,
+            "reset_seconds": 4.082
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:39.439Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31XMKCcmTYPko0w9uQK",
+        "previous_item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "item": {
+          "id": "item_CK31XgfFIm1M3Ye6bKYu2",
+          "type": "function_call_output",
+          "call_id": "call_Mng8woqurTXiQdxP",
+          "output": "{\"ok\":true,\"items\":[{\"id\":\"size-s\",\"kind\":\"size\",\"name\":\"Small\",\"inches\":10,\"slices\":6,\"calories_per_slice\":160,\"base_price\":8,\"topping_price\":1.25},{\"id\":\"size-m\",\"kind\":\"size\",\"name\":\"Medium\",\"inches\":12,\"slices\":8,\"calories_per_slice\":180,\"base_price\":10,\"topping_price\":1.75},{\"id\":\"size-l\",\"kind\":\"size\",\"name\":\"Large\",\"inches\":14,\"slices\":10,\"calories_per_slice\":190,\"base_price\":12,\"topping_price\":2},{\"id\":\"size-xl\",\"kind\":\"size\",\"name\":\"X-Large\",\"inches\":16,\"slices\":12,\"calories_per_slice\":200,\"base_price\":14,\"topping_price\":2.75},{\"id\":\"size-pr\",\"kind\":\"size\",\"name\":\"Party Round\",\"inches\":20,\"slices\":16,\"calories_per_slice\":230,\"base_price\":24,\"topping_price\":4},{\"id\":\"size-pt\",\"kind\":\"size\",\"name\":\"Party Tray\",\"inches\":\"21×15\",\"slices\":20,\"calories_per_slice\":190,\"base_price\":24,\"topping_price\":4},{\"id\":\"size-ps\",\"kind\":\"size\",\"name\":\"Party Square\",\"inches\":\"20×20\",\"slices\":25,\"calories_per_slice\":190,\"base_price\":28,\"topping_price\":5}]}"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.588Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31XckxqMnOWRAfeOgQ2",
+        "previous_item_id": "item_CK31WxWnWaEhvDKxRcPSd",
+        "item": {
+          "id": "item_CK31XgfFIm1M3Ye6bKYu2",
+          "type": "function_call_output",
+          "call_id": "call_Mng8woqurTXiQdxP",
+          "output": "{\"ok\":true,\"items\":[{\"id\":\"size-s\",\"kind\":\"size\",\"name\":\"Small\",\"inches\":10,\"slices\":6,\"calories_per_slice\":160,\"base_price\":8,\"topping_price\":1.25},{\"id\":\"size-m\",\"kind\":\"size\",\"name\":\"Medium\",\"inches\":12,\"slices\":8,\"calories_per_slice\":180,\"base_price\":10,\"topping_price\":1.75},{\"id\":\"size-l\",\"kind\":\"size\",\"name\":\"Large\",\"inches\":14,\"slices\":10,\"calories_per_slice\":190,\"base_price\":12,\"topping_price\":2},{\"id\":\"size-xl\",\"kind\":\"size\",\"name\":\"X-Large\",\"inches\":16,\"slices\":12,\"calories_per_slice\":200,\"base_price\":14,\"topping_price\":2.75},{\"id\":\"size-pr\",\"kind\":\"size\",\"name\":\"Party Round\",\"inches\":20,\"slices\":16,\"calories_per_slice\":230,\"base_price\":24,\"topping_price\":4},{\"id\":\"size-pt\",\"kind\":\"size\",\"name\":\"Party Tray\",\"inches\":\"21×15\",\"slices\":20,\"calories_per_slice\":190,\"base_price\":24,\"topping_price\":4},{\"id\":\"size-ps\",\"kind\":\"size\",\"name\":\"Party Square\",\"inches\":\"20×20\",\"slices\":25,\"calories_per_slice\":190,\"base_price\":28,\"topping_price\":5}]}"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.595Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31XSYGYnHTHIWYBwNFY",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:39.611Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31XjZB8hf6ecKnEVe6t",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31XjjvpnX7Gcrcf1ADV",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:40.024Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31XKSBsg6oSCAPiI34m",
+        "previous_item_id": "item_CK31XgfFIm1M3Ye6bKYu2",
+        "item": {
+          "id": "item_CK31XjjvpnX7Gcrcf1ADV",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:40.025Z"
+    },
+    {
+      "type": "response.content_part.added",
+      "data": {
+        "type": "response.content_part.added",
+        "event_id": "event_CK31XVaILbBx9rSdqIiG4",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:40.025Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31XGl4h4llYd4e6LF1C",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Got",
+        "obfuscation": "nyKYfPGUyUmyY"
+      },
+      "timestamp": "2025-09-26T13:43:40.025Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31XHZBL3PtrA64meJMX",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " it",
+        "obfuscation": "10t7g93NZoH5F"
+      },
+      "timestamp": "2025-09-26T13:43:40.032Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YQqEbvImMXxCO4CCu",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "jCkSE9VuOtuQ1mS"
+      },
+      "timestamp": "2025-09-26T13:43:40.040Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YKfQjc2qOrgCChkvx",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " that",
+        "obfuscation": "KhOpFZ5Q1eM"
+      },
+      "timestamp": "2025-09-26T13:43:40.050Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31Y7aFSvQWIWqfd8LZ1",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’s",
+        "obfuscation": "rjCiheGQbHhnDk"
+      },
+      "timestamp": "2025-09-26T13:43:40.061Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YY5iP7sDvDi3QloOd",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " a",
+        "obfuscation": "VyaIk9YhLWoLcP"
+      },
+      "timestamp": "2025-09-26T13:43:40.067Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YWdxHjNxIUWVJOrQu",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " large",
+        "obfuscation": "vk1orrOXwS"
+      },
+      "timestamp": "2025-09-26T13:43:40.076Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YijjEO1nXh2YN0hDC",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Hawaiian",
+        "obfuscation": "iIBPqQD"
+      },
+      "timestamp": "2025-09-26T13:43:40.084Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YHRREqm3cyxO612eZ",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pizza",
+        "obfuscation": "eOWN4wIooj"
+      },
+      "timestamp": "2025-09-26T13:43:40.094Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YvNYQNxEaMrGqq2nU",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "vRZw6pDGClDZnMO"
+      },
+      "timestamp": "2025-09-26T13:43:40.102Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YGwLcmGK0mGhUaCyW",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Would",
+        "obfuscation": "W7IObK09og"
+      },
+      "timestamp": "2025-09-26T13:43:40.147Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YC5htrvcd1w1M85fw",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "7TLuF98PUNGJ"
+      },
+      "timestamp": "2025-09-26T13:43:40.147Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YEQAicrM8SWFfiwaJ",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " like",
+        "obfuscation": "xeZEx7U47xA"
+      },
+      "timestamp": "2025-09-26T13:43:40.147Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YYJZxf6voxAh9F8qY",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " anything",
+        "obfuscation": "HjPleHG"
+      },
+      "timestamp": "2025-09-26T13:43:40.147Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YjWO7yid0MWcL0oPt",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " else",
+        "obfuscation": "0C7w2RuhT3y"
+      },
+      "timestamp": "2025-09-26T13:43:40.147Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YYdM5yYPZ1Ky453ia",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " with",
+        "obfuscation": "xagaDfh8w2K"
+      },
+      "timestamp": "2025-09-26T13:43:40.160Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YbKrbmQmYY1BWZbGC",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " that",
+        "obfuscation": "cBW2oZLD6hb"
+      },
+      "timestamp": "2025-09-26T13:43:40.163Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YwvGmRwiFeCMn9eXM",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "Kupheh2teiw28Gi"
+      },
+      "timestamp": "2025-09-26T13:43:40.172Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YFWLCCqgxuzSkZIYP",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " such",
+        "obfuscation": "QNyqM8i5awP"
+      },
+      "timestamp": "2025-09-26T13:43:40.180Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31Y4RP3LMSy6iYGi6bo",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " as",
+        "obfuscation": "P3tAVXwgRGVVQ"
+      },
+      "timestamp": "2025-09-26T13:43:40.194Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YF4LYesAqthwgy54K",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " sides",
+        "obfuscation": "g6MN87zRTr"
+      },
+      "timestamp": "2025-09-26T13:43:40.202Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YnV1Dxz3VNP9ucFlc",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " or",
+        "obfuscation": "rn53krf2oUSom"
+      },
+      "timestamp": "2025-09-26T13:43:40.206Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YRPZnDqOxoe3HXfaQ",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " drinks",
+        "obfuscation": "KxlilkDTJ"
+      },
+      "timestamp": "2025-09-26T13:43:40.216Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31YdkY8JObinaJDT7Fl",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "?",
+        "obfuscation": "OYK7C487V4OvOGT"
+      },
+      "timestamp": "2025-09-26T13:43:40.225Z"
+    },
+    {
+      "type": "response.output_text.done",
+      "data": {
+        "type": "response.output_text.done",
+        "event_id": "event_CK31YQqu6w6cL8bWyQZNT",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "text": "Got it, that’s a large Hawaiian pizza. Would you like anything else with that, such as sides or drinks?"
+      },
+      "timestamp": "2025-09-26T13:43:40.253Z"
+    },
+    {
+      "type": "response.content_part.done",
+      "data": {
+        "type": "response.content_part.done",
+        "event_id": "event_CK31YIOVXqd8LprYb5mFP",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": "Got it, that’s a large Hawaiian pizza. Would you like anything else with that, such as sides or drinks?"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:40.254Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31YgiC7aNPR4YtOI4pP",
+        "previous_item_id": "item_CK31XgfFIm1M3Ye6bKYu2",
+        "item": {
+          "id": "item_CK31XjjvpnX7Gcrcf1ADV",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Got it, that’s a large Hawaiian pizza. Would you like anything else with that, such as sides or drinks?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:40.254Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31YzMN9C3VO7Q4I5jXy",
+        "response_id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31XjjvpnX7Gcrcf1ADV",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Got it, that’s a large Hawaiian pizza. Would you like anything else with that, such as sides or drinks?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:40.256Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31Y8PAg4Hgp0CiIBwak",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31Xv3NlU6nt3zvaFrUx",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31XjjvpnX7Gcrcf1ADV",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Got it, that’s a large Hawaiian pizza. Would you like anything else with that, such as sides or drinks?"
+                }
+              ]
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 2222,
+            "input_tokens": 2196,
+            "output_tokens": 26,
+            "input_token_details": {
+              "text_tokens": 2196,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 1856,
+              "cached_tokens_details": {
+                "text_tokens": 1856,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 26,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:40.266Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31YPEam0okdVmS7QS52",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 35367,
+            "reset_seconds": 6.949
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:40.267Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31ZFjkV0jH2lTg880sI",
+        "previous_item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "item": {
+          "id": "item_CK31ZHJCoZiCKrXgSYS16",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Pickup"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:41.976Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31ZeOUtMX7zOH1XtmGK",
+        "previous_item_id": "item_CK31XjjvpnX7Gcrcf1ADV",
+        "item": {
+          "id": "item_CK31ZHJCoZiCKrXgSYS16",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "Pickup"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:41.976Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31Zav41cYbnzce5hoiP",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:41.996Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31aSm6p0Y5JnGTcrcW9",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31ZQxaDsSUbaVtK2qGW",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:42.164Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31atzqKuFllNWqti4LD",
+        "previous_item_id": "item_CK31ZHJCoZiCKrXgSYS16",
+        "item": {
+          "id": "item_CK31ZQxaDsSUbaVtK2qGW",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:42.165Z"
+    },
+    {
+      "type": "response.content_part.added",
+      "data": {
+        "type": "response.content_part.added",
+        "event_id": "event_CK31aR08O5PzhawfCVf77",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:42.165Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aCUxrIMGjDDYzrnBF",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Perfect",
+        "obfuscation": "mcp2FFSLU"
+      },
+      "timestamp": "2025-09-26T13:43:42.165Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31a61RvgUisU2D7KXIr",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "RhSjYsjHmqRclBG"
+      },
+      "timestamp": "2025-09-26T13:43:42.166Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31asgb1ePBCpIeTmhSO",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " We",
+        "obfuscation": "81O2EJ6a8k2qL"
+      },
+      "timestamp": "2025-09-26T13:43:42.177Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aKWVW96IYrmHQ81ZK",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’ve",
+        "obfuscation": "XTfjIZM6Pe6Kp"
+      },
+      "timestamp": "2025-09-26T13:43:42.184Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aXyRTAbJJCEfWmCwG",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " got",
+        "obfuscation": "SdYneRYXEwSv"
+      },
+      "timestamp": "2025-09-26T13:43:42.194Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aI6Rrr1r03y2K22Jb",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " a",
+        "obfuscation": "1x30S6fPpKFtTm"
+      },
+      "timestamp": "2025-09-26T13:43:42.202Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31amWhMRT7jkoFiqVN0",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " large",
+        "obfuscation": "8DVG73UNMR"
+      },
+      "timestamp": "2025-09-26T13:43:42.211Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31acyXgzQN5gRvwPdOF",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Hawaiian",
+        "obfuscation": "VzJ2l1x"
+      },
+      "timestamp": "2025-09-26T13:43:42.281Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31akI0PKdM7ySwOq0FW",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pizza",
+        "obfuscation": "6Xa6YGGtBp"
+      },
+      "timestamp": "2025-09-26T13:43:42.282Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31amk9ccxnphdJz81Zb",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " for",
+        "obfuscation": "AjmiudmJer6Y"
+      },
+      "timestamp": "2025-09-26T13:43:42.282Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aq9Ey6rJwjRXiFDFf",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pickup",
+        "obfuscation": "3h7VLreKR"
+      },
+      "timestamp": "2025-09-26T13:43:42.282Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31auuSpN0X9TvKKtraj",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "COx7Fc4LJyyW5wv"
+      },
+      "timestamp": "2025-09-26T13:43:42.282Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aBoi17Zc0LRgeoprR",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Could",
+        "obfuscation": "nGyUlvIKVg"
+      },
+      "timestamp": "2025-09-26T13:43:42.282Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31a1jWrt6Mu4MjpywMp",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "JUfkz310xCs5"
+      },
+      "timestamp": "2025-09-26T13:43:42.282Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31a77AhWFeRq7eVf6Cm",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " let",
+        "obfuscation": "ULZu8Nr8bODT"
+      },
+      "timestamp": "2025-09-26T13:43:42.282Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aXh9pUI09UKuYcfAx",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " me",
+        "obfuscation": "uEGangITs424w"
+      },
+      "timestamp": "2025-09-26T13:43:42.296Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ax1gqqten3PeojcnJ",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " know",
+        "obfuscation": "PeT00wjNRL2"
+      },
+      "timestamp": "2025-09-26T13:43:42.300Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aDIwvb48ItBggIlwY",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " your",
+        "obfuscation": "qAMUnbSc2Do"
+      },
+      "timestamp": "2025-09-26T13:43:42.307Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aLePLf3FORJLnlxzy",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " location",
+        "obfuscation": "5XVOXUp"
+      },
+      "timestamp": "2025-09-26T13:43:42.316Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aYu2g5sg1WehHshLl",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " or",
+        "obfuscation": "JHhAH2lUdGfCH"
+      },
+      "timestamp": "2025-09-26T13:43:42.328Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aS2QG9mKeilYRoMmj",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " the",
+        "obfuscation": "l1f23283CVW1"
+      },
+      "timestamp": "2025-09-26T13:43:42.339Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aFiQnuSCeXderx0Ta",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " nearest",
+        "obfuscation": "MyWQT9bv"
+      },
+      "timestamp": "2025-09-26T13:43:42.345Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ax9whgNlMD0UjnWSj",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " landmark",
+        "obfuscation": "XJs52ly"
+      },
+      "timestamp": "2025-09-26T13:43:42.351Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31a09XbfoWCjifJTyyZ",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "VZi2zWSugYFzyjy"
+      },
+      "timestamp": "2025-09-26T13:43:42.363Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aZCMGz9K8bVEfilKn",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " so",
+        "obfuscation": "4OwtyDio0ZRyt"
+      },
+      "timestamp": "2025-09-26T13:43:42.371Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aBIyVdCDKZPINTO2C",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " I",
+        "obfuscation": "NdwrHKKPrGGtGM"
+      },
+      "timestamp": "2025-09-26T13:43:42.380Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ayml4adJNH56QfvfO",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " can",
+        "obfuscation": "z95Cjjzlx8LV"
+      },
+      "timestamp": "2025-09-26T13:43:42.393Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31anldiBlauVNAoChZ0",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " confirm",
+        "obfuscation": "xW2oYWSs"
+      },
+      "timestamp": "2025-09-26T13:43:42.406Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31awGFjhrPJkqNhKOX2",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " the",
+        "obfuscation": "jsVQcRYO4Al8"
+      },
+      "timestamp": "2025-09-26T13:43:42.406Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31adfTJJmXxYWvBCS0x",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " closest",
+        "obfuscation": "HgZNAzkg"
+      },
+      "timestamp": "2025-09-26T13:43:42.413Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31a6Gnm5CihfqSVGBsQ",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " store",
+        "obfuscation": "dA0L0U564P"
+      },
+      "timestamp": "2025-09-26T13:43:42.428Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31akyoUTBeXSgrQGbjv",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " for",
+        "obfuscation": "lwPCIsA4biJx"
+      },
+      "timestamp": "2025-09-26T13:43:42.432Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31aGeC2O1uLnbbrnvQj",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "6pEjLLQOzM5a"
+      },
+      "timestamp": "2025-09-26T13:43:42.439Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31a21EbM42vPkVhfFqi",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "?",
+        "obfuscation": "sfXNLbCfZZvxcLG"
+      },
+      "timestamp": "2025-09-26T13:43:42.459Z"
+    },
+    {
+      "type": "response.output_text.done",
+      "data": {
+        "type": "response.output_text.done",
+        "event_id": "event_CK31aJicDbh7RxiFuSJTR",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "text": "Perfect. We’ve got a large Hawaiian pizza for pickup. Could you let me know your location or the nearest landmark, so I can confirm the closest store for you?"
+      },
+      "timestamp": "2025-09-26T13:43:42.483Z"
+    },
+    {
+      "type": "response.content_part.done",
+      "data": {
+        "type": "response.content_part.done",
+        "event_id": "event_CK31aec5xgwiwgqNGlfkA",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": "Perfect. We’ve got a large Hawaiian pizza for pickup. Could you let me know your location or the nearest landmark, so I can confirm the closest store for you?"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:42.491Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31a4OTpfDESsi0LXojU",
+        "previous_item_id": "item_CK31ZHJCoZiCKrXgSYS16",
+        "item": {
+          "id": "item_CK31ZQxaDsSUbaVtK2qGW",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Perfect. We’ve got a large Hawaiian pizza for pickup. Could you let me know your location or the nearest landmark, so I can confirm the closest store for you?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:42.491Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31aQCdNkut2DNHFgayT",
+        "response_id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31ZQxaDsSUbaVtK2qGW",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Perfect. We’ve got a large Hawaiian pizza for pickup. Could you let me know your location or the nearest landmark, so I can confirm the closest store for you?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:42.491Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31aNSPSln1LAPbATEhw",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31ZuRJBPHzYxwfEGlfd",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31ZQxaDsSUbaVtK2qGW",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Perfect. We’ve got a large Hawaiian pizza for pickup. Could you let me know your location or the nearest landmark, so I can confirm the closest store for you?"
+                }
+              ]
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 2265,
+            "input_tokens": 2229,
+            "output_tokens": 36,
+            "input_token_details": {
+              "text_tokens": 2229,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 2176,
+              "cached_tokens_details": {
+                "text_tokens": 2176,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 36,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:42.491Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31ag6XeAiyjSy4jc62n",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 34326,
+            "reset_seconds": 8.509
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:42.500Z"
+    }
+  ],
+  "analysis": {
+    "totalResponses": 0,
+    "totalToolCalls": 2,
+    "toolsUsed": [
+      "getMenuItems"
+    ],
+    "responseTexts": []
+  }
+}

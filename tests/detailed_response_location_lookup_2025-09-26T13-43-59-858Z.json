@@ -1,0 +1,2369 @@
+{
+  "test": {
+    "name": "Location Lookup",
+    "messages": [
+      "What's the nearest location to me?",
+      "I'm at 123 Main Street, Toronto, ON"
+    ],
+    "startTime": "2025-09-26T13:43:47.851Z"
+  },
+  "sessionId": "sess_CK31O3cocKhWGMNG3iMhn",
+  "timestamp": "2025-09-26T13:43:59.858Z",
+  "responses": [],
+  "toolCalls": [
+    {
+      "name": "findNearestStore",
+      "arguments": "{  \n  \"address\": \"123 Main Street, Toronto, ON\" \n} \n",
+      "timestamp": "2025-09-26T13:43:54.477Z"
+    }
+  ],
+  "toolResults": [
+    {
+      "tool": "findNearestStore",
+      "arguments": {
+        "address": "123 Main Street, Toronto, ON"
+      },
+      "result": {
+        "ok": true,
+        "distanceKm": 8.5,
+        "store": {
+          "id": "TORONT-YONGE-2387",
+          "brand": "Gino's Pizza",
+          "address": "2387 Yonge St, Toronto, ON, CA M4P2E7",
+          "city": "Toronto",
+          "province": "ON",
+          "postal": "M4P2E7",
+          "url": "https://ginospizza.ca/locations/toronto/0058/ginos+pizza+2387+yonge+st/",
+          "lat": 43.7097911,
+          "lon": -79.3988171,
+          "hours": {
+            "mon": "11:00-23:00",
+            "tue": "11:00-23:00",
+            "wed": "11:00-23:00",
+            "thu": "11:00-00:00",
+            "fri": "11:00-01:00",
+            "sat": "11:00-01:00",
+            "sun": "00:00-23:00"
+          }
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.617Z"
+    }
+  ],
+  "allMessages": [
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31gzCoNWZmBgXaNk4Gp",
+        "previous_item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "item": {
+          "id": "item_CK31gispFQvqglALOgKKq",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "What's the nearest location to me?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:48.992Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31gQGMASON9Du8bfFWn",
+        "previous_item_id": "item_CK31ZQxaDsSUbaVtK2qGW",
+        "item": {
+          "id": "item_CK31gispFQvqglALOgKKq",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "What's the nearest location to me?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:48.993Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31gALsEPv4nn9X9To21",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31gBxAoIJa5WnDTy57Y",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:49.011Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31hO1fpQvUBLXEtE77R",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31g3G1RYYtyLwOXEBbh",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:49.233Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31hXrpBLA9Rj8m1yz8i",
+        "previous_item_id": "item_CK31gispFQvqglALOgKKq",
+        "item": {
+          "id": "item_CK31g3G1RYYtyLwOXEBbh",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:49.233Z"
+    },
+    {
+      "type": "response.content_part.added",
+      "data": {
+        "type": "response.content_part.added",
+        "event_id": "event_CK31h4sWLJLbF5myjlu8m",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:49.233Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hLCc1UdEEzAH8YCVu",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Could",
+        "obfuscation": "D8qBS2Xhc1n"
+      },
+      "timestamp": "2025-09-26T13:43:49.234Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hEACOytV2DlFLGZeH",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "ResvQLWoFqu1"
+      },
+      "timestamp": "2025-09-26T13:43:49.239Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hzq2RH3AigvVqZFvo",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " share",
+        "obfuscation": "DDh8YECkNM"
+      },
+      "timestamp": "2025-09-26T13:43:49.245Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hh7vkc4H7Wl6kkZl8",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " your",
+        "obfuscation": "rI0ye91FbRg"
+      },
+      "timestamp": "2025-09-26T13:43:49.267Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hu3SstCRK9jQSday5",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " address",
+        "obfuscation": "r1HdM7WF"
+      },
+      "timestamp": "2025-09-26T13:43:49.286Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hv4NoB06buX1p5kyH",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "QHtamSoL1t1yfmj"
+      },
+      "timestamp": "2025-09-26T13:43:49.293Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hgKWDzUSWzY4Ifts9",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " postal",
+        "obfuscation": "Ro4TWornF"
+      },
+      "timestamp": "2025-09-26T13:43:49.299Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hbXAEV9yzpofA8Ay0",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " code",
+        "obfuscation": "B0pVkufqd3i"
+      },
+      "timestamp": "2025-09-26T13:43:49.356Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hLxRwz9n7jpV2JgiF",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "BW0oeDdYUG4WqfH"
+      },
+      "timestamp": "2025-09-26T13:43:49.356Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hs47Kv0LTfIZapzos",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " or",
+        "obfuscation": "VUthB27jrVwDf"
+      },
+      "timestamp": "2025-09-26T13:43:49.356Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31h8RWVuf0sruVNztWN",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " a",
+        "obfuscation": "UTJSBCWSL5FYHR"
+      },
+      "timestamp": "2025-09-26T13:43:49.356Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hiEcJtkUJhSJ23UUd",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " nearby",
+        "obfuscation": "xVFzckLCV"
+      },
+      "timestamp": "2025-09-26T13:43:49.356Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31h8cOGlmILNQuWLcBA",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " landmark",
+        "obfuscation": "QdYhMMw"
+      },
+      "timestamp": "2025-09-26T13:43:49.356Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31h09qsfv6Dii9hElnE",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "?",
+        "obfuscation": "3mDZV5KA3mXCj8j"
+      },
+      "timestamp": "2025-09-26T13:43:49.356Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hdJ7TBZGlOlj56Tdi",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " That",
+        "obfuscation": "ESZMKuvZsiz"
+      },
+      "timestamp": "2025-09-26T13:43:49.357Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hFBPqTLDjBejtWLPP",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " way",
+        "obfuscation": "EKgk1wg0VoUq"
+      },
+      "timestamp": "2025-09-26T13:43:49.357Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31h9aOVaMWeBHNK8KwN",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " I",
+        "obfuscation": "7IF7AHnHRbgoUe"
+      },
+      "timestamp": "2025-09-26T13:43:49.357Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ha2muYW7GPHQwDgxV",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " can",
+        "obfuscation": "ZWocTOqu8hCX"
+      },
+      "timestamp": "2025-09-26T13:43:49.357Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31h5Y6VQDDQRbhGlBp4",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " find",
+        "obfuscation": "FziVDQn8P2L"
+      },
+      "timestamp": "2025-09-26T13:43:49.357Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hwsbvG74Y4ZFowfa2",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " the",
+        "obfuscation": "q6lPmJH6udlR"
+      },
+      "timestamp": "2025-09-26T13:43:49.357Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hUNEqnseyNWdFlGx2",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " nearest",
+        "obfuscation": "QvIw4co0"
+      },
+      "timestamp": "2025-09-26T13:43:49.368Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31h7828rKDQHqROfWkJ",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " G",
+        "obfuscation": "HydqOfKdFL3MHF"
+      },
+      "timestamp": "2025-09-26T13:43:49.371Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hA39TmoSuR9oJEC2N",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "ino",
+        "obfuscation": "qiklgY3Ex5y07"
+      },
+      "timestamp": "2025-09-26T13:43:49.379Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hMrdCXfIkTLboG7S1",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’s",
+        "obfuscation": "ox5aGjhvz4g62Q"
+      },
+      "timestamp": "2025-09-26T13:43:49.386Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hGyHsssgQ8X9RibnG",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Pizza",
+        "obfuscation": "d9PSLe8kOx"
+      },
+      "timestamp": "2025-09-26T13:43:49.396Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hr1hTAzHqV1YywhDH",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " location",
+        "obfuscation": "0q5xktK"
+      },
+      "timestamp": "2025-09-26T13:43:49.406Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hl6ZZNYFSmjxBli3c",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " for",
+        "obfuscation": "Fn8P8MGgNdcM"
+      },
+      "timestamp": "2025-09-26T13:43:49.428Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hPjbya0hNoG47yezA",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " your",
+        "obfuscation": "tUcinGB1zxW"
+      },
+      "timestamp": "2025-09-26T13:43:49.428Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31h2dFFYhGKmiAvtMyc",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pickup",
+        "obfuscation": "TCBCjeszb"
+      },
+      "timestamp": "2025-09-26T13:43:49.433Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31hDkYcDEJgoFEG3rM6",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "u2gRI16JpekPrAe"
+      },
+      "timestamp": "2025-09-26T13:43:49.443Z"
+    },
+    {
+      "type": "response.output_text.done",
+      "data": {
+        "type": "response.output_text.done",
+        "event_id": "event_CK31hMtGhDLAbVDV2t1EM",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "text": "Could you share your address, postal code, or a nearby landmark? That way I can find the nearest Gino’s Pizza location for your pickup."
+      },
+      "timestamp": "2025-09-26T13:43:49.478Z"
+    },
+    {
+      "type": "response.content_part.done",
+      "data": {
+        "type": "response.content_part.done",
+        "event_id": "event_CK31hH50Fac7gi58KwkmD",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": "Could you share your address, postal code, or a nearby landmark? That way I can find the nearest Gino’s Pizza location for your pickup."
+        }
+      },
+      "timestamp": "2025-09-26T13:43:49.478Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31hVZp5WX04aS0Hzxtu",
+        "previous_item_id": "item_CK31gispFQvqglALOgKKq",
+        "item": {
+          "id": "item_CK31g3G1RYYtyLwOXEBbh",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Could you share your address, postal code, or a nearby landmark? That way I can find the nearest Gino’s Pizza location for your pickup."
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:49.478Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31hnrjEZwNB8N6aukhU",
+        "response_id": "resp_CK31gBxAoIJa5WnDTy57Y",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31g3G1RYYtyLwOXEBbh",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Could you share your address, postal code, or a nearby landmark? That way I can find the nearest Gino’s Pizza location for your pickup."
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:49.479Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31hsxe1X29QG3yrAync",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31gBxAoIJa5WnDTy57Y",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31g3G1RYYtyLwOXEBbh",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "Could you share your address, postal code, or a nearby landmark? That way I can find the nearest Gino’s Pizza location for your pickup."
+                }
+              ]
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 2310,
+            "input_tokens": 2278,
+            "output_tokens": 32,
+            "input_token_details": {
+              "text_tokens": 2278,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 2240,
+              "cached_tokens_details": {
+                "text_tokens": 2240,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 32,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:49.484Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31h2zr4R5cYYbPkRhlf",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 36404,
+            "reset_seconds": 5.393
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:49.491Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31lYNFF20CruUBq7Bnz",
+        "previous_item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "item": {
+          "id": "item_CK31l699p866a58gVMiPN",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "I'm at 123 Main Street, Toronto, ON"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.024Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31lbRjaF3z0FyjMMbVg",
+        "previous_item_id": "item_CK31g3G1RYYtyLwOXEBbh",
+        "item": {
+          "id": "item_CK31l699p866a58gVMiPN",
+          "type": "message",
+          "status": "completed",
+          "role": "user",
+          "content": [
+            {
+              "type": "input_text",
+              "text": "I'm at 123 Main Street, Toronto, ON"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.026Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31l185pn4UA1ubBNj3Q",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31lBftKnKubkkiQY8FX",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.042Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31mgwXbJ9i3C9tAnUOe",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31laqyNQxFKfhabvDgb",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "findNearestStore",
+          "call_id": "call_FPdXRCSa3vKnCM4S",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.332Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31mWP986KNBACYRgb4I",
+        "previous_item_id": "item_CK31l699p866a58gVMiPN",
+        "item": {
+          "id": "item_CK31laqyNQxFKfhabvDgb",
+          "type": "function_call",
+          "status": "in_progress",
+          "name": "findNearestStore",
+          "call_id": "call_FPdXRCSa3vKnCM4S",
+          "arguments": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.332Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mO5iUBctJpaNcf9fV",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": "{",
+        "obfuscation": "cxGMwLzZPUjCGmN"
+      },
+      "timestamp": "2025-09-26T13:43:54.333Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mRscGLLb2A8LSyvSm",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": "  \n",
+        "obfuscation": "icfpy14mzxcW0"
+      },
+      "timestamp": "2025-09-26T13:43:54.337Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31m7dBNWJFZWLeBGGAN",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " ",
+        "obfuscation": "3SHF9GhjLqE2c4x"
+      },
+      "timestamp": "2025-09-26T13:43:54.339Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31myU0Jnmvzdw3xZeRe",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " \"",
+        "obfuscation": "UPpWjCU0TvZmrR"
+      },
+      "timestamp": "2025-09-26T13:43:54.343Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mWuP6P9MnD9oitvoN",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": "address",
+        "obfuscation": "R74GI9PX4"
+      },
+      "timestamp": "2025-09-26T13:43:54.343Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mW66tWBp6zhfPVWnG",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": "\":",
+        "obfuscation": "YCiFpl9ygpRWYs"
+      },
+      "timestamp": "2025-09-26T13:43:54.346Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mHWRHJOCWUQzFghW9",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " \"",
+        "obfuscation": "QBsA8EsxRluP3D"
+      },
+      "timestamp": "2025-09-26T13:43:54.349Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mzq5AO5PNWlNqlsIi",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": "123",
+        "obfuscation": "JqCXWwsoT3M7X"
+      },
+      "timestamp": "2025-09-26T13:43:54.359Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mR4qDQVUcJU53pTnh",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " Main",
+        "obfuscation": "omkfGU0K93h"
+      },
+      "timestamp": "2025-09-26T13:43:54.456Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31m6rR7rzGvSY5nKHm4",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " Street",
+        "obfuscation": "s8VE7WXS7"
+      },
+      "timestamp": "2025-09-26T13:43:54.456Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mC3kZ8bdEo2FKgmcP",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": ",",
+        "obfuscation": "iU8lBUod7ijxbPN"
+      },
+      "timestamp": "2025-09-26T13:43:54.456Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mOTUrVCDBC3YWg13R",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " Toronto",
+        "obfuscation": "hbIpqxK6"
+      },
+      "timestamp": "2025-09-26T13:43:54.457Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mDrLvDaDpMjmODx7F",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": ",",
+        "obfuscation": "8YMB3N0L2UL6Uon"
+      },
+      "timestamp": "2025-09-26T13:43:54.457Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mmIvaUyPN3xqePaB2",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " ON",
+        "obfuscation": "5YjVX2pMLbMM0"
+      },
+      "timestamp": "2025-09-26T13:43:54.457Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mV6BliBrEG7ELZJhM",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": "\"",
+        "obfuscation": "WQSdw0MdyXxCR72"
+      },
+      "timestamp": "2025-09-26T13:43:54.457Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mkPokgpyzNQryL9wC",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " \n",
+        "obfuscation": "21wgNd1tdfYSos"
+      },
+      "timestamp": "2025-09-26T13:43:54.457Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31m0hjMkcrflh4qPriu",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": "}",
+        "obfuscation": "6mYL6l6xbkf4YCE"
+      },
+      "timestamp": "2025-09-26T13:43:54.458Z"
+    },
+    {
+      "type": "response.function_call_arguments.delta",
+      "data": {
+        "type": "response.function_call_arguments.delta",
+        "event_id": "event_CK31mXkuydI0S6AW5k3Q6",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "delta": " \n",
+        "obfuscation": "gdhXzsbPjHMwlz"
+      },
+      "timestamp": "2025-09-26T13:43:54.458Z"
+    },
+    {
+      "type": "response.function_call_arguments.done",
+      "data": {
+        "type": "response.function_call_arguments.done",
+        "event_id": "event_CK31mm2KRlaKVkA4EqVY9",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "output_index": 0,
+        "call_id": "call_FPdXRCSa3vKnCM4S",
+        "name": "findNearestStore",
+        "arguments": "{  \n  \"address\": \"123 Main Street, Toronto, ON\" \n} \n"
+      },
+      "timestamp": "2025-09-26T13:43:54.472Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31meR5QUMM2xqN1F2Mo",
+        "previous_item_id": "item_CK31l699p866a58gVMiPN",
+        "item": {
+          "id": "item_CK31laqyNQxFKfhabvDgb",
+          "type": "function_call",
+          "status": "completed",
+          "name": "findNearestStore",
+          "call_id": "call_FPdXRCSa3vKnCM4S",
+          "arguments": "{  \n  \"address\": \"123 Main Street, Toronto, ON\" \n} \n"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.473Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31mDfCtZbXpnQqnwCar",
+        "response_id": "resp_CK31lBftKnKubkkiQY8FX",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31laqyNQxFKfhabvDgb",
+          "type": "function_call",
+          "status": "completed",
+          "name": "findNearestStore",
+          "call_id": "call_FPdXRCSa3vKnCM4S",
+          "arguments": "{  \n  \"address\": \"123 Main Street, Toronto, ON\" \n} \n"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.475Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31mdghV2QJuW9C2LO8y",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31lBftKnKubkkiQY8FX",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31laqyNQxFKfhabvDgb",
+              "type": "function_call",
+              "status": "completed",
+              "name": "findNearestStore",
+              "call_id": "call_FPdXRCSa3vKnCM4S",
+              "arguments": "{  \n  \"address\": \"123 Main Street, Toronto, ON\" \n} \n"
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 2355,
+            "input_tokens": 2326,
+            "output_tokens": 29,
+            "input_token_details": {
+              "text_tokens": 2326,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 2304,
+              "cached_tokens_details": {
+                "text_tokens": 2304,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 29,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.476Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31m10KCXxutt3rwy6NM",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 37115,
+            "reset_seconds": 4.327
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:54.518Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31mgUM6fUE58ABMxz97",
+        "previous_item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "item": {
+          "id": "item_CK31maqUjSKoRrQCVn7wz",
+          "type": "function_call_output",
+          "call_id": "call_FPdXRCSa3vKnCM4S",
+          "output": "{\"ok\":true,\"distanceKm\":8.5,\"store\":{\"id\":\"TORONT-YONGE-2387\",\"brand\":\"Gino's Pizza\",\"address\":\"2387 Yonge St, Toronto, ON, CA M4P2E7\",\"city\":\"Toronto\",\"province\":\"ON\",\"postal\":\"M4P2E7\",\"url\":\"https://ginospizza.ca/locations/toronto/0058/ginos+pizza+2387+yonge+st/\",\"lat\":43.7097911,\"lon\":-79.3988171,\"hours\":{\"mon\":\"11:00-23:00\",\"tue\":\"11:00-23:00\",\"wed\":\"11:00-23:00\",\"thu\":\"11:00-00:00\",\"fri\":\"11:00-01:00\",\"sat\":\"11:00-01:00\",\"sun\":\"00:00-23:00\"}}}"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.768Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31mfCASs13PvArOqji4",
+        "previous_item_id": "item_CK31laqyNQxFKfhabvDgb",
+        "item": {
+          "id": "item_CK31maqUjSKoRrQCVn7wz",
+          "type": "function_call_output",
+          "call_id": "call_FPdXRCSa3vKnCM4S",
+          "output": "{\"ok\":true,\"distanceKm\":8.5,\"store\":{\"id\":\"TORONT-YONGE-2387\",\"brand\":\"Gino's Pizza\",\"address\":\"2387 Yonge St, Toronto, ON, CA M4P2E7\",\"city\":\"Toronto\",\"province\":\"ON\",\"postal\":\"M4P2E7\",\"url\":\"https://ginospizza.ca/locations/toronto/0058/ginos+pizza+2387+yonge+st/\",\"lat\":43.7097911,\"lon\":-79.3988171,\"hours\":{\"mon\":\"11:00-23:00\",\"tue\":\"11:00-23:00\",\"wed\":\"11:00-23:00\",\"thu\":\"11:00-00:00\",\"fri\":\"11:00-01:00\",\"sat\":\"11:00-01:00\",\"sun\":\"00:00-23:00\"}}}"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.772Z"
+    },
+    {
+      "type": "response.created",
+      "data": {
+        "type": "response.created",
+        "event_id": "event_CK31mG5zRVPVkknm7n778",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31mxA4BbBO0Za4BgMGE",
+          "status": "in_progress",
+          "status_details": null,
+          "output": [],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": null,
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.776Z"
+    },
+    {
+      "type": "response.output_item.added",
+      "data": {
+        "type": "response.output_item.added",
+        "event_id": "event_CK31mYxkRuV2eyEsYzHpn",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31mRX6iOK6hurP7Cclt",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.939Z"
+    },
+    {
+      "type": "conversation.item.added",
+      "data": {
+        "type": "conversation.item.added",
+        "event_id": "event_CK31mHd6IM0aAY9XCgUhS",
+        "previous_item_id": "item_CK31maqUjSKoRrQCVn7wz",
+        "item": {
+          "id": "item_CK31mRX6iOK6hurP7Cclt",
+          "type": "message",
+          "status": "in_progress",
+          "role": "assistant",
+          "content": []
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.939Z"
+    },
+    {
+      "type": "response.content_part.added",
+      "data": {
+        "type": "response.content_part.added",
+        "event_id": "event_CK31mSURw2yzvvzBjXZ3F",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": ""
+        }
+      },
+      "timestamp": "2025-09-26T13:43:54.940Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mbhgVzjwJHKUPeNJL",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "The",
+        "obfuscation": "4KXsq9d12fg0d"
+      },
+      "timestamp": "2025-09-26T13:43:54.941Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31m8RUhcbXYX9heewQF",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " nearest",
+        "obfuscation": "PsDzibGu"
+      },
+      "timestamp": "2025-09-26T13:43:54.946Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31miXPjtH6FVoR6vOpf",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " G",
+        "obfuscation": "JmAFbYrcrX0uJQ"
+      },
+      "timestamp": "2025-09-26T13:43:54.963Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mKLSOlsEWmzq6evzX",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "ino",
+        "obfuscation": "cT0vwZ2NjcFmI"
+      },
+      "timestamp": "2025-09-26T13:43:54.970Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mktbTSjw3d1Z1bUO2",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’s",
+        "obfuscation": "B7qo3Bb677d0t6"
+      },
+      "timestamp": "2025-09-26T13:43:54.970Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mCK2oR4rkMJ3ULch4",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Pizza",
+        "obfuscation": "NlR1rkF6h6"
+      },
+      "timestamp": "2025-09-26T13:43:54.984Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mjzK3iDXJQ3uvmobW",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " to",
+        "obfuscation": "6lZkRkwr3HNZo"
+      },
+      "timestamp": "2025-09-26T13:43:54.988Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mTFqpJxvFxdzFxwlo",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "c4rsBHYA5tgX"
+      },
+      "timestamp": "2025-09-26T13:43:54.994Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mTsu6p6bfSafjQcxs",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " is",
+        "obfuscation": "NoKbpXPCFxNft"
+      },
+      "timestamp": "2025-09-26T13:43:55.003Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mcyzGHVZw88Lszw9a",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " at",
+        "obfuscation": "cFkneOZgarJLD"
+      },
+      "timestamp": "2025-09-26T13:43:55.010Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mEwgLX6fIQ0MmKbEO",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " ",
+        "obfuscation": "O3hSPg4dGxuAfrU"
+      },
+      "timestamp": "2025-09-26T13:43:55.020Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31mUpii4SfIp9slY6yr",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "238",
+        "obfuscation": "l5SeiHbCvhwT1"
+      },
+      "timestamp": "2025-09-26T13:43:55.029Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nnigmewRLXpKRAqgJ",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "7",
+        "obfuscation": "PkJuNHRz1PzfDNy"
+      },
+      "timestamp": "2025-09-26T13:43:55.035Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nZMvH6YpVgIESiRzi",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Y",
+        "obfuscation": "hkgpiz0qIbHKFb"
+      },
+      "timestamp": "2025-09-26T13:43:55.046Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nokjwI0SPDeCiM3N4",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "onge",
+        "obfuscation": "NNdMnATIfEwr"
+      },
+      "timestamp": "2025-09-26T13:43:55.055Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nu495uKOAMqcd1Xkl",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " St",
+        "obfuscation": "HOjcpr5daJFQI"
+      },
+      "timestamp": "2025-09-26T13:43:55.073Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n6Z1typAlPYpG1ZQL",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "dr0VU0HEgbwJiH9"
+      },
+      "timestamp": "2025-09-26T13:43:55.073Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nmdNOquvDbZjdpR2W",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Toronto",
+        "obfuscation": "j1oMY8hd"
+      },
+      "timestamp": "2025-09-26T13:43:55.081Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n416gtTmzlTjpsGbQ",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ",",
+        "obfuscation": "t1LdjbzhsmTooMQ"
+      },
+      "timestamp": "2025-09-26T13:43:55.087Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ns1vttfl9RO7oTX71",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " about",
+        "obfuscation": "Ipxb24oxoL"
+      },
+      "timestamp": "2025-09-26T13:43:55.093Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nYnTTBJlMZYs88wcj",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " ",
+        "obfuscation": "OrLDWsZJ3ptkYiU"
+      },
+      "timestamp": "2025-09-26T13:43:55.101Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nxE5kZQZsGn9z55LE",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "8",
+        "obfuscation": "XJpRgZT5CbaKk0b"
+      },
+      "timestamp": "2025-09-26T13:43:55.111Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nod9cG8QoScKA4nLj",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "hZzQzzT9KcWFzPL"
+      },
+      "timestamp": "2025-09-26T13:43:55.126Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nNlFOEhsDpVooYFGK",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "5",
+        "obfuscation": "2FDsIX5Vtolo4Tl"
+      },
+      "timestamp": "2025-09-26T13:43:55.133Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nfnNsTH7z8gcOVSFG",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " kilometers",
+        "obfuscation": "1Vnw7"
+      },
+      "timestamp": "2025-09-26T13:43:55.140Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nbYZQF64omBE8FR84",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " away",
+        "obfuscation": "2DGLufD3s2Z"
+      },
+      "timestamp": "2025-09-26T13:43:55.149Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n65fvOeJ55uCqFU2t",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".\n\n",
+        "obfuscation": "UTjHLFD683SDO"
+      },
+      "timestamp": "2025-09-26T13:43:55.159Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nIAgpOmaLa0hLjx2w",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Let",
+        "obfuscation": "kQrXzQeftpd8D"
+      },
+      "timestamp": "2025-09-26T13:43:55.165Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31npBivrCtTbXBffnCb",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’s",
+        "obfuscation": "8xhWpUyWv7Lyfe"
+      },
+      "timestamp": "2025-09-26T13:43:55.175Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nXiHpa5Fnq5JrSgMC",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " confirm",
+        "obfuscation": "WDD8zaom"
+      },
+      "timestamp": "2025-09-26T13:43:55.183Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n20SMkoSCleugm2Go",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " your",
+        "obfuscation": "OcnkpMtiuB5"
+      },
+      "timestamp": "2025-09-26T13:43:55.192Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n1KWBnuqOf9DR7qOQ",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " order",
+        "obfuscation": "gzM9eLt30f"
+      },
+      "timestamp": "2025-09-26T13:43:55.202Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nL6WYygDYK6ZXr1gD",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " details",
+        "obfuscation": "cVGKQpT8"
+      },
+      "timestamp": "2025-09-26T13:43:55.212Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nTP6NbKBhzRCySkad",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " now",
+        "obfuscation": "deg5Bry5zDJ5"
+      },
+      "timestamp": "2025-09-26T13:43:55.213Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n9swSO12oxC1scCDt",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".",
+        "obfuscation": "S25Vl9ehmswd40k"
+      },
+      "timestamp": "2025-09-26T13:43:55.228Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ngiCuRjpfbvlI16S6",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " You",
+        "obfuscation": "zKCX5fepvHw6"
+      },
+      "timestamp": "2025-09-26T13:43:55.231Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nhcn7FwvaEJuFO5Ls",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "’ve",
+        "obfuscation": "jG9efAbG8Hdw2"
+      },
+      "timestamp": "2025-09-26T13:43:55.240Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n3j6YFVrl2nQJDFHZ",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " got",
+        "obfuscation": "9zh9shKy3vcP"
+      },
+      "timestamp": "2025-09-26T13:43:55.251Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nlc7jCvU9WbgxmP9o",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " one",
+        "obfuscation": "TB5i36ZQM70v"
+      },
+      "timestamp": "2025-09-26T13:43:55.256Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nfSPID81focOUiuEO",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " large",
+        "obfuscation": "EG3zENKSH2"
+      },
+      "timestamp": "2025-09-26T13:43:55.264Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nCy7TWB1gZDM9bsHs",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " Hawaiian",
+        "obfuscation": "aVwMIci"
+      },
+      "timestamp": "2025-09-26T13:43:55.271Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nV0cq1prVdFq5rZOi",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pizza",
+        "obfuscation": "BrP0mmdXTB"
+      },
+      "timestamp": "2025-09-26T13:43:55.278Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nW3MuINuIyVvNGkHa",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " for",
+        "obfuscation": "OInNkM50C5c7"
+      },
+      "timestamp": "2025-09-26T13:43:55.287Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n9DzMoixynFqYkLoZ",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " pickup",
+        "obfuscation": "D9jubuq5P"
+      },
+      "timestamp": "2025-09-26T13:43:55.297Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nB8HmRVvTKqk21DbL",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " at",
+        "obfuscation": "pBIDyhumWv2dd"
+      },
+      "timestamp": "2025-09-26T13:43:55.308Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n4aHr7H9OnWKfsbVa",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " that",
+        "obfuscation": "DpXpUPdACQV"
+      },
+      "timestamp": "2025-09-26T13:43:55.315Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nMHDEkPghgai3jL1b",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " location",
+        "obfuscation": "ZoWVr3L"
+      },
+      "timestamp": "2025-09-26T13:43:55.319Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nbf8pSXZUQbOGHjHf",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": ".\n\n",
+        "obfuscation": "q7xIT9S5kDGAk"
+      },
+      "timestamp": "2025-09-26T13:43:55.338Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nS6q4A5sQ9MZAii9G",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "Would",
+        "obfuscation": "mTI5O7Nb3ND"
+      },
+      "timestamp": "2025-09-26T13:43:55.342Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31n5dXikGwbQvvvNQVl",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " you",
+        "obfuscation": "hNRgbQiQ33H5"
+      },
+      "timestamp": "2025-09-26T13:43:55.343Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nT22qN78MI3kYJK5x",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " like",
+        "obfuscation": "OBs3XTWPf8n"
+      },
+      "timestamp": "2025-09-26T13:43:55.355Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nV7dbCBAB16AXz7cB",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " to",
+        "obfuscation": "xbMAbsbnBiVLM"
+      },
+      "timestamp": "2025-09-26T13:43:55.364Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nkQxexsHTUo1GRVOH",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " add",
+        "obfuscation": "iSIukvOhV0HC"
+      },
+      "timestamp": "2025-09-26T13:43:55.371Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nl9Gt7mgzyyGH4NIF",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " any",
+        "obfuscation": "H8il8eiAoARW"
+      },
+      "timestamp": "2025-09-26T13:43:55.378Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nxwpZmaMIkJ8vpwQX",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " sides",
+        "obfuscation": "NbMjgL9Z2m"
+      },
+      "timestamp": "2025-09-26T13:43:55.383Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nkvaJd0hvsx76mdoo",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " or",
+        "obfuscation": "DrcerOnIV0eii"
+      },
+      "timestamp": "2025-09-26T13:43:55.398Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nMNx7sNTMltKmTedM",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " drinks",
+        "obfuscation": "ZZiTcAUez"
+      },
+      "timestamp": "2025-09-26T13:43:55.405Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ne3pFdUVeiofNm9xt",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " before",
+        "obfuscation": "obUUM51Na"
+      },
+      "timestamp": "2025-09-26T13:43:55.408Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31ndnftqmwTG5LenAiP",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " we",
+        "obfuscation": "E8NJi1iYUI2GW"
+      },
+      "timestamp": "2025-09-26T13:43:55.428Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nQyzSiVcfYfQ0tekr",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " wrap",
+        "obfuscation": "5hLFfH9DJfo"
+      },
+      "timestamp": "2025-09-26T13:43:55.430Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nRBHtX2YHJH43cXwO",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": " up",
+        "obfuscation": "85vaHpQzkiUlp"
+      },
+      "timestamp": "2025-09-26T13:43:55.435Z"
+    },
+    {
+      "type": "response.output_text.delta",
+      "data": {
+        "type": "response.output_text.delta",
+        "event_id": "event_CK31nr3HrtOjHJblLs3Ur",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "delta": "?",
+        "obfuscation": "eRf1Dj7KfHNkgWA"
+      },
+      "timestamp": "2025-09-26T13:43:55.446Z"
+    },
+    {
+      "type": "response.output_text.done",
+      "data": {
+        "type": "response.output_text.done",
+        "event_id": "event_CK31nG8fUiEJGIbzZix5J",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "text": "The nearest Gino’s Pizza to you is at 2387 Yonge St, Toronto, about 8.5 kilometers away.\n\nLet’s confirm your order details now. You’ve got one large Hawaiian pizza for pickup at that location.\n\nWould you like to add any sides or drinks before we wrap up?"
+      },
+      "timestamp": "2025-09-26T13:43:55.486Z"
+    },
+    {
+      "type": "response.content_part.done",
+      "data": {
+        "type": "response.content_part.done",
+        "event_id": "event_CK31nCKqBoSopOg9kNMb9",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "item_id": "item_CK31mRX6iOK6hurP7Cclt",
+        "output_index": 0,
+        "content_index": 0,
+        "part": {
+          "type": "text",
+          "text": "The nearest Gino’s Pizza to you is at 2387 Yonge St, Toronto, about 8.5 kilometers away.\n\nLet’s confirm your order details now. You’ve got one large Hawaiian pizza for pickup at that location.\n\nWould you like to add any sides or drinks before we wrap up?"
+        }
+      },
+      "timestamp": "2025-09-26T13:43:55.486Z"
+    },
+    {
+      "type": "conversation.item.done",
+      "data": {
+        "type": "conversation.item.done",
+        "event_id": "event_CK31nGabr89x2HEJ40Azp",
+        "previous_item_id": "item_CK31maqUjSKoRrQCVn7wz",
+        "item": {
+          "id": "item_CK31mRX6iOK6hurP7Cclt",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "The nearest Gino’s Pizza to you is at 2387 Yonge St, Toronto, about 8.5 kilometers away.\n\nLet’s confirm your order details now. You’ve got one large Hawaiian pizza for pickup at that location.\n\nWould you like to add any sides or drinks before we wrap up?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:55.486Z"
+    },
+    {
+      "type": "response.output_item.done",
+      "data": {
+        "type": "response.output_item.done",
+        "event_id": "event_CK31nnuNhlXG19h29QaEw",
+        "response_id": "resp_CK31mxA4BbBO0Za4BgMGE",
+        "output_index": 0,
+        "item": {
+          "id": "item_CK31mRX6iOK6hurP7Cclt",
+          "type": "message",
+          "status": "completed",
+          "role": "assistant",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "The nearest Gino’s Pizza to you is at 2387 Yonge St, Toronto, about 8.5 kilometers away.\n\nLet’s confirm your order details now. You’ve got one large Hawaiian pizza for pickup at that location.\n\nWould you like to add any sides or drinks before we wrap up?"
+            }
+          ]
+        }
+      },
+      "timestamp": "2025-09-26T13:43:55.487Z"
+    },
+    {
+      "type": "response.done",
+      "data": {
+        "type": "response.done",
+        "event_id": "event_CK31ngDvQEoteLMXrITKg",
+        "response": {
+          "object": "realtime.response",
+          "id": "resp_CK31mxA4BbBO0Za4BgMGE",
+          "status": "completed",
+          "status_details": null,
+          "output": [
+            {
+              "id": "item_CK31mRX6iOK6hurP7Cclt",
+              "type": "message",
+              "status": "completed",
+              "role": "assistant",
+              "content": [
+                {
+                  "type": "output_text",
+                  "text": "The nearest Gino’s Pizza to you is at 2387 Yonge St, Toronto, about 8.5 kilometers away.\n\nLet’s confirm your order details now. You’ve got one large Hawaiian pizza for pickup at that location.\n\nWould you like to add any sides or drinks before we wrap up?"
+                }
+              ]
+            }
+          ],
+          "conversation_id": "conv_CK31O4rAyLnqgzj8dcCc0",
+          "output_modalities": [
+            "text"
+          ],
+          "max_output_tokens": "inf",
+          "audio": {
+            "output": {
+              "format": {
+                "type": "audio/pcm",
+                "rate": 24000
+              },
+              "voice": "alloy"
+            }
+          },
+          "usage": {
+            "total_tokens": 2610,
+            "input_tokens": 2546,
+            "output_tokens": 64,
+            "input_token_details": {
+              "text_tokens": 2546,
+              "audio_tokens": 0,
+              "image_tokens": 0,
+              "cached_tokens": 2304,
+              "cached_tokens_details": {
+                "text_tokens": 2304,
+                "audio_tokens": 0,
+                "image_tokens": 0
+              }
+            },
+            "output_token_details": {
+              "text_tokens": 64,
+              "audio_tokens": 0
+            }
+          },
+          "metadata": null
+        }
+      },
+      "timestamp": "2025-09-26T13:43:55.489Z"
+    },
+    {
+      "type": "rate_limits.updated",
+      "data": {
+        "type": "rate_limits.updated",
+        "event_id": "event_CK31nW1ro6PKLq51JPdF8",
+        "rate_limits": [
+          {
+            "name": "tokens",
+            "limit": 40000,
+            "remaining": 34910,
+            "reset_seconds": 7.634
+          }
+        ]
+      },
+      "timestamp": "2025-09-26T13:43:55.504Z"
+    }
+  ],
+  "analysis": {
+    "totalResponses": 0,
+    "totalToolCalls": 1,
+    "toolsUsed": [
+      "findNearestStore"
+    ],
+    "responseTexts": []
+  }
+}

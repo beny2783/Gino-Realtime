@@ -239,7 +239,41 @@ export function findMenuItems(filters = {}) {
     if (search) {
       const q = search.toLowerCase();
       const hay = [item.name, item.details, item.category].filter(Boolean).join(' ').toLowerCase();
-      if (!hay.includes(q)) return false;
+      
+      // Direct match
+      if (hay.includes(q)) return true;
+      
+      // Handle common pizza variations
+      if (item.kind === 'gourmet') {
+        // Remove "pizza" from search term for gourmet items
+        const pizzaLessQ = q.replace(/\bpizza\b/g, '').trim();
+        if (pizzaLessQ && hay.includes(pizzaLessQ)) return true;
+        
+        // Handle specific common variations
+        const variations = {
+          'hawaiian pizza': 'hawaiian',
+          'hawaiian': 'hawaiian',
+          'meat lovers pizza': 'meat lovers',
+          'meat lovers': 'meat lovers',
+          'veggie pizza': 'mega veggie',
+          'vegetarian pizza': 'mega veggie',
+          'cheese pizza': 'cheese',
+          'margherita pizza': 'margherita',
+          'margherita': 'margherita',
+          'pepperoni pizza': 'pepperoni',
+          'pepperoni': 'pepperoni',
+          'supreme pizza': 'supreme',
+          'supreme': 'supreme',
+          'bbq chicken pizza': 'bbq chicken',
+          'bbq chicken': 'bbq chicken',
+          'chicken pizza': 'chicken',
+          'chicken': 'chicken'
+        };
+        
+        if (variations[q] && hay.includes(variations[q])) return true;
+      }
+      
+      return false;
     }
     
     return true;

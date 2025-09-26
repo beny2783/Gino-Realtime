@@ -42,8 +42,79 @@ fastify.register(fastifyWs);
 // Constants
 // =====================
 
+// Tools configuration for Laura
+export const LAURA_TOOLS = [
+  {
+    type: 'function',
+    name: 'findNearestStore',
+    description: 'Given a Canadian address (postal code, street address, city, or landmark), return the nearest Ginos Pizza store.',
+    parameters: {
+      type: 'object',
+      properties: {
+        address: {
+          type: 'string',
+          description: 'Canadian address in any format: postal code (L1Z 1Z2), street address (123 Main St, Toronto), city name (Toronto, ON), or landmark (CN Tower, Toronto).'
+        }
+      }
+      // No "required" at top level (Realtime restriction). We handle validation server-side.
+    }
+  },
+  {
+    type: 'function',
+    name: 'getMenuItems',
+    description: 'Query menu items by kind/dietary/search. Returns compact structured items for sizes, crusts, sauces, toppings, deals, gourmet pizzas, add-ons, salads, and dips.',
+    parameters: {
+      type: 'object',
+      properties: {
+        kinds: {
+          type: 'array',
+          items: { 
+            type: 'string', 
+            enum: ['size', 'crust', 'sauce', 'topping', 'gourmet', 'deal', 'addon', 'salad', 'dip'] 
+          },
+          description: 'Filter by item kinds'
+        },
+        dietary: {
+          type: 'string',
+          enum: ['vegan', 'vegetarian', 'gluten_free'],
+          description: 'Filter by dietary restrictions'
+        },
+        search: {
+          type: 'string',
+          description: 'Free text search across names and details'
+        },
+        limit: {
+          type: 'number',
+          description: 'Maximum number of results to return (default: 12)'
+        }
+      }
+    }
+  },
+  {
+    type: 'function',
+    name: 'getKbSnippet',
+    description: 'Fetch compact KB snippets (catering prices, dietary notes, offers, charity policy, hours, pronunciations).',
+    parameters: {
+      type: 'object',
+      properties: {
+        topic: {
+          type: 'string',
+          enum: ['catering_prices', 'dietary', 'offers', 'charity_policy', 'hours', 'pronunciations'],
+          description: 'KB topic to fetch'
+        },
+        ids: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Specific IDs to filter (for catering_prices)'
+        }
+      },
+      required: ['topic']
+    }
+  }
+];
+
 // Clean, readable markdown prompt for LAURA (no Tools section)
-const LAURA_PROMPT = `
+export const LAURA_PROMPT = `
 Role & Objective
 You are Laura, the warm and enthusiastic virtual host for Gino’s Pizza in Canada. Always role-play as Laura, speaking in first person (“I” / “we”) as the caller’s live assistant.
 Your objective is to provide a seamless caller experience by taking and confirming orders, answering common questions using the Knowledge Base, and ensuring callers feel cared for. Success means the guest’s order is captured clearly, they get accurate information, or they are smoothly transferred to a human when required.
@@ -67,7 +138,7 @@ Tools
 
 transferToNumber: Connects caller to nearest store (based on postal code) or central helpline.
 
-getMenuItems: ALWAYS call this for ANY menu item request. Example: CALL getMenuItems({search: "Caesar salad"}) or CALL getMenuItems({kinds: ["salad"]}). Never respond with menu information without calling this tool first.
+        getMenuItems: ALWAYS call this for ANY menu item request. Use flexible search terms - "Hawaiian pizza" will find "Hawaiian" gourmet pizza. Examples: CALL getMenuItems({search: "Hawaiian pizza"}) or CALL getMenuItems({search: "Caesar salad"}) or CALL getMenuItems({kinds: ["salad"]}). Never respond with menu information without calling this tool first.
 
 getKbSnippet: Example: CALL getKbSnippet({topic: "dietary"}). Returns knowledge base text. Use only the smallest topic/ids required.
 
@@ -510,75 +581,7 @@ const geocodeCache = makeLRU(400);
               },
               output: { format: { type: 'audio/pcmu' }, voice: VOICE },
             },
-          tools: [
-            {
-              type: 'function',
-              name: 'findNearestStore',
-              description: 'Given a Canadian address (postal code, street address, city, or landmark), return the nearest Ginos Pizza store.',
-              parameters: {
-                type: 'object',
-                properties: {
-                  address: {
-                    type: 'string',
-                    description: 'Canadian address in any format: postal code (L1Z 1Z2), street address (123 Main St, Toronto), city name (Toronto, ON), or landmark (CN Tower, Toronto).'
-                  }
-                }
-                // No "required" at top level (Realtime restriction). We handle validation server-side.
-              }
-            },
-            {
-              type: 'function',
-              name: 'getMenuItems',
-              description: 'Query menu items by kind/dietary/search. Returns compact structured items for sizes, crusts, sauces, toppings, deals, gourmet pizzas, add-ons, salads, and dips.',
-              parameters: {
-                type: 'object',
-                properties: {
-                  kinds: {
-                    type: 'array',
-                    items: { 
-                      type: 'string', 
-                      enum: ['size', 'crust', 'sauce', 'topping', 'gourmet', 'deal', 'addon', 'salad', 'dip'] 
-                    },
-                    description: 'Filter by item kinds'
-                  },
-                  dietary: {
-                    type: 'string',
-                    enum: ['vegan', 'vegetarian', 'gluten_free'],
-                    description: 'Filter by dietary restrictions'
-                  },
-                  search: {
-                    type: 'string',
-                    description: 'Free text search across names and details'
-                  },
-                  limit: {
-                    type: 'number',
-                    description: 'Maximum number of results to return (default: 12)'
-                  }
-                }
-              }
-            },
-            {
-              type: 'function',
-              name: 'getKbSnippet',
-              description: 'Fetch compact KB snippets (catering prices, dietary notes, offers, charity policy, hours, pronunciations).',
-              parameters: {
-                type: 'object',
-                properties: {
-                  topic: {
-                    type: 'string',
-                    enum: ['catering_prices', 'dietary', 'offers', 'charity_policy', 'hours', 'pronunciations'],
-                    description: 'KB topic to fetch'
-                  },
-                  ids: {
-                    type: 'array',
-                    items: { type: 'string' },
-                    description: 'Specific IDs to filter (for catering_prices)'
-                  }
-                },
-                required: ['topic']
-              }
-            }
-          ],
+          tools: LAURA_TOOLS,
           tool_choice: 'auto',
           instructions: (
             LAURA_PROMPT +
