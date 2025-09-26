@@ -247,7 +247,17 @@ Exit:
 `;
 
 // Validate required environment variables
+console.log('🔧 Environment Variables Check:');
+console.log('  OPENAI_API_KEY:', ENV.OPENAI_API_KEY ? '✅ Set' : '❌ Missing');
+console.log('  GMAPS_KEY:', ENV.GMAPS_KEY ? '✅ Set' : '❌ Missing');
+console.log('  VAD_MODE:', VAD_CONFIG.MODE);
+console.log('  PORT:', APP_CONFIG.PORT);
+
 if (!ENV.OPENAI_API_KEY) {
-  console.error('Missing OpenAI API key. Please set it in the .env file.');
+  console.error('❌ Missing OpenAI API key. Please set it in the .env file.');
   process.exit(1);
+}
+
+if (!ENV.GMAPS_KEY) {
+  console.warn('⚠️  GMAPS_KEY not set. Geocoding functionality will be limited.');
 }

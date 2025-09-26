@@ -12,7 +12,9 @@ import { makeTurnDetection } from '../config/vad.js';
 // =====================
 
 export function createWebSocketHandler(connection) {
-  console.log('Client connected');
+  console.log('🔌 Client connected to WebSocket');
+  console.log('🔧 Using OpenAI API Key:', ENV.OPENAI_API_KEY ? '✅ Present' : '❌ Missing');
+  console.log('🔧 Using Google Maps Key:', ENV.GMAPS_KEY ? '✅ Present' : '❌ Missing');
 
   const openAiWs = new WebSocket(
     `wss://api.openai.com/v1/realtime?model=gpt-realtime&temperature=${APP_CONFIG.TEMPERATURE}`,
@@ -40,20 +42,29 @@ export function createWebSocketHandler(connection) {
   // Helper function to create response with interruption handling
   const createResponseWithInterruptHandling = () => {
     let responseData = { type: 'response.create' };
-    
-    // If there was an interruption, add reset instruction
+   
     if (currentTurn?.wasInterrupted) {
+      console.log('🔄 HANDLING INTERRUPTION - Creating response with reset context');
+      
+      // Don't clear the entire conversation - just add a reset instruction
+      // The conversation.clear was too aggressive and causing poor responses
       responseData.response = {
-        instructions: "The user interrupted you. Do not continue your previous answer; respond to the new input instead."
+        instructions: "The user interrupted you. Please acknowledge the interruption briefly and respond naturally to their new input. Don't reference your previous incomplete response."
       };
-      currentTurn.wasInterrupted = false; // Reset the flag
-      callLogger.log('INTERRUPTION_RESET', { turnId: currentTurn?.turnId }, 'Added interruption reset instruction');
+  
+      currentTurn.wasInterrupted = false; // reset flag
+      callLogger.log(
+        'INTERRUPTION_RESET',
+        { turnId: currentTurn?.turnId },
+        'Added gentle reset instruction without clearing conversation'
+      );
     }
-    
+  
     return responseData;
   };
 
   const sendSessionUpdate = () => {
+    console.log('📤 Sending session update to OpenAI...');
     const sessionUpdate = {
       type: 'session.update',
       session: {
@@ -94,14 +105,16 @@ export function createWebSocketHandler(connection) {
         ).trim(),
       },
     };
-    console.log('Sending session update:', JSON.stringify(sessionUpdate));
+    console.log('📤 Session update payload:', JSON.stringify(sessionUpdate, null, 2));
     openAiWs.send(JSON.stringify(sessionUpdate));
   };
 
   // Open event for OpenAI WebSocket
   openAiWs.on('open', () => {
+    console.log('🤖 OpenAI WebSocket connected successfully');
     callLogger.log('OPENAI_CONNECTED', { callId: callLogger.callId }, 'Connected to the OpenAI Realtime API');
     attachRttMeter(openAiWs, (rtt) => metrics.hWSRttOpenAI.observe(rtt));
+    console.log('⏰ Sending session update in 250ms...');
     setTimeout(sendSessionUpdate, 250); // Ensure connection stability
   });
 
@@ -185,10 +198,34 @@ export function createWebSocketHandler(connection) {
       if (LOG_EVENT_TYPES.includes(response.type)) {
         callLogger.log('OPENAI_EVENT', { type: response.type, data: response }, `Received event: ${response.type}`);
       }
+      
+      // Log any cancellation-related events
+      if (response.type === 'response.cancelled' || response.type === 'response.interrupted') {
+        console.log('🛑 OPENAI CANCELLATION EVENT:', {
+          type: response.type,
+          turnId: currentTurn?.turnId,
+          timestamp: now,
+          wasInterrupted: currentTurn?.wasInterrupted
+        });
+      }
+      
+      // Log all VAD-related events for debugging
+      if (response.type.includes('speech') || response.type.includes('audio_buffer')) {
+        console.log('🔊 VAD EVENT:', {
+          type: response.type,
+          timestamp: now,
+          currentTurn: currentTurn ? {
+            turnId: currentTurn.turnId,
+            isGenerating: !!currentTurn.firstDeltaAt
+          } : null
+        });
+      }
       if (response.type === 'session.updated') {
+        console.log('✅ OpenAI session updated successfully');
         callLogger.log('SESSION_UPDATED', { sessionId: response.session?.id }, 'Session updated successfully');
         // Trigger initial greeting from Laura
         setTimeout(() => {
+          console.log('👋 Triggering initial greeting from Laura...');
           callLogger.log('INITIAL_GREETING_TRIGGER', {}, 'Triggering initial greeting from Laura');
           openAiWs.send(JSON.stringify(createResponseWithInterruptHandling()));
         }, 100);
@@ -196,19 +233,43 @@ export function createWebSocketHandler(connection) {
 
       // Handle VAD speech started - interrupt AI response if in progress
       if (response.type === 'input_audio_buffer.speech_started') {
-        // Check if AI is currently generating a response
-        if (currentTurn && currentTurn.firstDeltaAt) {
-          callLogger.log('SPEECH_STARTED_DURING_RESPONSE', { 
-            turnId: currentTurn.turnId 
-          }, 'User started speaking during AI response - sending interrupt');
+        console.log('🎤 Speech Start:', response.type);
+        
+        // IMMEDIATELY clear Twilio buffer (like the working examples)
+        if (streamSid) {
+          const clearTwilio = {
+            streamSid: streamSid,
+            event: 'clear'
+          };
+          console.log('🔄 SENDING TWILIO CLEAR:', clearTwilio);
+          connection.send(JSON.stringify(clearTwilio));
           
-          // Send interrupt to stop AI response
-          openAiWs.send(JSON.stringify({
-            type: 'response.interrupt'
-          }));
-          
-          // Track that an interruption occurred
+          // Also try alternative format that might work better
+          const clearTwilioAlt = {
+            event: 'clear',
+            streamSid: streamSid
+          };
+          console.log('🔄 SENDING TWILIO CLEAR (alt format):', clearTwilioAlt);
+          connection.send(JSON.stringify(clearTwilioAlt));
+        }
+        
+        // IMMEDIATELY cancel OpenAI response (like the working examples)
+        console.log('🛑 Cancelling AI speech from the server');
+        const interruptMessage = {
+          type: 'response.cancel'
+        };
+        openAiWs.send(JSON.stringify(interruptMessage));
+        
+        // Track interruption for conversation state management
+        if (currentTurn) {
           currentTurn.wasInterrupted = true;
+          currentTurn.interruptTime = performance.now();
+          console.log('📊 INTERRUPTION TRACKED - Will apply reset on next response:', {
+            turnId: currentTurn.turnId,
+            interruptTime: currentTurn.interruptTime
+          });
+        } else {
+          console.log('⚠️ INTERRUPTION DETECTED BUT NO ACTIVE TURN - No reset will be applied');
         }
       }
 
@@ -231,17 +292,40 @@ export function createWebSocketHandler(connection) {
       }
 
       if (response.type === 'response.output_audio.delta' && response.delta) {
+        // Check if this delta came after an interruption attempt
+        const isAfterInterrupt = currentTurn?.wasInterrupted && currentTurn?.interruptTime && now > currentTurn.interruptTime;
+        
+        if (isAfterInterrupt) {
+          console.log('⚠️ AUDIO DELTA AFTER INTERRUPT:', {
+            turnId: currentTurn.turnId,
+            timeSinceInterrupt: Math.round(now - currentTurn.interruptTime),
+            deltaLength: response.delta.length,
+            wasInterrupted: currentTurn.wasInterrupted
+          });
+        }
+        
         // First audio delta from OpenAI → TTFB
         if (currentTurn && !currentTurn.firstDeltaAt) {
           currentTurn.firstDeltaAt = now;
           metrics.hOpenAITTFB.observe(currentTurn.firstDeltaAt - currentTurn.speechStoppedAt);
           callLogger.log('FIRST_AUDIO_DELTA', { turnId: currentTurn.turnId, ttfb: currentTurn.firstDeltaAt - currentTurn.speechStoppedAt }, 'First audio delta received');
+          console.log('🎵 FIRST AUDIO DELTA:', {
+            turnId: currentTurn.turnId,
+            ttfb: Math.round(currentTurn.firstDeltaAt - currentTurn.speechStoppedAt),
+            timestamp: now
+          });
         }
         currentTurn && (currentTurn.lastDeltaAt = now);
         currentTurnDeltaCount++;
 
         // Forward to Twilio (response.delta is already base64)
         const audioDelta = createAudioDelta(streamSid, response.delta);
+        console.log('📤 SENDING AUDIO TO TWILIO:', {
+          turnId: currentTurn?.turnId,
+          deltaLength: response.delta.length,
+          isAfterInterrupt: isAfterInterrupt,
+          timestamp: now
+        });
         connection.send(JSON.stringify(audioDelta));
 
         // Count bytes out (approx)
@@ -255,10 +339,25 @@ export function createWebSocketHandler(connection) {
           const name = `first-audio-${Date.now()}`;
           firstAudioMark = { name, sentAt: performance.now() };
           connection.send(JSON.stringify(createMarkEvent(streamSid, name)));
+          console.log('📍 FIRST AUDIO MARK SENT:', { name, turnId: currentTurn.turnId });
         }
       }
 
       if (response.type === 'response.done') {
+        // Log response completion with interruption context
+        const wasInterrupted = currentTurn?.wasInterrupted;
+        const interruptTime = currentTurn?.interruptTime;
+        const timeSinceInterrupt = interruptTime ? now - interruptTime : null;
+        
+        console.log('🏁 RESPONSE DONE - Status:', response?.response?.status);
+        console.log('🏁 Response Details:', {
+          turnId: currentTurn?.turnId,
+          status: response?.response?.status,
+          deltaCount: currentTurnDeltaCount,
+          wasInterrupted: wasInterrupted,
+          timeSinceInterrupt: timeSinceInterrupt ? Math.round(timeSinceInterrupt) + 'ms' : null
+        });
+        
         // Check for function_call outputs in response.done (alternative pattern)
         try {
           const outputs = response?.response?.output || [];
@@ -300,7 +399,9 @@ export function createWebSocketHandler(connection) {
           // Track VAD cancellations
           if (response.response.status === 'cancelled') {
             metrics.cVADCancellations.inc();
-            console.log('VAD cancellation detected - response was cancelled due to turn detection');
+            console.log('✅ VAD CANCELLATION SUCCESS - response was cancelled due to turn detection');
+          } else if (wasInterrupted && response.response.status !== 'cancelled') {
+            console.log('❌ INTERRUPTION FAILED - response completed normally despite interruption attempt');
           }
         }
         currentTurn = null;
@@ -318,6 +419,7 @@ export function createWebSocketHandler(connection) {
         case 'media':
           if (openAiWs.readyState === WebSocket.OPEN) {
             const b64 = data.media?.payload || '';
+            console.log('🎤 Received audio from Twilio:', b64.length, 'bytes');
             // Count bytes in (approx)
             metrics.cBytesIn.inc(Math.floor(b64.length * 0.75));
 
@@ -327,11 +429,57 @@ export function createWebSocketHandler(connection) {
               lastUserPacketTs = ts;
             }
 
+            // Debug: Log current turn state for every audio packet (only when no turn or generating)
+            if (!currentTurn || !currentTurn.firstDeltaAt) {
+              console.log('🔍 AUDIO PACKET DEBUG:', {
+                hasCurrentTurn: !!currentTurn,
+                turnId: currentTurn?.turnId,
+                firstDeltaAt: currentTurn?.firstDeltaAt,
+                audioLength: b64.length,
+                isGenerating: !!(currentTurn && currentTurn.firstDeltaAt),
+                status: !currentTurn ? 'NO_ACTIVE_TURN' : 'TURN_EXISTS_BUT_NOT_GENERATING'
+              });
+            }
+
+            // Check if we should trigger interruption based on incoming audio during AI response
+            if (currentTurn && currentTurn.firstDeltaAt && b64.length > 0 && !currentTurn.wasInterrupted) {
+              console.log('🎵 INCOMING AUDIO DURING AI RESPONSE - Manual interruption trigger');
+              
+              // IMMEDIATELY clear Twilio buffer (like the working examples)
+              if (streamSid) {
+                const clearTwilio = {
+                  streamSid: streamSid,
+                  event: 'clear'
+                };
+                console.log('🔄 SENDING TWILIO CLEAR (manual):', clearTwilio);
+                connection.send(JSON.stringify(clearTwilio));
+              }
+              
+              // IMMEDIATELY cancel OpenAI response (like the working examples)
+              console.log('🛑 Cancelling AI speech from the server (manual)');
+              const interruptMessage = {
+                type: 'response.cancel'
+              };
+              openAiWs.send(JSON.stringify(interruptMessage));
+              
+              // Track interruption
+              currentTurn.wasInterrupted = true;
+              currentTurn.interruptTime = performance.now();
+              
+              console.log('📊 MANUAL INTERRUPTION TRACKED - Will apply reset on next response:', {
+                turnId: currentTurn.turnId,
+                interruptTime: currentTurn.interruptTime
+              });
+            }
+
             const audioAppend = {
               type: 'input_audio_buffer.append',
               audio: b64,
             };
+            console.log('📤 Sending audio to OpenAI...');
             openAiWs.send(JSON.stringify(audioAppend));
+          } else {
+            console.log('⚠️  OpenAI WebSocket not ready, ignoring audio');
           }
           break;
 
@@ -379,7 +527,30 @@ export function createWebSocketHandler(connection) {
           }
           break;
 
+        case 'clear':
+          // Twilio confirms buffer clear
+          const clearTime = performance.now();
+          const timeSinceInterrupt = currentTurn?.interruptTime ? clearTime - currentTurn.interruptTime : null;
+          
+          console.log('✅ TWILIO BUFFER CLEARED - SUCCESS!');
+          console.log('✅ Clear Details:', {
+            streamSid: data.streamSid,
+            turnId: currentTurn?.turnId,
+            timeSinceInterrupt: timeSinceInterrupt ? Math.round(timeSinceInterrupt) + 'ms' : 'unknown'
+          });
+          
+          if (timeSinceInterrupt && timeSinceInterrupt > 500) {
+            console.log('⚠️ SLOW TWILIO CLEAR - Took longer than expected:', Math.round(timeSinceInterrupt), 'ms');
+          } else if (timeSinceInterrupt) {
+            console.log('⚡ FAST TWILIO CLEAR - Good performance:', Math.round(timeSinceInterrupt), 'ms');
+          }
+          break;
+
         default:
+          console.log('🔍 TWILIO EVENT:', data.event);
+          if (data.event === 'clear') {
+            console.log('✅ TWILIO CLEAR CONFIRMATION RECEIVED!');
+          }
           callLogger.log('TWILIO_EVENT', { event: data.event, data }, 'Received non-media event');
           break;
       }

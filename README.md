@@ -60,13 +60,28 @@ https://your-ngrok-url.ngrok-free.app/incoming-call
 
 ## Deployment to Google Cloud Run
 
-### Prerequisites for Cloud Run Deployment
+### Quick Deploy (Recommended)
 
-- Google Cloud SDK (`gcloud`) installed and authenticated
-- Google Cloud project with billing enabled
-- Docker installed (for local testing)
+1. **Set up environment variables:**
+```bash
+# Copy the example file
+cp env.example .env
 
-### Deploy to Cloud Run
+# Edit with your actual API keys
+nano .env
+```
+
+2. **Deploy with one command:**
+```bash
+./deploy.sh
+```
+
+That's it! The script handles everything automatically.
+
+### Manual Deployment (Alternative)
+
+<details>
+<summary>Click to expand manual deployment steps</summary>
 
 1. **Build and push the Docker image:**
 ```bash
@@ -97,6 +112,16 @@ gcloud run services update gino-realtime \
 ```bash
 gcloud run services describe gino-realtime --region=us-central1 --format="value(status.url)"
 ```
+
+</details>
+
+### Prerequisites
+
+- Google Cloud SDK (`gcloud`) installed and authenticated
+- Google Cloud project with billing enabled
+- Docker installed (for local testing)
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for detailed deployment instructions.
 
 ### Required Environment Variables
 

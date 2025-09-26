@@ -48,10 +48,21 @@ fastify.register(async (fastify) => {
 // =====================
 // Start server
 // =====================
+console.log('🚀 Starting Gino\'s Pizza Realtime Voice AI Server...');
+console.log('📋 Server Configuration:');
+console.log('  Port:', APP_CONFIG.PORT);
+console.log('  Host:', APP_CONFIG.HOST);
+console.log('  Voice:', APP_CONFIG.VOICE);
+console.log('  Temperature:', APP_CONFIG.TEMPERATURE);
+
 fastify.listen({ port: APP_CONFIG.PORT, host: APP_CONFIG.HOST }, (err) => {
   if (err) {
-    console.error(err);
+    console.error('❌ Failed to start server:', err);
     process.exit(1);
   }
-  console.log(`Server is listening on port ${APP_CONFIG.PORT}`);
+  console.log('✅ Server is listening on port', APP_CONFIG.PORT);
+  console.log('🌐 Health check: http://localhost:' + APP_CONFIG.PORT + '/');
+  console.log('📊 Metrics: http://localhost:' + APP_CONFIG.PORT + '/metrics');
+  console.log('📞 Twilio webhook: http://localhost:' + APP_CONFIG.PORT + '/incoming-call');
+  console.log('🔌 WebSocket: ws://localhost:' + APP_CONFIG.PORT + '/media-stream');
 });

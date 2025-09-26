@@ -9,13 +9,24 @@ export function makeTurnDetection() {
   const useSemanticVAD = VAD_CONFIG.SEMANTIC_ENABLED === 'true' || VAD_CONFIG.MODE === 'semantic';
   
   if (useSemanticVAD) {
+    // Ensure eagerness is a valid value
+    const validEagerness = ['low', 'medium', 'high', 'auto'].includes(VAD_CONFIG.EAGERNESS) 
+      ? VAD_CONFIG.EAGERNESS 
+      : 'high';
+    
+    console.log('🔧 VAD Config Debug:', {
+      original: VAD_CONFIG.EAGERNESS,
+      validated: validEagerness,
+      isValid: ['low', 'medium', 'high', 'auto'].includes(VAD_CONFIG.EAGERNESS)
+    });
+    
     const config = {
       type: 'semantic_vad',
-      eagerness: VAD_CONFIG.EAGERNESS, // 'low' | 'medium' | 'high' | 'auto'
+      eagerness: validEagerness, // 'low' | 'medium' | 'high' | 'auto'
       create_response: true,
       interrupt_response: true
     };
-    console.log('🧠 Using semantic VAD with eagerness:', VAD_CONFIG.EAGERNESS);
+    console.log('🧠 Using semantic VAD with eagerness:', validEagerness);
     return config;
   }
   
