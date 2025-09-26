@@ -173,7 +173,7 @@ Exit:
 
 const VOICE = 'alloy';
 const TEMPERATURE = 0.8; // Controls the randomness of the AI's responses
-const PORT = process.env.PORT || 5050; // Allow dynamic port assignment
+const PORT = process.env.PORT || 8080; // Allow dynamic port assignment
 
 // =====================
 // VAD Configuration
