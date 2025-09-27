@@ -21,4 +21,4 @@ USER appuser
 EXPOSE 8080
 
 # Start the application
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]

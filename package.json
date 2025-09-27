@@ -1,21 +1,53 @@
 {
-  "name": "twillio-openai-realtime",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "ginos-pizza-voice-ai",
+  "version": "2.0.0",
+  "description": "Voice AI assistant for Gino's Pizza using Twilio Voice and OpenAI Realtime API",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "npm run test:unit && npm run test:integration",
+    "test:unit": "echo 'Unit tests not implemented yet'",
+    "test:integration": "node tests/test_comprehensive.js",
+    "lint": "echo 'Linting not configured yet'",
+    "format": "echo 'Formatting not configured yet'",
+    "build": "echo 'No build step required for Node.js'",
+    "deploy": "./deploy.sh"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "voice-ai",
+    "twilio",
+    "openai",
+    "realtime-api",
+    "pizza",
+    "voice-assistant",
+    "websocket",
+    "fastify"
+  ],
+  "author": "Gino's Pizza Development Team",
+  "license": "MIT",
   "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@fastify/formbody": "^8.0.2",
     "@fastify/websocket": "^11.2.0",
     "dotenv": "^17.2.2",
     "fastify": "^5.6.1",
     "prom-client": "^15.1.3",
+    "twilio": "^5.3.5",
     "ws": "^8.18.3"
-  }
+  },
+  "devDependencies": {
+    "pino-pretty": "^10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ginos-pizza/voice-ai-assistant.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ginos-pizza/voice-ai-assistant/issues"
+  },
+  "homepage": "https://github.com/ginos-pizza/voice-ai-assistant#readme"
 }
