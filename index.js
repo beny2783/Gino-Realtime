@@ -7,6 +7,7 @@ import { performance } from 'perf_hooks';
 import client from 'prom-client';
 import fs from 'fs';
 import path from 'path';
+import Twilio from 'twilio';
 import { nearestStore } from './nearestStore.js';
 import { geocodeAddress } from './geocode.js';
 import { findMenuItems } from './menu.js';
@@ -17,7 +18,16 @@ import { getKbSnippet } from './kb.js';
 dotenv.config();
 
 // Retrieve the OpenAI API key from environment variables. You must have OpenAI Realtime API access.
-const { OPENAI_API_KEY } = process.env;
+const { 
+  OPENAI_API_KEY,
+  TWILIO_ACCOUNT_SID,
+  TWILIO_AUTH_TOKEN,
+  PUBLIC_BASE_URL,
+  MP3_ASSET_URL
+} = process.env;
+
+// Initialize Twilio client
+const twilio = Twilio(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 
 // VAD (Voice Activity Detection) configuration
 const {
@@ -37,6 +47,22 @@ if (!OPENAI_API_KEY) {
 const fastify = Fastify();
 fastify.register(fastifyFormBody);
 fastify.register(fastifyWs);
+
+// Conference state management
+const confState = new Map(); // ConferenceSid -> { participants, announced, lastActivity }
+
+// Cleanup old conference states every 5 minutes to prevent memory leaks
+setInterval(() => {
+  const now = Date.now();
+  const maxAge = 5 * 60 * 1000; // 5 minutes
+  
+  for (const [conferenceSid, state] of confState.entries()) {
+    if (state.lastActivity && (now - state.lastActivity) > maxAge) {
+      console.log(`[${conferenceSid}] Cleaning up stale conference state`);
+      confState.delete(conferenceSid);
+    }
+  }
+}, 5 * 60 * 1000); // Run every 5 minutes
 
 // =====================
 // Constants
@@ -336,17 +362,97 @@ fastify.get('/metrics', async (req, reply) => {
   reply.type(register.contentType).send(await register.metrics());
 });
 
+// TwiML that loops your MP3 forever
+fastify.get('/twiml/background', async (req, reply) => {
+  const twiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Play loop="infinite">${MP3_ASSET_URL}</Play>
+</Response>`;
+  reply.type('text/xml').send(twiml);
+});
+
 // Route for Twilio to handle incoming and outgoing calls
-// Direct connection to Laura agent - no pre-recorded greeting
+// Conference-based approach with background audio
 fastify.all('/incoming-call', async (request, reply) => {
+  const callSid = request.body?.CallSid || `anon-${Date.now()}`;
+  const room = `room-${callSid}`;
+
   const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
-  <Connect>
+  <!-- Keep your AI media-stream on the caller leg -->
+  <Start>
     <Stream url="wss://${request.headers.host}/media-stream" />
-  </Connect>
+  </Start>
+
+  <!-- Put caller into a conference so we can inject background audio -->
+  <Dial>
+    <Conference
+      statusCallback="${PUBLIC_BASE_URL}/conf/events"
+      statusCallbackEvent="start join leave end"
+      statusCallbackMethod="POST"
+      endConferenceOnExit="true"
+      waitUrl=""
+      beep="false"
+      maxParticipants="3">${room}</Conference>
+  </Dial>
 </Response>`;
 
   reply.type('text/xml').send(twimlResponse);
+});
+
+// Conference events handler - manages conference state and injects background audio
+fastify.post('/conf/events', async (req, reply) => {
+  const { ConferenceSid, StatusCallbackEvent } = req.body || {};
+  const state = confState.get(ConferenceSid) || { participants: 0, announced: false, lastActivity: Date.now() };
+
+  // Update last activity timestamp
+  state.lastActivity = Date.now();
+
+  if (StatusCallbackEvent === 'participant-join') {
+    state.participants += 1;
+    console.log(`[${ConferenceSid}] Participant joined. Total: ${state.participants}`);
+  }
+  if (StatusCallbackEvent === 'participant-leave') {
+    state.participants = Math.max(0, state.participants - 1);
+    console.log(`[${ConferenceSid}] Participant left. Total: ${state.participants}`);
+  }
+  if (StatusCallbackEvent === 'conference-end') {
+    console.log(`[${ConferenceSid}] Conference ended - cleaning up state`);
+    confState.delete(ConferenceSid);
+    reply.send('OK');
+    return;
+  }
+  confState.set(ConferenceSid, state);
+
+  // Start background as soon as the caller is in the room
+  if (!state.announced && state.participants >= 1) {
+    try {
+      await twilio.conferences(ConferenceSid).update({
+        announceUrl: `${PUBLIC_BASE_URL}/twiml/background`,
+        announceMethod: 'GET'
+      });
+      state.announced = true;
+      confState.set(ConferenceSid, state);
+      console.log(`[${ConferenceSid}] Background noise started with ${state.participants} participants`);
+    } catch (e) {
+      console.error('announceUrl failed:', e);
+    }
+  }
+
+  // Terminate conference if no participants remain (prevents hanging conferences)
+  if (state.participants === 0) {
+    try {
+      console.log(`[${ConferenceSid}] No participants remaining - terminating conference`);
+      await twilio.conferences(ConferenceSid).update({
+        status: 'completed'
+      });
+      confState.delete(ConferenceSid);
+    } catch (e) {
+      console.error('Failed to terminate empty conference:', e);
+    }
+  }
+
+  reply.send('OK');
 });
 
 // =====================
