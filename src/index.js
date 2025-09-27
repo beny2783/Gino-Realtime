@@ -10,7 +10,7 @@ import fastifyWs from '@fastify/websocket';
 // Import configuration and modules
 import { SERVER_CONFIG, TWILIO_CONFIG } from './config/index.js';
 import { register } from './metrics/index.js';
-import { setupRoutes, participantStore } from './routes/index.js';
+import { setupRoutes } from './routes/index.js';
 import { createWebSocketConnection } from './websocket/connection.js';
 
 // Setup Fastify
@@ -24,30 +24,7 @@ app.register(fastifyWs);
 app.register(async function (server) {
   // 📡 WebSocket route for the Twilio Media Stream
   server.get('/media-stream', { websocket: true }, (connection, req) => {
-    const ws = connection.socket;
-    app.log.info('AI WebSocket connection established.');
-
-    ws.on('message', (message) => {
-      const data = JSON.parse(message);
-
-      if (data.event === 'start') {
-        app.log.info(`Stream started. StreamSid: ${data.streamSid}`);
-        // 🚀 Send the first message to kick off the AI conversation (optional)
-      }
-      if (data.event === 'media') {
-        // 🧠 Process inbound audio here (send to OpenAI API)
-        // In a real application, the AI response audio would be sent back here.
-        // console.log('Received audio chunk...'); 
-      }
-      if (data.event === 'stop') {
-        app.log.info('Media Stream stopped.');
-      }
-    });
-
-    ws.on('close', () => {
-      app.log.info('AI WebSocket connection closed.');
-      // 🧹 In a real app, ensure the parent call leg is terminated here if needed
-    });
+    createWebSocketConnection(connection, req);
   });
   
   // Setup standard HTTP routes
@@ -64,12 +41,38 @@ app.get('/metrics', async (req, reply) => {
  */
 const start = async () => {
   try {
+    console.log(`🚀 Starting server on port ${SERVER_CONFIG.port} and host ${SERVER_CONFIG.host}`);
+    
+    // Start the server
     await app.listen({ port: SERVER_CONFIG.port, host: SERVER_CONFIG.host });
+    
+    // Log successful startup
+    console.log(`✅ Server successfully started and listening on port ${SERVER_CONFIG.port}`);
     app.log.info(`Server listening on port ${app.server.address().port}`);
+    
+    // Log health check endpoint
+    console.log(`🏥 Health check available at: http://localhost:${SERVER_CONFIG.port}/`);
+    console.log(`📊 Metrics available at: http://localhost:${SERVER_CONFIG.port}/metrics`);
+    console.log(`🔌 WebSocket endpoint: ws://localhost:${SERVER_CONFIG.port}/media-stream`);
+    
   } catch (err) {
+    console.error('❌ Failed to start server:', err);
     app.log.error(err);
     process.exit(1);
   }
 };
+
+// Handle graceful shutdown
+process.on('SIGTERM', async () => {
+  console.log('🛑 SIGTERM received, shutting down gracefully...');
+  await app.close();
+  process.exit(0);
+});
+
+process.on('SIGINT', async () => {
+  console.log('🛑 SIGINT received, shutting down gracefully...');
+  await app.close();
+  process.exit(0);
+});
 
 start();

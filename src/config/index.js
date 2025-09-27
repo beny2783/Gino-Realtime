@@ -10,9 +10,17 @@ dotenv.config();
 
 // Validate required environment variables
 const { OPENAI_API_KEY, TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_PHONE_NUMBER } = process.env;
+
+// OpenAI API key is required
 if (!OPENAI_API_KEY) {
-  console.error('Missing OpenAI API key. Please set it in the .env file.');
+  console.error('❌ Missing OpenAI API key. Please set OPENAI_API_KEY in environment variables.');
   process.exit(1);
+}
+
+// Twilio credentials are optional for startup (will be validated when needed)
+if (!TWILIO_ACCOUNT_SID || !TWILIO_AUTH_TOKEN || !TWILIO_PHONE_NUMBER) {
+  console.warn('⚠️  Twilio credentials not set. Some features may not work properly.');
+  console.warn('   Set TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_PHONE_NUMBER for full functionality.');
 }
 
 // OpenAI Configuration
@@ -36,15 +44,20 @@ export const VAD_CONFIG = {
 
 // Server Configuration
 export const SERVER_CONFIG = {
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 8080,
   host: '0.0.0.0'
 };
 
 // Twilio Configuration
+const accountSid = TWILIO_ACCOUNT_SID || 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+const authToken = TWILIO_AUTH_TOKEN || 'your_auth_token';
+const phoneNumber = TWILIO_PHONE_NUMBER || '+15005550006';
+
 export const TWILIO_CONFIG = {
-  accountSid: TWILIO_ACCOUNT_SID || 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-  authToken: TWILIO_AUTH_TOKEN || 'your_auth_token',
-  phoneNumber: TWILIO_PHONE_NUMBER || '+15005550006'
+  accountSid,
+  authToken,
+  phoneNumber,
+  isConfigured: !!(TWILIO_ACCOUNT_SID && TWILIO_AUTH_TOKEN && TWILIO_PHONE_NUMBER)
 };
 
 // External API Configuration
