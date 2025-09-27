@@ -1,12 +1,14 @@
-# Twilio Voice AI Assistant with OpenAI Realtime API
+# Gino's Pizza Realtime API
 
-A real-time voice AI assistant built with Twilio Voice and OpenAI's Realtime API. This project creates an interactive voice experience where users can have natural conversations with an AI assistant over the phone.
+> **🔄 Recently Refactored**: This codebase has been refactored for better maintainability and structure. See [REFACTOR_README.md](./REFACTOR_README.md) for details.
+
+A real-time voice AI assistant built with Twilio Voice and OpenAI's Realtime API for Gino's Pizza. This project creates an interactive voice experience where customers can place orders and get information through natural conversations with Laura, the AI assistant.
 
 ## Features
 
 - 🎙️ **Real-time Voice Interaction**: Powered by OpenAI's Realtime API
 - 📞 **Phone Integration**: Uses Twilio Voice for telephony
-- 🤖 **Personality-driven AI**: Bubbly assistant with dad jokes and owl jokes
+- 🤖 **Laura AI Assistant**: Warm and enthusiastic virtual host for Gino's Pizza
 - 🔄 **Low-latency Audio**: Optimized for natural conversation flow
 - 🛠️ **Modern Node.js**: Built with Fastify and ES6 modules
 
@@ -42,7 +44,9 @@ PORT=5050
 
 1. Start the server:
 ```bash
-node index.js
+npm start
+# or for development with auto-reload:
+npm run dev
 ```
 
 2. In another terminal, start ngrok:
@@ -88,8 +92,19 @@ const TEMPERATURE = 0.8; // Response randomness (0-1)
 ## API Endpoints
 
 - `GET /` - Health check endpoint
+- `GET /metrics` - Prometheus metrics endpoint
 - `POST /incoming-call` - Twilio webhook for incoming calls
 - `WebSocket /media-stream` - Real-time audio streaming
+
+## Laura's Capabilities
+
+Laura can help customers with:
+
+- 🍕 **Menu Information**: Browse pizzas, toppings, deals, and more
+- 📍 **Store Locations**: Find the nearest Gino's Pizza location
+- 🛒 **Order Taking**: Natural conversation-based ordering
+- ❓ **General Questions**: Hours, dietary options, special offers
+- 📞 **Transfer Support**: Escalate to human staff when needed
 
 ## Troubleshooting
 

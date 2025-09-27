@@ -396,10 +396,13 @@ export class ConnectionManager {
     };
     this.twilioConnection.send(JSON.stringify(audioDelta));
 
+    // Count bytes out (approx)
+    cBytesOut.inc(Math.floor(response.delta.length * 0.75));
+
     // First chunk sent back → observe e2e
     if (this.currentTurn && !this.currentTurn.firstDeltaSentAt) {
       this.currentTurn.firstDeltaSentAt = performance.now();
-      // E2E metric would be observed here
+      hE2EReply.observe(this.currentTurn.firstDeltaSentAt - this.currentTurn.speechStoppedAt);
 
       const name = `first-audio-${Date.now()}`;
       this.firstAudioMark = { name, sentAt: performance.now() };
@@ -453,8 +456,14 @@ export class ConnectionManager {
       // Ignore parsing errors
     }
     
+    // Response processing complete
+    if (this.currentTurn?.firstDeltaAt && this.currentTurn?.lastDeltaAt) {
+      hRespStream.observe(this.currentTurn.lastDeltaAt - this.currentTurn.firstDeltaAt);
+    }
+    
     // Handle VAD cancellations
     if (response?.response?.status === 'cancelled') {
+      cVADCancellations.inc();
       console.log('VAD cancellation detected - response was cancelled due to turn detection');
       
       const clearMessage = {
@@ -490,6 +499,9 @@ export class ConnectionManager {
   handleTwilioMedia(data) {
     if (this.openAiWs.readyState === WebSocket.OPEN) {
       const b64 = data.media?.payload || '';
+      
+      // Count bytes in (approx)
+      cBytesIn.inc(Math.floor(b64.length * 0.75));
       
       // Track Twilio's notion of elapsed time since stream start (ms)
       const ts = Number(data.media?.timestamp);
@@ -528,11 +540,11 @@ export class ConnectionManager {
       let felt = null;
       if (this.currentTurn?.userStopAt) {
         felt = markEchoAt - this.currentTurn.userStopAt;
-        // Felt latency metric would be observed here
+        hFeltLatency.observe(felt);
       } else if (this.currentTurn?.speechStoppedAt) {
         const fallback = markEchoAt - this.currentTurn.speechStoppedAt;
         felt = fallback;
-        // Felt latency metric would be observed here
+        hFeltLatency.observe(fallback);
       }
 
       const summary = {
