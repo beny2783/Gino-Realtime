@@ -86,8 +86,6 @@ class OrderModificationTester {
     this.currentMessageIndex = 0;
     this.waitingForResponse = false;
     this.pendingToolCalls = 0;
-    this.responseComplete = false;
-    this.currentResponseText = '';
   }
 
   async run() {
@@ -160,14 +158,12 @@ class OrderModificationTester {
           
         case 'session.updated':
           console.log('📋 Session updated - Starting order modification test');
-          this.startTest();
+          setTimeout(() => this.startTest(), 1000);
           break;
           
-        case 'conversation.item.added':
-          console.log(`🔍 conversation.item.added: role=${response.item?.role}, type=${response.item?.type}`);
+        case 'conversation.item.created':
           if (response.item?.role === 'assistant' && response.item?.type === 'message') {
             const textContent = response.item.content?.find(c => c.type === 'text');
-            console.log(`🔍 textContent:`, textContent);
             if (textContent) {
               this.responses.push({
                 type: 'assistant_message',
@@ -175,24 +171,12 @@ class OrderModificationTester {
                 timestamp: new Date().toISOString()
               });
               console.log(`\n🤖 Laura: "${textContent.text}"`);
-              
-              // Now that we have Laura's response, send the next message
-              if (this.waitingForResponse && this.pendingToolCalls === 0) {
-                console.log('✅ Sending next message after Laura response...');
-                this.waitingForResponse = false;
-                this.sendNextMessage();
-              }
-            } else {
-              console.log('🔍 No text content found in assistant message');
             }
-          } else {
-            console.log('🔍 Not an assistant message or wrong type');
           }
           break;
           
         case 'response.output_text.delta':
           if (response.delta) {
-            this.currentResponseText += response.delta;
             process.stdout.write(response.delta);
           }
           break;
@@ -204,12 +188,10 @@ class OrderModificationTester {
         case 'response.done':
           const outputs = response?.response?.output || [];
           let hasToolCalls = false;
-          console.log(`🔍 response.done: outputs.length=${outputs.length}, waitingForResponse=${this.waitingForResponse}`);
           
           for (const item of outputs) {
             if (item?.type === 'function_call') {
               hasToolCalls = true;
-              this.pendingToolCalls++;
               console.log(`\n🔧 Tool Call: ${item.name}`);
               console.log(`📝 Arguments: ${item.arguments}`);
               
@@ -223,33 +205,13 @@ class OrderModificationTester {
             }
           }
           
-          // If there are no tool calls, capture the response text and send next message
+          // Only mark response as complete if there are no tool calls
+          // Tool calls will trigger their own response continuation
           if (!hasToolCalls) {
-            console.log(`🔍 No tool calls, pendingToolCalls now: ${this.pendingToolCalls}`);
-            
-            // Only proceed if Laura actually generated a response
-            if (this.currentResponseText.trim()) {
-              this.responses.push({
-                type: 'assistant_message',
-                text: this.currentResponseText.trim(),
-                timestamp: new Date().toISOString()
-              });
-              console.log(`\n🤖 Laura: "${this.currentResponseText.trim()}"`);
-              
-              // Send next message only if Laura responded
-              if (this.waitingForResponse && this.pendingToolCalls === 0) {
-                console.log('✅ Sending next message after Laura response...');
-                this.waitingForResponse = false;
-                this.currentResponseText = ''; // Reset for next response
-                this.sendNextMessage();
-              }
-            } else {
-              console.log('⚠️ Laura did not generate a response - stopping test');
-              this.waitingForResponse = false;
-              console.log('\n📊 Test completed - analyzing results...');
-              this.analyzeResults();
-              this.saveResults();
-            }
+            this.responseComplete = true;
+            this.waitingForResponse = false;
+            // Send next message after a short delay
+            setTimeout(() => this.sendNextMessage(), 500);
           }
           break;
 
@@ -312,9 +274,6 @@ class OrderModificationTester {
       // Continue conversation - this will trigger another response.done
       this.ws.send(JSON.stringify({ type: 'response.create' }));
       
-      // Decrement pending tool calls counter
-      this.pendingToolCalls--;
-      
     } catch (error) {
       console.error('❌ Error handling tool call:', error);
     }
@@ -324,8 +283,11 @@ class OrderModificationTester {
     console.log(`\n🧪 Running Test: ${TEST_SCENARIO.name}`);
     console.log('==================================================\n');
     
-    // Start the sequential conversation immediately
-    this.sendNextMessage();
+    // Wait for initial greeting
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Start the sequential conversation
+    await this.sendNextMessage();
   }
 
   async sendNextMessage() {
@@ -340,9 +302,7 @@ class OrderModificationTester {
     console.log(`\n👤 User: "${message}"`);
     
     this.waitingForResponse = true;
-    this.pendingToolCalls = 0;
     this.responseComplete = false;
-    this.currentResponseText = ''; // Reset response text for new message
     
     this.ws.send(JSON.stringify({
       type: 'conversation.item.create',
