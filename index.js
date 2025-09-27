@@ -49,19 +49,43 @@ fastify.register(fastifyFormBody);
 fastify.register(fastifyWs);
 
 // Conference state management
-const confState = new Map(); // ConferenceSid -> { participants, announced, lastActivity }
+const confState = new Map(); // ConferenceSid -> { participants, announced, lastActivity, startTime }
+
+// Safeguard configuration
+const MAX_CALL_DURATION = 30 * 60 * 1000; // 30 minutes max call duration
+const MAX_ACTIVE_CONFERENCES = 100; // Maximum concurrent conferences
+const MAX_WS_CONNECTIONS = 50; // Maximum WebSocket connections
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute rate limit window
+const MAX_CALLS_PER_WINDOW = 5; // Max calls per IP per window
+
+// Rate limiting storage
+const callRateLimit = new Map(); // IP -> { count, resetTime }
+
+// WebSocket connection tracking
+let activeWSConnections = 0;
 
 // Cleanup old conference states every 5 minutes to prevent memory leaks
 setInterval(() => {
   const now = Date.now();
   const maxAge = 5 * 60 * 1000; // 5 minutes
   
+  // Cleanup stale conference states
   for (const [conferenceSid, state] of confState.entries()) {
     if (state.lastActivity && (now - state.lastActivity) > maxAge) {
       console.log(`[${conferenceSid}] Cleaning up stale conference state`);
       confState.delete(conferenceSid);
     }
   }
+  
+  // Cleanup expired rate limit entries
+  for (const [ip, data] of callRateLimit.entries()) {
+    if (now > data.resetTime) {
+      callRateLimit.delete(ip);
+    }
+  }
+  
+  // Log current resource usage
+  console.log(`📊 Resource Status: ${confState.size}/${MAX_ACTIVE_CONFERENCES} conferences, ${activeWSConnections}/${MAX_WS_CONNECTIONS} WebSocket connections`);
 }, 5 * 60 * 1000); // Run every 5 minutes
 
 // =====================
@@ -375,7 +399,43 @@ fastify.get('/twiml/background', async (req, reply) => {
 // Conference-based approach with background audio
 fastify.all('/incoming-call', async (request, reply) => {
   const callSid = request.body?.CallSid || `anon-${Date.now()}`;
+  const clientIP = request.ip || request.headers['x-forwarded-for'] || 'unknown';
   const room = `room-${callSid}`;
+  
+  // 1. Conference Count Limit Check
+  if (confState.size >= MAX_ACTIVE_CONFERENCES) {
+    console.log(`🚫 Conference limit reached: ${confState.size}/${MAX_ACTIVE_CONFERENCES}`);
+    const errorTwiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say>Sorry, our system is currently at capacity. Please try again in a few minutes.</Say>
+  <Hangup/>
+</Response>`;
+    return reply.type('text/xml').send(errorTwiml);
+  }
+  
+  // 2. Rate Limiting Check
+  const now = Date.now();
+  const clientData = callRateLimit.get(clientIP) || { count: 0, resetTime: now + RATE_LIMIT_WINDOW };
+  
+  if (now > clientData.resetTime) {
+    clientData.count = 0;
+    clientData.resetTime = now + RATE_LIMIT_WINDOW;
+  }
+  
+  if (clientData.count >= MAX_CALLS_PER_WINDOW) {
+    console.log(`🚫 Rate limit exceeded for IP ${clientIP}: ${clientData.count}/${MAX_CALLS_PER_WINDOW}`);
+    const rateLimitTwiml = `<?xml version="1.0" encoding="UTF-8"?>
+<Response>
+  <Say>Too many calls from your location. Please wait a moment before calling again.</Say>
+  <Hangup/>
+</Response>`;
+    return reply.type('text/xml').send(rateLimitTwiml);
+  }
+  
+  clientData.count++;
+  callRateLimit.set(clientIP, clientData);
+  
+  console.log(`📞 New call from ${clientIP}: ${clientData.count}/${MAX_CALLS_PER_WINDOW} in current window`);
 
   const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
 <Response>
@@ -403,10 +463,28 @@ fastify.all('/incoming-call', async (request, reply) => {
 // Conference events handler - manages conference state and injects background audio
 fastify.post('/conf/events', async (req, reply) => {
   const { ConferenceSid, StatusCallbackEvent } = req.body || {};
-  const state = confState.get(ConferenceSid) || { participants: 0, announced: false, lastActivity: Date.now() };
+  const state = confState.get(ConferenceSid) || { 
+    participants: 0, 
+    announced: false, 
+    lastActivity: Date.now(),
+    startTime: Date.now() // Track when conference started
+  };
 
   // Update last activity timestamp
   state.lastActivity = Date.now();
+
+  // 3. Call Duration Limit Check
+  if (state.startTime && (Date.now() - state.startTime) > MAX_CALL_DURATION) {
+    console.log(`⏰ Conference ${ConferenceSid} exceeded max duration (${MAX_CALL_DURATION/60000} minutes) - terminating`);
+    try {
+      await twilio.conferences(ConferenceSid).update({ status: 'completed' });
+      confState.delete(ConferenceSid);
+      reply.send('OK');
+      return;
+    } catch (e) {
+      console.error('Failed to terminate long-running conference:', e);
+    }
+  }
 
   if (StatusCallbackEvent === 'participant-join') {
     state.participants += 1;
@@ -480,7 +558,15 @@ function attachRttMeter(ws, observeFn, intervalMs = 5000) {
 // =====================
 fastify.register(async (fastify) => {
   fastify.get('/media-stream', { websocket: true }, (connection, req) => {
-    console.log('Client connected');
+    // 4. WebSocket Connection Limit Check
+    if (activeWSConnections >= MAX_WS_CONNECTIONS) {
+      console.log(`🚫 WebSocket connection limit reached: ${activeWSConnections}/${MAX_WS_CONNECTIONS}`);
+      connection.close(1013, 'Server overloaded - too many connections');
+      return;
+    }
+    
+    activeWSConnections++;
+    console.log(`🔌 Client connected (${activeWSConnections}/${MAX_WS_CONNECTIONS} connections)`);
 
     const openAiWs = new WebSocket(
       `wss://api.openai.com/v1/realtime?model=gpt-realtime&temperature=${TEMPERATURE}`,
@@ -974,6 +1060,8 @@ const geocodeCache = makeLRU(400);
 
     // Handle connection close
     connection.on('close', async () => {
+      activeWSConnections--;
+      console.log(`🔌 Client disconnected (${activeWSConnections}/${MAX_WS_CONNECTIONS} connections)`);
       if (openAiWs.readyState === WebSocket.OPEN) openAiWs.close();
       logCallEvent('CONNECTION_CLOSED', { callId, totalTurns: turnCounter }, 'Client disconnected');
       await saveCallLogs();
@@ -985,6 +1073,20 @@ const geocodeCache = makeLRU(400);
     });
     openAiWs.on('error', (error) => {
       logCallEvent('OPENAI_ERROR', { error: error.message, callId }, 'Error in the OpenAI WebSocket');
+      // Ensure connection counter is decremented on error
+      if (activeWSConnections > 0) {
+        activeWSConnections--;
+        console.log(`🔌 WebSocket error - connection closed (${activeWSConnections}/${MAX_WS_CONNECTIONS} connections)`);
+      }
+    });
+    
+    // Handle connection errors
+    connection.on('error', (error) => {
+      console.error('WebSocket connection error:', error);
+      if (activeWSConnections > 0) {
+        activeWSConnections--;
+        console.log(`🔌 Connection error - connection closed (${activeWSConnections}/${MAX_WS_CONNECTIONS} connections)`);
+      }
     });
   });
 });
