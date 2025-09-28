@@ -3,6 +3,9 @@ FROM node:18-slim
 # Set working directory
 WORKDIR /app
 
+# Install FFmpeg for audio processing
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
+
 # Copy package files
 COPY package*.json ./
 
@@ -21,4 +24,4 @@ USER appuser
 EXPOSE 8080
 
 # Start the application
-CMD ["node", "index.js"]
+CMD ["node", "src/index.js"]

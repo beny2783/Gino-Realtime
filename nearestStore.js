@@ -35,5 +35,3 @@ export function nearestStore(userLat, userLon) {
   console.log('NearestStore: result', { id: best?.id, distanceKm: result.distanceKm });
   return result;
 }
-
-
