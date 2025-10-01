@@ -57,7 +57,7 @@ export class FFmpegMixer {
       '-i', 'pipe:0',
       '-stream_loop', '-1',
       '-i', this.ambienceFile,
-      '-filter_complex', `amix=inputs=2:duration=first:weights=1 ${this.ambienceVolume}`,
+      '-filter_complex', `[0:a]atempo=1.2[a_fast];[a_fast][1:a]amix=inputs=2:duration=first:weights=1 ${this.ambienceVolume}`,
       '-f', 'mulaw',
       'pipe:1'
     ], { stdio: ['pipe', 'pipe', 'ignore'] });
