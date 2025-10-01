@@ -176,12 +176,43 @@ export const MENU = [
   // =====================
   // BEVERAGES
   // =====================
+  // 591ml Individual Bottles
   { id: 'addon-pepsi-591ml', kind: 'addon', name: 'Pepsi (591ml)', price: 2, calories_range: '0-290' },
   { id: 'addon-diet-pepsi-591ml', kind: 'addon', name: 'Diet Pepsi (591ml)', price: 2, calories: 0 },
   { id: 'addon-7up-591ml', kind: 'addon', name: '7UP (591ml)', price: 2, calories_range: '0-290' },
+  { id: 'addon-mountain-dew-591ml', kind: 'addon', name: 'Mountain Dew (591ml)', price: 2, calories_range: '0-290' },
+  { id: 'addon-dr-pepper-591ml', kind: 'addon', name: 'Dr Pepper (591ml)', price: 2, calories_range: '0-290' },
+  { id: 'addon-root-beer-591ml', kind: 'addon', name: 'Root Beer (591ml)', price: 2, calories_range: '0-290' },
+  { id: 'addon-ice-tea-591ml', kind: 'addon', name: 'Ice Tea (591ml)', price: 2, calories_range: '0-290' },
+  { id: 'addon-ginger-ale-591ml', kind: 'addon', name: 'Ginger Ale (591ml)', price: 2, calories_range: '0-290' },
+  { id: 'addon-orange-crush-591ml', kind: 'addon', name: 'Orange Crush (591ml)', price: 2, calories_range: '0-290' },
+  
+  // Water
+  { id: 'addon-aquafina-500ml', kind: 'addon', name: 'Aquafina (500ml)', price: 2, calories: 0 },
+  
+  // Juices
+  { id: 'addon-orange-juice', kind: 'addon', name: 'Orange Juice (Dole Orange Juice)', price: 2, calories: 120 },
+  { id: 'addon-apple-juice', kind: 'addon', name: 'Apple Juice (Dole Apple Juice)', price: 2, calories: 120 },
+  
+  // Sparkling Water & Energy Drinks
+  { id: 'addon-brio-355ml', kind: 'addon', name: 'BRIO (355ml)', price: 2, calories: 140 },
+  { id: 'addon-bubly-cherry-473ml', kind: 'addon', name: 'Bubly - Cherry (473ml Can)', price: 2, calories: 0 },
+  { id: 'addon-bubly-grapefruit-473ml', kind: 'addon', name: 'Bubly - Grapefruit (473ml Can)', price: 2, calories: 0 },
+  { id: 'addon-bubly-lime-473ml', kind: 'addon', name: 'Bubly - Lime (473ml Can)', price: 2, calories: 0 },
+  { id: 'addon-gatorade-fruit-punch-355ml', kind: 'addon', name: 'Gatorade Fruit Punch (355ml Bottle)', price: 3, calories: 80 },
+  { id: 'addon-gatorade-orange-355ml', kind: 'addon', name: 'Gatorade Orange (355ml Bottle)', price: 3, calories: 80 },
+  
+  // Multi-Packs
+  { id: 'addon-3-pack-591ml', kind: 'addon', name: '3 Pack (Three 591ml Bottles of Pop)', price: 5, calories_range: '0-870' },
+  { id: 'addon-4-pack-591ml', kind: 'addon', name: '4 Pack (Four 591ml Bottles of Pop)', price: 7, calories_range: '0-1160' },
+  
+  // 2 Litre Bottles
   { id: 'addon-pepsi-2l', kind: 'addon', name: 'Pepsi (2L)', price: 4, calories_range: '0-880' },
   { id: 'addon-diet-pepsi-2l', kind: 'addon', name: 'Diet Pepsi (2L)', price: 4, calories: 0 },
   { id: 'addon-7up-2l', kind: 'addon', name: '7UP (2L)', price: 4, calories_range: '0-880' },
+  { id: 'addon-2l-pop', kind: 'addon', name: '2 Litre of Pop (Available in Pepsi, Diet Pepsi or 7-Up)', price: 4, calories_range: '0-880' },
+  
+  // Other
   { id: 'addon-pringles', kind: 'addon', name: 'Pringles', price: 2, calories: 200 },
 
   // =====================
