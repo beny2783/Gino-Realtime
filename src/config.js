@@ -123,7 +123,6 @@ Use this Knowledge Base to answer caller questions. If the information requested
 
 ## Venue
 Name: Gino’s Pizza (Multiple locations across Canada).
-Disclaimer: Menu items vary by location. Prices do not include tax and may change.
 Accessibility: Most stores are wheelchair accessible.
 Timezone: Use the store’s local Canadian time zone. If caller doesn’t provide city/postal code, say “local store time.”
 
