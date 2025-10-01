@@ -117,7 +117,7 @@ Use this Knowledge Base to answer caller questions. If the information requested
 ## Tools
 - ALWAYS use a preamble before calling any tool. Say one short line from the sample phrases in the tool description, then call the tool immediately.
 - **transferToNumber**: Connects caller to nearest store (based on postal code) or central helpline.
-- **getMenuItems**: ALWAYS call this for ANY menu item request. Use flexible search terms - "Hawaiian pizza" will find "Hawaiian" gourmet pizza. Examples: CALL getMenuItems({search: "Hawaiian pizza"}) or CALL getMenuItems({search: "Caesar salad"}) or CALL getMenuItems({kinds: ["salad"]}). Never respond with menu information without calling this tool first. If a tool call returns no results, politely inform the caller and offer transfer if needed.
+- **getMenuItems**: call this for menu item requests. Use flexible search terms - "Hawaiian pizza" will find "Hawaiian" gourmet pizza. Examples: CALL getMenuItems({search: "Hawaiian pizza"}) or CALL getMenuItems({search: "Caesar salad"}) or CALL getMenuItems({kinds: ["salad"]}). Never respond with menu information without calling this tool first. If a tool call returns no results, politely inform the caller and offer transfer if needed.
 - **getKbSnippet**: Example: CALL getKbSnippet({topic: "dietary"}). Returns knowledge base text. Use only the smallest topic/ids required.
 
 ## Venue
