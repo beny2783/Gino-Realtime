@@ -268,7 +268,7 @@ export function findMenuItems(filters = {}) {
       if (item.kind === 'crust') return false;
     }
     
-    // Filter by search text
+    // Filter by search text - more flexible matching
     if (search) {
       const q = search.toLowerCase();
       const hay = [item.name, item.details, item.category].filter(Boolean).join(' ').toLowerCase();
@@ -276,7 +276,7 @@ export function findMenuItems(filters = {}) {
       // Direct match
       if (hay.includes(q)) return true;
       
-      // Handle common pizza variations
+      // Handle common pizza variations and natural language queries
       if (item.kind === 'gourmet') {
         // Remove "pizza" from search term for gourmet items
         const pizzaLessQ = q.replace(/\bpizza\b/g, '').trim();
@@ -288,9 +288,15 @@ export function findMenuItems(filters = {}) {
           'hawaiian': 'hawaiian',
           'meat lovers pizza': 'meat lovers',
           'meat lovers': 'meat lovers',
+          'meaty pizza': 'meat lovers',
+          'meaty': 'meat lovers',
+          'meat pizza': 'meat lovers',
           'veggie pizza': 'mega veggie',
           'vegetarian pizza': 'mega veggie',
+          'vegetarian': 'mega veggie',
+          'veggie': 'mega veggie',
           'cheese pizza': 'cheese',
+          'cheese': 'cheese',
           'margherita pizza': 'margherita',
           'margherita': 'margherita',
           'pepperoni pizza': 'pepperoni',
@@ -300,11 +306,43 @@ export function findMenuItems(filters = {}) {
           'bbq chicken pizza': 'bbq chicken',
           'bbq chicken': 'bbq chicken',
           'chicken pizza': 'chicken',
-          'chicken': 'chicken'
+          'chicken': 'chicken',
+          'bacon pizza': 'bacon',
+          'bacon': 'bacon',
+          'canadian pizza': 'canadian',
+          'canadian': 'canadian'
         };
         
         if (variations[q] && hay.includes(variations[q])) return true;
+        
+        // Smart category matching for natural language
+        const categoryMatches = {
+          'meat': ['meat lovers', 'meat mania', 'bacon', 'canadian', 'hawaiian', 'chicken', 'bbq chicken'],
+          'meaty': ['meat lovers', 'meat mania', 'bacon', 'canadian', 'hawaiian', 'chicken', 'bbq chicken'],
+          'vegetarian': ['mega veggie', 'greek', 'bruschetta', 'spinach supreme', 'vegetarian'],
+          'veggie': ['mega veggie', 'greek', 'bruschetta', 'spinach supreme', 'vegetarian'],
+          'spicy': ['peri peri', 'tandoori', 'bbq chicken'],
+          'chicken': ['chicken', 'bbq chicken', 'grilled chicken club', 'chicken shawarma', 'chicken bacon alfredo', 'butter chicken', 'tandoori chicken'],
+          'bacon': ['bacon', 'bacon cheeseburger', 'bacon bonanza', 'canadian', 'hawaiian']
+        };
+        
+        // Check if search term matches any category
+        for (const [category, items] of Object.entries(categoryMatches)) {
+          if (q.includes(category)) {
+            for (const itemName of items) {
+              if (hay.includes(itemName)) return true;
+            }
+          }
+        }
       }
+      
+      // For non-gourmet items, be more flexible with partial matches
+      const words = q.split(/\s+/);
+      const hayWords = hay.split(/\s+/);
+      const matchCount = words.filter(word => hayWords.some(hayWord => hayWord.includes(word) || word.includes(hayWord))).length;
+      
+      // If at least half the search words match, include the item
+      if (matchCount >= Math.ceil(words.length / 2)) return true;
       
       return false;
     }
