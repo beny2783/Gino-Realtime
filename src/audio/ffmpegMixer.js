@@ -77,7 +77,7 @@ export class FFmpegMixer {
       console.log('FFmpeg process exited with code', code);
     });
 
-    // Feed silence to FFmpeg when not speaking
+    // Feed silence to FFmpeg when not speaking (continue during user speech to maintain ambient noise)
     this.silenceInterval = setInterval(() => {
       if (!this.isAISpeaking && this.process) {
         const silence = Buffer.alloc(160, 0x7F); // PCMU silence

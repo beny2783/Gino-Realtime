@@ -195,15 +195,11 @@ export function createMediaStreamHandler() {
           }, 100);
         }
 
-        // Handle speech started - clear audio immediately when user starts speaking
+        // Handle speech started - DO NOT clear audio to preserve ambient noise continuity
         if (response.type === 'input_audio_buffer.speech_started') {
-          console.log('User started speaking - clearing audio buffer');
-          const clearMessage = {
-            event: 'clear',
-            streamSid: streamSid,
-          };
-          connection.send(JSON.stringify(clearMessage));
-          console.log('Sent immediate clear message to Twilio');
+          console.log('User started speaking - ambient noise continues, no clear needed');
+          // Previously we sent clear here, but this was causing choppy audio by interrupting ambient noise
+          // The ambient noise should continue uninterrupted during user speech
         }
 
         // Track VAD stop as turn boundary (and compute user stop wall-clock if we can)
@@ -296,13 +292,9 @@ export function createMediaStreamHandler() {
               cVADCancellations.inc();
               console.log('VAD cancellation detected - response was cancelled due to turn detection');
 
-              // Clear Twilio's audio buffer to stop playback immediately
-              const clearMessage = {
-                event: 'clear',
-                streamSid: streamSid,
-              };
-              connection.send(JSON.stringify(clearMessage));
-              console.log('Sent clear message to Twilio to stop audio playback');
+               // For VAD cancellation, we stop feeding AI audio to FFmpeg but don't clear the stream
+               // This allows ambient noise to continue uninterrupted
+               console.log('VAD cancellation - stopping AI audio feed, ambient noise continues');
             }
            }
             ffmpegMixer?.setAISpeaking(false);
