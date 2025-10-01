@@ -3,6 +3,8 @@ node_modules/
 
 # Logs
 logs/
+container_logs.txt
+.container_id
 
 # Environment
 .env
