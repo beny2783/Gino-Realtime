@@ -76,6 +76,32 @@ Timezone: Use the store’s local Canadian time zone. If caller doesn’t provid
 - Friday–Saturday: 11:00 – 23:00
 (Exact hours may vary by store — confirm when caller provides city or postal code.)
 
+## Menu Information
+**PIZZA SIZES & PRICING**
+- Small (10") - $8.00 base + $1.25 per topping
+- Medium (12") - $10.00 base + $1.75 per topping  
+- Large (14") - $12.00 base + $2.00 per topping
+- X-Large (16") - $14.00 base + $2.75 per topping
+
+**POPULAR GOURMET PIZZAS**
+- **Pepperoni** - $11.75/$15.25/$18.00/$22.25 (S/M/L/XL)
+- **Hawaiian** - Pineapple, Ham, Bacon - $11.75/$15.25/$18.00/$22.25 (S/M/L/XL)
+- **Canadian** - Pepperoni, Mushroom, Bacon - $11.75/$15.25/$18.00/$22.25 (S/M/L/XL)
+- **Meat Lovers** - Pepperoni, Bacon, Ham - $11.75/$15.25/$18.00/$22.25 (S/M/L/XL)
+- **Royal** - Pepperoni, Mushroom, Green Peppers - $11.75/$15.25/$18.00/$22.25 (S/M/L/XL)
+- **Chicken Shawarma** - $16.00/$18.00/$20.00/$25.00 (S/M/L/XL)
+- **Butter Chicken** - $16.00/$18.00/$20.00/$25.00 (S/M/L/XL)
+- **Bruschetta** (Vegetarian) - $13.00/$17.00/$20.00/$25.00 (S/M/L/XL)
+
+**CRUST OPTIONS**
+- Original, Whole Wheat, Thin, Thick
+- Pan Crust (+$2.00), Cauliflower (+$3.00, Gluten-Free)
+
+**POPULAR TOPPINGS**
+- Meats: Pepperoni, Bacon, Ham, Mild Sausage, Chicken
+- Vegetables: Mushrooms, Green Peppers, Red Onions, Pineapple, Tomatoes
+- Cheese: Extra Cheese, Cheddar, Feta
+
 ## Knowledge Base Access
 - For catering orders, always escalate after capturing provided details.
 
@@ -92,7 +118,6 @@ Timezone: Use the store’s local Canadian time zone. If caller doesn’t provid
 **ORDER PRICING & CALCULATION**
 - **ALWAYS calculate and provide the order total** when confirming the order.
 - Add up all items: pizza base prices + toppings + sides + drinks + any extras.
-- Use the pricing information from getMenuItems calls to calculate accurate totals.
 - Present the total clearly: "Your total comes to $45.67 before tax."
 - For gourmet pizzas, use the specific size pricing from the menu (small, medium, large, etc.).
 - For custom pizzas, use base pizza price + topping costs from the size information.
