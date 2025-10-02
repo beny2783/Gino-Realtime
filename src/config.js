@@ -37,58 +37,6 @@ export const LAURA_TOOLS = [
       }
       // No "required" at top level (Realtime restriction). We handle validation server-side.
     }
-  },
-  {
-    type: 'function',
-    name: 'getMenuItems',
-    description: 'Query menu items by kind/dietary/search. Returns compact structured items for sizes, crusts, sauces, toppings, deals, gourmet pizzas, add-ons, salads, and dips.\n\nPreamble sample phrases:\n- I\'m checking our menu for {search}.\n- Let me look up our {kinds} options.\n- One sec—pulling up our menu details.',
-    parameters: {
-      type: 'object',
-      properties: {
-        kinds: {
-          type: 'array',
-          items: {
-            type: 'string',
-            enum: ['size', 'crust', 'sauce', 'topping', 'gourmet', 'deal', 'addon', 'salad', 'dip']
-          },
-          description: 'Filter by item kinds'
-        },
-        dietary: {
-          type: 'string',
-          enum: ['vegan', 'vegetarian', 'gluten_free'],
-          description: 'Filter by dietary restrictions'
-        },
-        search: {
-          type: 'string',
-          description: 'Free text search across names and details'
-        },
-        limit: {
-          type: 'number',
-          description: 'Maximum number of results to return (default: 12)'
-        }
-      }
-    }
-  },
-  {
-    type: 'function',
-    name: 'getKbSnippet',
-    description: 'Fetch compact KB snippets (catering prices, dietary notes, offers, charity policy, hours, pronunciations).\n\nPreamble sample phrases:\n- I\'m looking up {topic} for you.\n- Let me check our information on {topic}.\n- One moment—fetching details about {topic}.',
-    parameters: {
-      type: 'object',
-      properties: {
-        topic: {
-          type: 'string',
-          enum: ['catering_prices', 'dietary', 'offers', 'charity_policy', 'hours', 'pronunciations'],
-          description: 'KB topic to fetch'
-        },
-        ids: {
-          type: 'array',
-          items: { type: 'string' },
-          description: 'Specific IDs to filter (for catering_prices)'
-        }
-      },
-      required: ['topic']
-    }
   }
 ];
 
@@ -117,8 +65,6 @@ Use this Knowledge Base to answer caller questions. If the information requested
 ## Tools
 - ALWAYS use a preamble before calling any tool. Say one short line from the sample phrases in the tool description, then call the tool immediately.
 - **transferToNumber**: Connects caller to nearest store (based on postal code) or central helpline.
-- **getMenuItems**: call this for menu item requests. Use flexible search terms - "Hawaiian pizza" will find "Hawaiian" gourmet pizza. Examples: CALL getMenuItems({search: "Hawaiian pizza"}) or CALL getMenuItems({search: "Caesar salad"}) or CALL getMenuItems({kinds: ["salad"]}). Never respond with menu information without calling this tool first. If a tool call returns no results, politely inform the caller and offer transfer if needed.
-- **getKbSnippet**: Example: CALL getKbSnippet({topic: "dietary"}). Returns knowledge base text. Use only the smallest topic/ids required.
 
 ## Venue
 Name: Gino’s Pizza (Multiple locations across Canada).
@@ -131,13 +77,6 @@ Timezone: Use the store’s local Canadian time zone. If caller doesn’t provid
 (Exact hours may vary by store — confirm when caller provides city or postal code.)
 
 ## Knowledge Base Access
-**Menu Access:**
-- Use getMenuItems with smallest filters possible.
-- Do not enumerate the whole menu; only present items the caller asked about, except when offering sides/desserts/drinks once after main items.
-- For dietary restrictions, use dietary filter (vegan, vegetarian, gluten_free).
-
-**KB Access:**
-- Use getKbSnippet for catering prices, dietary info, offers, charity policy, hours, or pronunciations.
 - For catering orders, always escalate after capturing provided details.
 
 ## Instructions / Rules
